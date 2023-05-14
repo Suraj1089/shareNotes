@@ -46,7 +46,7 @@
       padding: 2rem;
       text-align: center;
       margin: 2rem auto;
-      max-width: 800px;
+      max-width: 600px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
@@ -125,7 +125,7 @@
 </head>
 <body>
   <header>
-    <h1>My Portfolio</h1>
+    <h1>Suraj Pisal</h1>
   </header>
   <nav>
     <a href="#about">About</a>
@@ -134,7 +134,7 @@
   </nav>
   <section id="about">
     <h2>About Me</h2>
-    <p>Hi, my name is John Doe and I am a web developer.</p>
+    <p>Hi I am Suraj</p>
   </section>
   <section id="projects">
     <h2>Projects</h2>
@@ -157,7 +157,8 @@
     </form>
   </section>
   <footer>
-    <p>&copy; 2023 John Doe</p>
+    <p>Suraj Pisal@ <span id="footerYear"></span></p>
+    <span>surajpisal113@gmail.com</span>
   </footer>
 </body>
 <script>
@@ -172,6 +173,8 @@
         targetSection.scrollIntoView({behavior: 'smooth'});
       });
     });
+    const currentYear = new Date();
+    document.getElementById("footerYear").innerHTML = currentYear.getFullYear();
   </script>
   
 </html>
