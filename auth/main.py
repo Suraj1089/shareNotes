@@ -30,8 +30,19 @@ def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
     db.refresh(new_user)
     return new_user
 
+def get_user(email: str,db: Session):
+    user = db.query(models.User).filter(models.User.email == email)
+    if user.first():
+        return user.first() 
+    return None
+
+
 @app.post('/login')
-def login_user():
+def login_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
+    user = get_user(request.email,db)
+    print(user.email)
+    if user is not None:
+        return "return login token"
     return "user login"
 
 
