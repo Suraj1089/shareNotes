@@ -37,13 +37,16 @@ def get_user(email: str,db: Session):
     return None
 
 
-@app.post('/login')
+@app.post('/login',response_model=schemas.User,status_code=status.HTTP_200_OK)
 def login_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
     user = get_user(request.email,db)
     print(user.email)
     if user is not None:
-        return "return login token"
-    return "user login"
+        return user
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Invalid Credentials"
+    )
 
 
 
