@@ -2,12 +2,13 @@ from fastapi import FastAPI,Request,Depends,HTTPException,status
 import uvicorn
 from typing import Annotated
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
-from . import schemas,models,hashing
+from . import schemas,models,hashing,config
 from fastapi.middleware.cors import CORSMiddleware
 from .database import engine,get_db
 from sqlalchemy.orm import Session
-
-
+from datetime import timedelta,datetime
+from jose import JWTError,jwt
+import json
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 app.add_middleware(
@@ -36,19 +37,28 @@ def get_user(email: str,db: Session):
         return user.first() 
     return None
 
+def create_access_token(data: dict, expires_delta: timedelta | None = None):
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, config.SECRET_KEY, algorithm=config.ALGORITHM)
+    return encoded_jwt
 
-@app.post('/login',response_model=schemas.User,status_code=status.HTTP_200_OK)
+@app.post('/login',status_code=status.HTTP_200_OK)
 def login_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
     user = get_user(request.email,db)
-    print(user.email)
-    if user is not None:
-        return user
-    return HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Invalid Credentials"
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Invalid Credentials"
+        )
+    access_token = create_access_token(
+        data={"sub": user.email}
     )
-
-
+    return {"access_token": access_token, "token_type": "bearer"}
 
 if __name__ == '__main__':
     uvicorn.run('main:app',host='0.0.0.0',port=8000,reload=True)
