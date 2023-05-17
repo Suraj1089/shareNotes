@@ -1,16 +1,31 @@
-from fastapi import FastAPI
-import uvicorn
+from typing import List
 
+import databases
+import uvicorn
+from fastapi import FastAPI
+
+# SQLAlchemy specific code, as with any other app
+DATABASE_URL = "mysql://root:Suraj%40123@localhost/my_loop"
+
+# DATABASE_URL = "postgresql://user:password@postgresserver/db"
+
+database = databases.Database(DATABASE_URL)
 
 app = FastAPI()
 
+async def get_all_menu():
+    await database.connect()
+    query = """SELECT * FROM menu_hours"""
+    return await database.fetch_all(query=query)
 
 @app.get('/')
 def home():
     return {"data":"home page"}
 
 @app.get('/trigger_report')
-def report_trigger():
+async def report_trigger():
+    data = await get_all_menu()
+    print(data)
     return {"report":"triggered"}
 
 @app.get('/get_report')
