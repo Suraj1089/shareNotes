@@ -3,7 +3,7 @@ version: '3.7'
 services:
   movie_service:
     build: ./movie-service
-    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    # command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
     volumes:
       - ./movie-service/:/app/
     ports:
@@ -23,7 +23,7 @@ services:
 
   cast_service:
     build: ./cast-service
-    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    # command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
     volumes:
       - ./cast-service/:/app/
     ports:
@@ -40,6 +40,46 @@ services:
       - POSTGRES_PASSWORD=cast_db_password
       - POSTGRES_DB=cast_db_dev
 
+  auth_service:
+    build: ./auth-service
+    volumes:
+      - ./auth-service/:/app/
+    ports:
+      - 8003:8000
+    environments:
+      - DATABASE_URI=postgresql://auth_db_username:auth_db_password@auth_db/auth_db_dev
+
+  auth_db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data_auth:/var/lib/postgresql/data/
+
+    environment:
+      - POSTGRES_USER=auth_db_username
+      - POSTGRES_PASSWORD=auth_db_password
+      - POSTGRES_DB=auth_db_dev
+
+
+  restarant_status_service:
+    build: ./restarant_status_service
+    volumes:
+      - ./restarant_status_service/:/app/
+    ports:
+      - 8004:8000
+    environments:
+      - DATABASE_URI=postgresql://restarant_status_db_username:restarant_status_db_password@restarant_status_db/restarant_status_dev
+
+  restarant_status_db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data_restarant_status:/var/lib/postgresql/data/
+
+    environment:
+      - POSTGRES_USER=restarant_status_db_username
+      - POSTGRES_PASSWORD=restarant_status_db_password
+      - POSTGRES_DB=restarant_status_db_dev
+  
+
   nginx:
     image: nginx:latest
     ports:
@@ -53,3 +93,5 @@ services:
 volumes:
   postgres_data_movie:
   postgres_data_cast:
+  postgres_data_auth:
+  postgres_data_restarant_status:

@@ -2,9 +2,9 @@ from fastapi import FastAPI,Request,Depends,HTTPException,status
 import uvicorn
 from typing import Annotated
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
-from . import schemas,models,hashing,config
+from app.api import schemas,models,hashing,config
 from fastapi.middleware.cors import CORSMiddleware
-from .database import engine,get_db
+from app.api.database import engine,get_db
 from sqlalchemy.orm import Session
 from datetime import timedelta,datetime
 from jose import JWTError,jwt
