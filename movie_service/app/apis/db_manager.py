@@ -1,5 +1,5 @@
-from app.api.models import MovieIn, MovieOut, MovieUpdate
-from app.api.db import movies, database
+from .models import MovieIn, MovieOut, MovieUpdate
+from .db import movies, database
 
 
 async def add_movie(payload: MovieIn):

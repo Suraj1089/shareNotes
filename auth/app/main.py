@@ -1,14 +1,11 @@
 from fastapi import FastAPI,Request,Depends,HTTPException,status
-import uvicorn
-from typing import Annotated
-from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from app.api import schemas,models,hashing,config
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.database import engine,get_db
 from sqlalchemy.orm import Session
 from datetime import timedelta,datetime
 from jose import JWTError,jwt
-import json
+
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 app.add_middleware(
@@ -60,5 +57,3 @@ def login_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
-if __name__ == '__main__':
-    uvicorn.run('main:app',host='0.0.0.0',port=8000,reload=True)
