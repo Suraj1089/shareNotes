@@ -1,26 +1,26 @@
 version: '3.7'
 
 services:
-  note_app:
-    build: ./note_app
-    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-    ports:
-      - 8001:8000
-    environment:
-      - DATABASE_URI=postgresql://suraj:suraj@note_db/note
-    depends_on:
-      - note_db
+  # note_app:
+  #   build: ./note_app
+  #   command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+  #   ports:
+  #     - 8001:8000
+  #   environment:
+  #     - DATABASE_URI=postgresql://suraj:suraj@note_db/note
+  #   depends_on:
+  #     - note_db
 
-  note_db:
-    image: postgres:12.1-alpine
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data_notes:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=suraj
-      - POSTGRES_PASSWORD=suraj
-      - POSTGRES_DB=note
+  # note_db:
+  #   image: postgres:12.1-alpine
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - postgres_data_notes:/var/lib/postgresql/data/
+  #   environment:
+  #     - POSTGRES_USER=suraj
+  #     - POSTGRES_PASSWORD=suraj
+  #     - POSTGRES_DB=note
   
   auth:
     build: ./auth
@@ -35,16 +35,16 @@ services:
   auth_db:
     image: postgres:12.1-alpine
     ports:
-      - "5435:5432"
+      - "5433:5432"
     volumes:
-      - postgres_data_auth:/var/lib/postgresql/data/
+      - ./auth_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=suraj
       - POSTGRES_PASSWORD=suraj
       - POSTGRES_DB=auth
 
 volumes:
-  postgres_data_notes:
-  postgres_data_auth:
+  auth_data:
+
 
   
