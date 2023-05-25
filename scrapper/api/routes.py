@@ -32,6 +32,7 @@ async def scrap_search_query(request: Request,page: int = 1):
     url = generate_query_url(keyword,page)
     print('generated url ' , url)
     soup = get_page_data(url)
+    print(soup)
     if soup is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
