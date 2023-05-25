@@ -28,10 +28,10 @@ def get_page_data(url: str):
         return None
 
 def scrap_projects(soup):
-    result = {'repo_names':[],'repo_about':[],
-              'repo_keywords':[],'repo_stars':[],
-              'repo_last_updated':[],'repo_url':[],
-              'repo_language':[],"viewReadme":[]
+    result = {'Repository':[],'About':[],
+              'Keywords':[],'Stars':[],
+              'Last Updated':[],'Url':[],
+              'Programing Language':[],"Readme":[]
               }
     repo_list = soup.find_all("li", {"class": "repo-list-item"})
     for repo in repo_list:
@@ -55,14 +55,14 @@ def scrap_projects(soup):
             repo_language = repo.find("span", {"itemprop": "programmingLanguage"}).text.strip()  # Extract project language
 
 
-            result['repo_names'].append(repo_name)
-            result['repo_about'].append(repo_about)
-            result['repo_keywords'].append(repo_keywords)
-            result['repo_stars'].append(repo_stars)
-            result['repo_last_updated'].append(repo_last_updated)
-            result['repo_url'].append(repo_url)
-            result['repo_language'].append(repo_language)
-            result['viewReadme'].append(button)
+            result['Repository'].append(repo_name)
+            result['About'].append(repo_about)
+            result['Keywords'].append(repo_keywords)
+            result['Stars'].append(repo_stars)
+            result['Last Updated'].append(repo_last_updated)
+            result['Url'].append(repo_url)
+            result['Programing Language'].append(repo_language)
+            result['Readme'].append(button)
 
             # print('repo_project_language ',repo_project_language)
 

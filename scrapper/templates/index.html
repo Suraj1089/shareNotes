@@ -212,7 +212,7 @@
           <!-- Modal body content -->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="downloadProject()">Download Project</button>
+          <button id="download-project" type="button" class="btn btn-primary">Download Project</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
@@ -232,7 +232,6 @@
     }
 
     function handleSearch(event) {
-      console.log("Enter keyword presed");
       if (event.key === "Enter") {
         // Prevent the default form submission behavior
         event.preventDefault();
@@ -249,13 +248,25 @@
       // Replace all Chinese characters with an empty string
       return htmlString.replace(chineseRegex, "");
     }
-  </script>
+ 
+    function downloadProject(readmeLink) {
+        console.log("download project");
+        console.log(readmeLink);
+        // https://github.com/angular/angular/blob/main/README.md
+        // create a zip download link
+        //https://github.com/angular/angular/archive/refs/heads/main.zip
+        var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
+        downloadLink = downloadLink.replace("README.md", "main.zip");
+        console.log(downloadLink);
+        window.open(downloadLink, "_blank");
+        
+    }
+ </script>
 
   <!--contact form -->
   <script>
     $(document).ready(function () {
       $('#contactForm').submit(function (event) {
-        console.log('button clicked');
         event.preventDefault();
 
         $("#submitting-form-spinner").show();
@@ -265,7 +276,6 @@
         var subject = $('#subject').val();
         var message = $('#message').val();
         var role = $('#role').val();
-        console.log(role);
 
 
         // Perform field validation
@@ -288,11 +298,9 @@
           $('#success').text('Enter a valid email address!');
           $('#success').removeClass('success-message');
           $('#success').addClass('error-message'); // Apply error class to the success message element
-          console.log('email validation failed');
           return;
         }
         var base_url = '{{ base_url }}';  // Add this line
-        console.log('base_url' + base_url);
 
         // Make an AJAX POST request to the backend endpoint
         $.ajax({
@@ -314,13 +322,11 @@
 
             $("#response-message-box").addClass("alert alert-dismissible alert-success");
 
-            console.log('response is ' + response);
             $('#success').text('Message sent!');
             $('#success').removeClass('error-message');
             $('#success').addClass('success-message'); // Apply success class to the success message element
           },
           error: function (error) {
-            console.log('error is ' + error);
             // Display error message
             $("#submitting-form-spinner").hide();
             $("#response-message-box").show();
@@ -344,7 +350,6 @@
       // $("#table-body").empty();
       $("#table-body").empty();
 
-      console.log('search called');
 
       // Get the input value
       const searchKeyword = $("#example-search-input").val();
@@ -352,7 +357,6 @@
       if (pageNumber == null) {
         pageNumber = 1;
       }
-      console.log("keyword to search: " + searchKeyword + ' page number ' + pageNumber);
 
       var base_url = '{{ base_url }}';
       // Send an AJAX request to the backend with the search keyword
@@ -401,10 +405,8 @@
       // Get the rows from the temporary container
       tempContainer.innerHTML = htmlString;
       var rows = tempContainer.querySelectorAll('tr');
-      console.log('length of rows is ' + rows.length);
       // if length of rows == 1 then display message = 0 records found for given query searchKeyword
       if (rows.length === 1) {
-        console.log('1 length')
         return 1;
       }
 
@@ -418,13 +420,11 @@
       function addRowWithAnimation() {
         if (rowIndex < rows.length) {
           var row = rows[rowIndex].cloneNode(true);
-          // console.log(row);
 
           // get 7th element in row not last
 
-          console.log(row.childNodes[6].textContent);
           // if textContent ==! repo_url then created a anchor tag and add textContent to its href attribute
-          if (row.childNodes[6].textContent !== 'repo_url') {
+          if (row.childNodes[6].textContent !== 'Url') {
             var repo_url = row.childNodes[6].textContent;
             var a = document.createElement('a');
             a.setAttribute('href', repo_url);
@@ -464,7 +464,6 @@
             // Add event listener to the button
             button.addEventListener('click', function () {
               var base_url = '{{ base_url }}';
-              console.log("Clicked on button and readme url is " + readmeLink);
               // Get the readme content
               $.ajax({
                 url: base_url + 'readme',
@@ -474,15 +473,16 @@
                   'url': readmeLink
                 },
                 success: function (response) {
-                  console.log("Success:", response);
                   // Display the readme content in a modal
-                  console.log(response);
                   $('#show-readme').modal('show');
                   // instead of adding directly text content render it as html
                   $('#show-readme-body').html(response);
                   //  <button id="download-project" type="button" class="btn btn-primary" onclick="downloadProject()">Download Project</button>
                   // get the download button and add event listener to it
                   // on click of download button download the project as zip
+                  $("#download-project").click(function () {
+                    downloadProject(readmeLink);
+                  });
 
 
                 },
@@ -494,7 +494,6 @@
           }
 
 
-          // console.log(last);
           tableBody.appendChild(row);
           rowIndex++;
 
@@ -513,10 +512,9 @@
     // Call the searchRepositories function when the Search button is clicked
     $('#search-button').click(function () {
       // get element by id=search-response and show it
-      console.log('search is clicked');
       $("#search-response").show();
       $("#table-body").empty();
-      searchRepositories();
+      searchRepositories(readmeLink);
     });
 
 
