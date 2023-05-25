@@ -12,13 +12,15 @@ def generate_query_url(keyword:str,page: int = 1):
     query = ''
     for words in keyword.split(' '):
         query = query + '+' + words
-    print(query[1:])
-    url = f'https://github.com/search?q={query}&type=repositories&p={page}'
+    url = f'https://github.com/search?q={query[1:]}&type=repositories&p={page}'
     return url
 
 
 def get_page_data(url: str):
-    response = requests.get(url,headers=headers)
+    try:
+        response = requests.get(url,headers=headers)
+    except requests.exceptions.ConnectionError:
+        return None
     if response.status_code == 200:
         soup = BeautifulSoup(response.content,"html.parser")
         return soup
@@ -26,7 +28,11 @@ def get_page_data(url: str):
         return None
 
 def scrap_projects(soup):
-
+    result = {'repo_names':[],'repo_about':[],
+              'repo_keywords':[],'repo_stars':[],
+              'repo_last_updated':[],'repo_url':[],
+              'repo_language':[],"viewReadme":[]
+              }
     repo_list = soup.find_all("li", {"class": "repo-list-item"})
     for repo in repo_list:
         # repo_owner = repo.find("span", {"class": "mr-2"}).text.strip()
@@ -41,9 +47,35 @@ def scrap_projects(soup):
 
             repo_last_updated = repo.find("relative-time").text.strip()
 
+            
             repo_url = "https://github.com" + repo.find("a", {"class": "v-align-middle"})["href"]
+
+            button = repo_url + '/blob/master/README.md'
+            
+            repo_language = repo.find("span", {"itemprop": "programmingLanguage"}).text.strip()  # Extract project language
+
+
+            result['repo_names'].append(repo_name)
+            result['repo_about'].append(repo_about)
+            result['repo_keywords'].append(repo_keywords)
+            result['repo_stars'].append(repo_stars)
+            result['repo_last_updated'].append(repo_last_updated)
+            result['repo_url'].append(repo_url)
+            result['repo_language'].append(repo_language)
+            result['viewReadme'].append(button)
+
+            # print('repo_project_language ',repo_project_language)
+
         except AttributeError:
             pass
-            
+    return result
+    
 
-
+def scrap_readme(url: str):
+    readme_data = requests.get(url=url,headers=headers)
+    readme = None
+    if readme_data.status_code != 404:
+        soup = BeautifulSoup(readme_data.content,"html.parser")
+        readme = soup.find("article", {"class": "markdown-body entry-content container-lg"})
+        return readme
+    return None

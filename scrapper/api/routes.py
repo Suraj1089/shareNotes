@@ -1,8 +1,9 @@
 from fastapi import APIRouter,Request,HTTPException,status
-from .scrapper import get_page_data,generate_query_url,scrap_projects
+from .scrapper import get_page_data,generate_query_url,scrap_projects,scrap_readme
 import requests
 import os
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,HTMLResponse
+import pandas as pd
 
 router = APIRouter()
 
@@ -10,9 +11,14 @@ router = APIRouter()
 @router.post('/message')
 async def contact(request: Request):
     form_data = await request.form()
-    print(form_data)
     url = os.getenv('PORTFOLIO_URL')+ 'message'
-    r = requests.post(url=url,data=form_data)
+    try:
+        r = requests.post(url=url,data=form_data)
+    except requests.exceptions.ConnectionError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='Unable to send message try again!'
+        )
     print(r.status_code)
     if r.status_code == 201:
         return JSONResponse(
@@ -29,10 +35,9 @@ async def contact(request: Request):
 async def scrap_search_query(request: Request,page: int = 1):
     data = await request.form()
     keyword = data['keyword']
+    page = data['pageNumber']
     url = generate_query_url(keyword,page)
-    print('generated url ' , url)
     soup = get_page_data(url)
-    print(soup)
     if soup is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -40,6 +45,20 @@ async def scrap_search_query(request: Request,page: int = 1):
         )
     # if not none scrap projectsdata
     projects = scrap_projects(soup)
-    # print(projects)
+    df = pd.DataFrame(projects)
+    # df.to_csv('projects.csv')
+
     
-    return {"data":"genraeted"}
+    return df.to_html()
+
+
+@router.post('/readme',response_class=HTMLResponse)
+async def get_readme(request: Request):
+    data = await request.form()
+    url = data['url']
+    readme = scrap_readme(url)
+    if readme is not None:
+        print('not null')
+        return HTMLResponse(readme,status_code=status.HTTP_200_OK)
+        
+    return {"data":"readme not present"}
