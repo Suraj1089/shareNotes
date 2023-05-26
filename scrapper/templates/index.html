@@ -13,9 +13,35 @@
     integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <!--font awseome end-->
 
- 
+
 </head>
 <style>
+  #pagination-div{
+    text-align: center;
+  }
+  ul.pagination{
+    display: inline-flex;
+  }
+  .container1{
+    width: 90vw;
+  }
+  .shadow{
+    box-shadow: none;
+    margin: 0 !important;
+  }
+  .row{
+    margin-left: 5vw;
+  }
+  table{
+    margin-left:5vw;
+    /* table-layout: fixed; */
+    background-color: rgb(98, 115, 114);
+  }
+  th,td{
+    border: 1px solid black;
+    padding:10px;
+    text-align:center;
+  }
   .ms-n5 {
     margin-left: -40px;
   }
@@ -31,12 +57,12 @@
     /* Adjust the height as needed */
     overflow-y: auto;
   }
-  @media (min-width: 768px) {
-  .text-large {
-    font-size: 16px;
-  }
-}
 
+  @media (min-width: 768px) {
+    .text-large {
+      font-size: 16px;
+    }
+  }
 </style>
 
 <body>
@@ -48,7 +74,7 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -85,7 +111,8 @@
 
   <!--search input-->
 
-  <div class="container shadow min-vh-100 py-4">
+  <!-- <div class="container shadow min-vh-100 py-4"> -->
+    <div class="container1 py-4 min-vh-100 ">
     <div class="row">
       <div class="col-md-5 mx-auto">
         <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
@@ -134,11 +161,11 @@
         </div>
       </div>
     </div>
-    <div>
-      <table class="table table-hover" id="table-body">
+   
+      <table class="table  table-hover" id="table-body" width:"100vw">
 
       </table>
-    </div>
+    
   </div>
 
 
@@ -249,20 +276,20 @@
       // Replace all Chinese characters with an empty string
       return htmlString.replace(chineseRegex, "");
     }
- 
+
     function downloadProject(readmeLink) {
-        console.log("download project");
-        console.log(readmeLink);
-        // https://github.com/angular/angular/blob/main/README.md
-        // create a zip download link
-        //https://github.com/angular/angular/archive/refs/heads/main.zip
-        var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
-        downloadLink = downloadLink.replace("README.md", "main.zip");
-        console.log(downloadLink);
-        window.open(downloadLink, "_blank");
-        
+      console.log("download project");
+      console.log(readmeLink);
+      // https://github.com/angular/angular/blob/main/README.md
+      // create a zip download link
+      //https://github.com/angular/angular/archive/refs/heads/main.zip
+      var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
+      downloadLink = downloadLink.replace("README.md", "main.zip");
+      console.log(downloadLink);
+      window.open(downloadLink, "_blank");
+
     }
- </script>
+  </script>
 
   <!--contact form -->
   <script>
@@ -301,12 +328,11 @@
           $('#success').addClass('error-message'); // Apply error class to the success message element
           return;
         }
-        var base_url = '{{ base_url }}';  // Add this line
 
         // Make an AJAX POST request to the backend endpoint
         $.ajax({
           type: 'POST',
-          url: base_url + 'message',
+          url: '/message',
           data: {
             name: name,
             email: email,
@@ -359,11 +385,10 @@
         pageNumber = 1;
       }
 
-      var base_url = '{{ base_url }}';
       // Send an AJAX request to the backend with the search keyword
       $.ajax({
         type: "POST",
-        url: base_url + 'scrap',
+        url: '/scrap',
         dataType: "html",
         data: { keyword: searchKeyword, pageNumber: pageNumber },
         success: function (response) {
@@ -402,7 +427,10 @@
     function animateRows(htmlString, searchKeyword) {
       // Create a temporary container to hold the HTML content
       htmlString = removeChinese(htmlString);
+      // console.log(htmlString);
       var tempContainer = document.createElement('div');
+      var tableRow = document.createElement('tr');
+    
       // Get the rows from the temporary container
       tempContainer.innerHTML = htmlString;
       var rows = tempContainer.querySelectorAll('tr');
@@ -411,10 +439,20 @@
         return 1;
       }
 
+      var tableBody = document.querySelector('#table-body');
+      tableRow.append(rows.innerHTML);
+      rows.forEach((row)=>{
+        tableBody.append(row);
+          // console.log("row" ,row);
+      })
+      // console.log("Row :", rows);
+      console.log("tableRow :", tableBody);
+      
+
+
 
 
       // Access the table body
-      var tableBody = document.querySelector('#table-body');
 
       // Iterate over the rows and add them one by one with animation
       var rowIndex = 0;
@@ -464,10 +502,10 @@
 
             // Add event listener to the button
             button.addEventListener('click', function () {
-              var base_url = '{{ base_url }}';
+              // var base_url = '{{ base_url }}';
               // Get the readme content
               $.ajax({
-                url: base_url + 'readme',
+                url: '/readme',
                 type: 'POST',
                 dataType: "html",
                 data: {
@@ -493,9 +531,11 @@
               });
             });
           }
+          
 
+          
+          // tableBody.appendChild(row);
 
-          tableBody.appendChild(row);
           rowIndex++;
 
           // Apply animation to the row
