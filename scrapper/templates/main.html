@@ -48,14 +48,13 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
           </li>
         </ul>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-          data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Contact Me</button>
+        <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@getbootstrap"><i class="fas fa-iphone"></i> Contact Me</a>
       </div>
     </div>
   </nav>
@@ -301,11 +300,12 @@
           $('#success').addClass('error-message'); // Apply error class to the success message element
           return;
         }
+        var base_url = '{{ base_url }}';  // Add this line
 
         // Make an AJAX POST request to the backend endpoint
         $.ajax({
           type: 'POST',
-          url: '/message',
+          url: base_url + 'message',
           data: {
             name: name,
             email: email,
@@ -358,10 +358,11 @@
         pageNumber = 1;
       }
 
+      var base_url = '{{ base_url }}';
       // Send an AJAX request to the backend with the search keyword
       $.ajax({
         type: "POST",
-        url:'/scrap',
+        url: base_url + 'scrap',
         dataType: "html",
         data: { keyword: searchKeyword, pageNumber: pageNumber },
         success: function (response) {
@@ -419,27 +420,18 @@
       function addRowWithAnimation() {
         if (rowIndex < rows.length) {
           var row = rows[rowIndex].cloneNode(true);
-            console.log(row);
+
           // get 7th element in row not last
 
           // if textContent ==! repo_url then created a anchor tag and add textContent to its href attribute
           if (row.childNodes[6].textContent !== 'Url') {
             var repo_url = row.childNodes[6].textContent;
-            var urlButtonDiv = document.createElement('div');
-            buttonDiv.setAttribute('class', 'btn-group');
-            buttonDiv.setAttribute('role', 'group');
-            buttonDiv.setAttribute('aria-label', 'Button group');
-
-            // Create the button
-            var urlButton = document.createElement('button');
-            urlButton.setAttribute('type', 'button');
-            urlButton.setAttribute('class', 'btn btn-success');
-            urlButton.textContent = 'Github-Link';
-            urlButton.addEventListener('click', function() {
-              window.open(repo_url, '_blank');
-            });
+            var a = document.createElement('a');
+            a.setAttribute('href', repo_url);
+            a.setAttribute('target', '_blank');
+            a.textContent = repo_url;
             row.childNodes[6].textContent = '';
-            row.childNodes[6].appendChild(urlButton);
+            row.childNodes[6].appendChild(a);
           }
 
 
@@ -471,9 +463,10 @@
 
             // Add event listener to the button
             button.addEventListener('click', function () {
+              var base_url = '{{ base_url }}';
               // Get the readme content
               $.ajax({
-                url: '/readme',
+                url: base_url + 'readme',
                 type: 'POST',
                 dataType: "html",
                 data: {

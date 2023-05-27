@@ -53,7 +53,7 @@
   text-align: center;
   word-break: break-word; /* Add this property to break long words into multiple lines */
    max-width: 200px;/* Set a maximum width to limit the cell content */
-  min-width: 100px;
+  min-width: 109px;
   white-space: normal; /* Allow wrapping of text within cells */
 }
 
@@ -79,6 +79,12 @@
       font-size: 16px;
     }
   }
+
+  /** cursor hover style */
+  .badge.bg-info {
+  cursor: pointer;
+}
+
 </style>
 
 <body>
@@ -101,6 +107,23 @@
       </div>
     </div>
   </nav>
+    <!--other project see notification-->
+    <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3">
+      <div id="toast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: radial-gradient(circle, #f7efff, #f3f3f3);">
+
+          <div class="toast-header">
+              <strong class="me-auto">See Other Projects</strong>
+              <small id="toastTimestamp">1 min ago</small>
+              <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true"></span>
+              </button>
+          </div>
+          <div class="toast-body">
+              <a href="https://surajpisal.onrender.com" target="_blank">surajpisal.me</a>
+          </div>
+      </div>
+  </div>
+    <!--other project see notification end-->
 
 
   <!--NAVBAR END-->
@@ -267,6 +290,7 @@
 
   <!--REadme show model end-->
 
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
@@ -296,14 +320,13 @@
     }
 
     function downloadProject(readmeLink) {
-      console.log("download project");
-      console.log(readmeLink);
+     
       // https://github.com/angular/angular/blob/main/README.md
       // create a zip download link
       //https://github.com/angular/angular/archive/refs/heads/main.zip
       var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
       downloadLink = downloadLink.replace("README.md", "main.zip");
-      console.log(downloadLink);
+      
       window.open(downloadLink, "_blank");
 
     }
@@ -423,6 +446,8 @@
             $("#search-response").hide();
 
           } else {
+            var tableDiv = document.querySelector('.tableDiv');
+            tableDiv.style.display = "none";
             $("#pagination-div").hide();
             $("#search-response-spin").text("No records found for query.");
             $("#spinner-icon").hide();
@@ -433,6 +458,8 @@
           // Display error message
           // search-response-text adds the error message
           $("#spinner-icon").hide();
+          var tableDiv = document.querySelector('.tableDiv');
+            tableDiv.style.display = "none";
           // $("#search-response-spin").removeClass("alert alert-dismissible alert-success");
           $("#search-response-spin").text("Error fetching data. Please try again later.");
           // show search response
@@ -462,9 +489,10 @@
       tableDiv.style.display="flex";
       tableRow.append(rows.innerHTML);
       rows.forEach((row)=>{
-        console.log(row);
+      
         var rowIndex = 0;
-        if (row.childNodes[6].textContent !== 'Url') {
+        var urlCol = row.childNodes[6];
+        if (urlCol.textContent !== 'Url') {
             var repo_url = row.childNodes[6].textContent;
             // Create the button div
             var urlButtonDiv = document.createElement('div');
@@ -472,15 +500,18 @@
             urlButtonDiv.setAttribute('role', 'group');
             urlButtonDiv.setAttribute('aria-label', 'Button group');
 
-            // Create the button
-            var urlButton = document.createElement('button');
-            urlButton.setAttribute('type', 'button');
-            urlButton.setAttribute('class', 'btn btn-success');
-            urlButton.textContent = 'Github-Link';
+          // Create the span
+          var urlButton = document.createElement('span');
+          urlButton.setAttribute('class', 'badge bg-info');
+          urlButton.textContent = 'Github-Link';
+
             // Append the button to the button div
             urlButtonDiv.appendChild(urlButton);
-            row.childNodes[6].textContent = '';
-            row.childNodes[6].appendChild(urlButton);
+
+            urlCol.textContent = '';
+            urlCol.appendChild(urlButtonDiv);
+            
+            row.childNodes[6] = urlCol;
             // ro
             urlButton.addEventListener('click', function() {
               window.open(repo_url, '_blank');
@@ -494,6 +525,7 @@
           if (last.tagName == 'TD') {
             // Print tag content
             var readmeLink = last.textContent;
+            console.log(readmeLink);
             // Create the div structure
             var buttonDiv = document.createElement('div');
             buttonDiv.setAttribute('class', 'btn-group');
@@ -538,6 +570,9 @@
 
                 },
                 error: function (error) {
+                  // Display error message
+                  $('#show-readme').modal('show');
+                  $('#show-readme-body').html("<p>Error fetching readme. Please try again later.</p>");
                   console.error("Error:", error);
                 }
               });
