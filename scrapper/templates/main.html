@@ -13,51 +13,9 @@
     integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <!--font awseome end-->
 
-
+ 
 </head>
 <style>
-  #pagination-div{
-    text-align: center;
-  }
-  ul.pagination{
-    display: inline-flex;
-  }
-  .container1{
-    width: 90vw;
-  }
-  .shadow{
-    box-shadow: none;
-    margin: 0 !important;
-  }
-  .row{
-    margin-left: 5vw;
-  }
-  .tableDiv{
-    /* scroll-behavior: auto; */
-    overflow: scroll;
-    display: none;
-    /* align scroll bar to center */
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-
-  }
-  table{
-    margin-left:5vw;
-    /* table-layout: fixed; */
-    /* background-color: rgb(98, 115, 114); */
-  }
-  th, td {
-  border: 1px solid black;
-  padding: 10px;
-  text-align: center;
-  word-break: break-word; /* Add this property to break long words into multiple lines */
-   max-width: 200px;/* Set a maximum width to limit the cell content */
-  min-width: 100px;
-  white-space: normal; /* Allow wrapping of text within cells */
-}
-
-
   .ms-n5 {
     margin-left: -40px;
   }
@@ -73,12 +31,12 @@
     /* Adjust the height as needed */
     overflow-y: auto;
   }
-
   @media (min-width: 768px) {
-    .text-large {
-      font-size: 16px;
-    }
+  .text-large {
+    font-size: 16px;
   }
+}
+
 </style>
 
 <body>
@@ -90,7 +48,7 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+      
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -127,8 +85,7 @@
 
   <!--search input-->
 
-  <!-- <div class="container shadow min-vh-100 py-4"> -->
-    <div class="container1 py-4 min-vh-100 ">
+  <div class="container shadow min-vh-100 py-4">
     <div class="row">
       <div class="col-md-5 mx-auto">
         <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
@@ -151,7 +108,7 @@
         </div>
         <br>
         <div id="pagination-div" style="display: none;">
-          <ul class="pagination">
+          <ul class="pagination pagination-lg">
             <li class="page-item disabled">
               <a class="page-link" href="#">&laquo;</a>
             </li>
@@ -177,13 +134,11 @@
         </div>
       </div>
     </div>
-   <div class="tableDiv">
+    <div>
+      <table class="table table-hover" id="table-body">
 
-     <table class="table  table-hover" id="table-body" width:"100vw">
-       
-    </table>
-  </div>
-    
+      </table>
+    </div>
   </div>
 
 
@@ -294,20 +249,20 @@
       // Replace all Chinese characters with an empty string
       return htmlString.replace(chineseRegex, "");
     }
-
+ 
     function downloadProject(readmeLink) {
-      console.log("download project");
-      console.log(readmeLink);
-      // https://github.com/angular/angular/blob/main/README.md
-      // create a zip download link
-      //https://github.com/angular/angular/archive/refs/heads/main.zip
-      var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
-      downloadLink = downloadLink.replace("README.md", "main.zip");
-      console.log(downloadLink);
-      window.open(downloadLink, "_blank");
-
+        console.log("download project");
+        console.log(readmeLink);
+        // https://github.com/angular/angular/blob/main/README.md
+        // create a zip download link
+        //https://github.com/angular/angular/archive/refs/heads/main.zip
+        var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
+        downloadLink = downloadLink.replace("README.md", "main.zip");
+        console.log(downloadLink);
+        window.open(downloadLink, "_blank");
+        
     }
-  </script>
+ </script>
 
   <!--contact form -->
   <script>
@@ -406,7 +361,7 @@
       // Send an AJAX request to the backend with the search keyword
       $.ajax({
         type: "POST",
-        url: '/scrap',
+        url:'/scrap',
         dataType: "html",
         data: { keyword: searchKeyword, pageNumber: pageNumber },
         success: function (response) {
@@ -445,10 +400,7 @@
     function animateRows(htmlString, searchKeyword) {
       // Create a temporary container to hold the HTML content
       htmlString = removeChinese(htmlString);
-      // console.log(htmlString);
       var tempContainer = document.createElement('div');
-      var tableRow = document.createElement('tr');
-    
       // Get the rows from the temporary container
       tempContainer.innerHTML = htmlString;
       var rows = tempContainer.querySelectorAll('tr');
@@ -457,39 +409,42 @@
         return 1;
       }
 
+
+
+      // Access the table body
       var tableBody = document.querySelector('#table-body');
-      var tableDiv = document.querySelector('.tableDiv');
-      tableDiv.style.display="flex";
-      tableRow.append(rows.innerHTML);
-      rows.forEach((row)=>{
-        console.log(row);
-        var rowIndex = 0;
-        if (row.childNodes[6].textContent !== 'Url') {
+
+      // Iterate over the rows and add them one by one with animation
+      var rowIndex = 0;
+      function addRowWithAnimation() {
+        if (rowIndex < rows.length) {
+          var row = rows[rowIndex].cloneNode(true);
+            console.log(row);
+          // get 7th element in row not last
+
+          // if textContent ==! repo_url then created a anchor tag and add textContent to its href attribute
+          if (row.childNodes[6].textContent !== 'Url') {
             var repo_url = row.childNodes[6].textContent;
-            // Create the button div
             var urlButtonDiv = document.createElement('div');
-            urlButtonDiv.setAttribute('class', 'btn-group');
-            urlButtonDiv.setAttribute('role', 'group');
-            urlButtonDiv.setAttribute('aria-label', 'Button group');
+            buttonDiv.setAttribute('class', 'btn-group');
+            buttonDiv.setAttribute('role', 'group');
+            buttonDiv.setAttribute('aria-label', 'Button group');
 
             // Create the button
             var urlButton = document.createElement('button');
             urlButton.setAttribute('type', 'button');
             urlButton.setAttribute('class', 'btn btn-success');
             urlButton.textContent = 'Github-Link';
-            // Append the button to the button div
-            urlButtonDiv.appendChild(urlButton);
-            row.childNodes[6].textContent = '';
-            row.childNodes[6].appendChild(urlButton);
-            // ro
             urlButton.addEventListener('click', function() {
               window.open(repo_url, '_blank');
             });
-            // row.childNodes[6].textContent = '';
+            row.childNodes[6].textContent = '';
+            row.childNodes[6].appendChild(urlButton);
           }
 
-           // select last in row
-           var last = row.lastElementChild;
+
+          // select last in row
+          var last = row.lastElementChild;
           // if last is a tag create a button and add a tag to it
           if (last.tagName == 'TD') {
             // Print tag content
@@ -514,6 +469,7 @@
             last.appendChild(buttonDiv);
             row.lastElementChild = last;
 
+            // Add event listener to the button
             button.addEventListener('click', function () {
               // Get the readme content
               $.ajax({
@@ -543,24 +499,22 @@
               });
             });
           }
-          
-          tableBody.append(row);
 
-          // tableBody.appendChild(row);
+
+          tableBody.appendChild(row);
           rowIndex++;
 
-           // Apply animation to the row
-           $(row).hide().fadeIn(500, function () {
+          // Apply animation to the row
+          $(row).hide().fadeIn(500, function () {
             // Recursive call to add the next row after animation
             addRowWithAnimation();
           });
+        }
+      }
 
-
-      })
+      // Start adding rows with animation
+      addRowWithAnimation();
     }
-      // tableBody.append(rows);
-
-      // Iterate over the rows and add them one by one with animation
 
     // Call the searchRepositories function when the Search button is clicked
     $('#search-button').click(function () {

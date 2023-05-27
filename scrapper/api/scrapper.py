@@ -26,6 +26,23 @@ def get_page_data(url: str):
         return soup
     else:
         return None
+    
+
+def scrape_languages(url):
+    r = requests.get(url,headers=headers)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    # Find the element containing the language statistics
+    bordergrid_div = soup.find_all('div', class_='BorderGrid-cell')
+    languages = []
+
+    l = bordergrid_div[-1].find_all('span', class_='color-fg-default text-bold mr-1')
+    for i in l:
+        languages.append(i.text.strip())
+
+    return ', '.join(languages)
+
+
+
 
 def scrap_projects(soup):
     result = {'Repository':[],'About':[],
@@ -41,7 +58,7 @@ def scrap_projects(soup):
 
             repo_about = repo.find("p", {"class": "mb-1"}).text.strip()
 
-            repo_keywords = [tag.text.strip() for tag in repo.find_all("a", {"class": "topic-tag-link"})]
+            repo_keywords =','.join([tag.text.strip() for tag in repo.find_all("a", {"class": "topic-tag-link"})])
 
             repo_stars = repo.find("a", {"class": "Link--muted"}).text.strip()
 
@@ -49,10 +66,8 @@ def scrap_projects(soup):
 
             
             repo_url = "https://github.com" + repo.find("a", {"class": "v-align-middle"})["href"]
-
             button = repo_url + '/blob/master/README.md'
-            
-            repo_language = repo.find("span", {"itemprop": "programmingLanguage"}).text.strip()  # Extract project language
+            repo_language = scrape_languages(repo_url) # Extract project language
 
 
             result['Repository'].append(repo_name)
