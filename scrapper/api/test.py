@@ -1,18 +1,28 @@
 import requests
-from bs4 import BeautifulSoup
-url = "https://github.com/Suraj1089/Heart-Charity"
-r = requests.get(url)
-soup = BeautifulSoup(r.content, 'html.parser')
 
-# Find the element containing the language statistics
+def get_github_profile_info(username):
+    url = f"https://api.github.com/users/{username}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        profile_data = response.json()
+        print(profile_data)
+        profile_info = {
+            'username': profile_data['login'],
+            'name': profile_data['name'],
+            'photo': profile_data['avatar_url'],
+            'about': profile_data['bio'],
+            'location': profile_data['location'],
+            'public_repos': profile_data['public_repos'],
+            'followers': profile_data['followers'],
+            'following': profile_data['following'],
+            'blog': profile_data['blog'],
+            'twitter': profile_data['twitter_username'],
+            'company': profile_data['company']
+        }
+        # print(profile_info)
+        return profile_info
+    else:
+        return None
 
-bordergrid_div = soup.find_all('div', class_='BorderGrid-cell')
-languages = []
 
-l = bordergrid_div[-1].find_all('span', {"class":"color-fg-default text-bold mr-1"})
-for i in l:
-    languages.append(i.text.strip())
-
-lan_string = ','.join(languages)
-
-return lan_string
+get_github_profile_info("sachin-404")

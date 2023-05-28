@@ -1,5 +1,5 @@
 from fastapi import APIRouter,Request,HTTPException,status
-from .scrapper import get_page_data,generate_query_url,scrap_projects,scrap_readme
+from .scrapper import get_page_data,generate_query_url,scrap_projects,scrap_readme,get_github_profile_info
 import requests
 import os
 from fastapi.responses import JSONResponse,HTMLResponse
@@ -19,7 +19,6 @@ async def contact(request: Request):
             status_code=status.HTTP_404_NOT_FOUND,
             detail='Unable to send message try again!'
         )
-    print(r.status_code)
     if r.status_code == 201:
         return JSONResponse(
             status_code=status.HTTP_201_CREATED,
@@ -58,7 +57,24 @@ async def get_readme(request: Request):
     url = data['url']
     readme = scrap_readme(url)
     if readme is not None:
-        print('not null')
         return HTMLResponse(readme,status_code=status.HTTP_200_OK)
         
-    return {"data":"readme not present"}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail='Error in fetching data! Try Again!'
+    )
+
+@router.post('/user-details',status_code=status.HTTP_200_OK)
+async def get_user_info(request: Request):
+    data = await request.form()
+    username = data['username']
+    headers = {
+        "User-Agent":username
+    }
+    profile_info = get_github_profile_info(username,headers)
+    if profile_info is not None:
+        return profile_info
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail='Error in fetching data! Try Again!'
+    )

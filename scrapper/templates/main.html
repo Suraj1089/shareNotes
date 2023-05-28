@@ -106,6 +106,102 @@
           <button class="btn btn-primary" onclick="searchRepositories(1)">Search</button>
         </div>
         <br>
+ <style>
+          .button-container {
+          position: relative;
+        }
+
+        .user-info {
+          position: relative;
+          top: 0;
+          right: -200px; /* Adjust the value as per your layout */
+          width: 200px; /* Adjust the width as per your preference */
+          background-color: #f1f1f1;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  max-width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#user-info {
+  color: black !important;
+}
+
+.modal {
+  display: none;
+  /* ... */
+}
+
+#user-info {
+  color: black;
+}
+
+.user-info-field {
+  margin-bottom: 10px;
+}
+
+.user-info-field label {
+  font-weight: bold;
+}
+
+.user-info-field span {
+  margin-left: 5px;
+}
+
+.user-info-field img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+</style>
+<button onmouseover="showModal()" onmouseout="hideModal()">Hover Me</button>
+
+<div id="modal" class="modal" onmouseout="hideModal()">
+  <div class="modal-content">
+    <span class="close" onclick="hideModal()">&times;</span>
+    <div id="user-info"></div>
+  </div>
+</div>
+
+
+    
+
         <div id="pagination-div" style="display: none;">
           <ul class="pagination pagination-lg">
             <li class="page-item disabled">
@@ -198,6 +294,7 @@
   </div>
   <!--CONTACT MODEL END-->
 
+
   <!--REadme show model-->
   <div id="show-readme" class="modal">
     <div class="modal-dialog modal-lg" role="document">
@@ -262,7 +359,64 @@
         
     }
  </script>
+<script>
+  var modalTimeout;
 
+function showModal() {
+  clearTimeout(modalTimeout);
+
+  var modal = document.getElementById("modal");
+  modal.style.display = "block";
+
+  showUserInfo();
+}
+
+function hideModal() {
+  modalTimeout = setTimeout(function() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
+  }, 500);
+}
+
+function showUserInfo() {
+  var userInfo = {
+    'photo': "https://avatars.githubusercontent.com/u/96824004?v=4",
+    'username': "Suraj1089",
+    'name': "Suraj Pisal",
+    'location': "Pune",
+    'public_repos': 4,
+    'followers': 3,
+    'following': 14,
+    'blog': "https://surajpisal.onrender.com",
+    'twitter': "Suraj34",
+    'company': "student"
+  };
+
+  var userInfoElement = document.getElementById("user-info");
+  var infoString = "";
+
+  if (userInfo.photo) {
+    infoString += '<div class="user-info-field"><label></label><img src="' + userInfo.photo + '" alt="User Photo"></div>';
+  }
+
+  for (var key in userInfo) {
+    if (userInfo.hasOwnProperty(key) && key !== 'photo') {
+      if (userInfo[key]) {
+        var label = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize the label
+        var value = userInfo[key];
+        infoString += '<div class="user-info-field"><label>' + label + ':</label><span>' + value + '</span></div>';
+      }
+    }
+  }
+
+  if (infoString === "") {
+    infoString = "No user information available.";
+  }
+
+  userInfoElement.innerHTML = infoString;
+}
+
+</script>
   <!--contact form -->
   <script>
     $(document).ready(function () {

@@ -16,23 +16,28 @@
 
 </head>
 <style>
-  #pagination-div{
+  #pagination-div {
     text-align: center;
   }
-  ul.pagination{
+
+  ul.pagination {
     display: inline-flex;
   }
-  .container1{
+
+  .container1 {
     width: 90vw;
   }
-  .shadow{
+
+  .shadow {
     box-shadow: none;
     margin: 0 !important;
   }
-  .row{
+
+  .row {
     margin-left: 5vw;
   }
-  .tableDiv{
+
+  .tableDiv {
     /* scroll-behavior: auto; */
     overflow: scroll;
     display: none;
@@ -42,20 +47,26 @@
     align-items: center;
 
   }
-  table{
-    margin-left:5vw;
+
+  table {
+    margin-left: 5vw;
     /* table-layout: fixed; */
     /* background-color: rgb(98, 115, 114); */
   }
-  th, td {
-  border: 1px solid black;
-  padding: 10px;
-  text-align: center;
-  word-break: break-word; /* Add this property to break long words into multiple lines */
-   max-width: 200px;/* Set a maximum width to limit the cell content */
-  min-width: 109px;
-  white-space: normal; /* Allow wrapping of text within cells */
-}
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    word-break: break-word;
+    /* Add this property to break long words into multiple lines */
+    max-width: 200px;
+    /* Set a maximum width to limit the cell content */
+    min-width: 109px;
+    white-space: normal;
+    /* Allow wrapping of text within cells */
+  }
 
 
   .ms-n5 {
@@ -82,9 +93,121 @@
 
   /** cursor hover style */
   .badge.bg-info {
+    cursor: pointer;
+  }
+
+  /* CSS for the overlay */
+  #toastContainer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    z-index: 9999;
+    display: none;
+  }
+
+  /* CSS for the push animation */
+  @keyframes pushInFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Apply the animation to the toast */
+  .toast.show {
+    animation: pushInFromRight 0.5s forwards;
+  }
+
+  /* * style for user info */
+
+          .button-container {
+          position: relative;
+        }
+
+        .user-info {
+          position: relative;
+          top: 0;
+          right: -200px; /* Adjust the value as per your layout */
+          width: 200px; /* Adjust the width as per your preference */
+          background-color: #f1f1f1;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  max-width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
   cursor: pointer;
 }
 
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#user-info {
+  color: black !important;
+}
+
+.modal {
+  display: none;
+  /* ... */
+}
+
+#user-info {
+  color: black;
+}
+
+.user-info-field {
+  margin-bottom: 10px;
+}
+
+.user-info-field label {
+  font-weight: bold;
+}
+
+.user-info-field span {
+  margin-left: 5px;
+}
+
+.user-info-field img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+  /* * style end of user info */
 </style>
 
 <body>
@@ -107,24 +230,28 @@
       </div>
     </div>
   </nav>
-    <!--other project see notification-->
-    <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3">
-      <div id="toast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: radial-gradient(circle, #f7efff, #f3f3f3);">
 
-          <div class="toast-header">
-              <strong class="me-auto">See Other Projects</strong>
-              <small id="toastTimestamp">1 min ago</small>
-              <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
-                  <span aria-hidden="true"></span>
-              </button>
-          </div>
-          <div class="toast-body">
-              <a href="https://surajpisal.onrender.com" target="_blank">surajpisal.me</a>
-          </div>
+
+  <!--other project see notification-->
+  <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3">
+    <div id="toast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
+      style="background: radial-gradient(circle, #f7efff, #f3f3f3);">
+
+      <div class="toast-header">
+        <strong class="me-auto">See Other Projects</strong>
+        <small id="toastTimestamp">1 min ago</small>
+        <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
       </div>
+      <div class="toast-body">
+        <a href="https://surajpisal.onrender.com" target="_blank">surajpisal.me</a>
+      </div>
+    </div>
   </div>
-    <!--other project see notification end-->
 
+
+  <!--other project see notification end-->
 
   <!--NAVBAR END-->
 
@@ -151,7 +278,7 @@
   <!--search input-->
 
   <!-- <div class="container shadow min-vh-100 py-4"> -->
-    <div class="container1 py-4 min-vh-100 ">
+  <div class="container1 py-4 min-vh-100 ">
     <div class="row">
       <div class="col-md-5 mx-auto">
         <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
@@ -172,7 +299,7 @@
         <div class="d-flex justify-content-center mt-3">
           <button class="btn btn-primary" onclick="searchRepositories(1)">Search</button>
         </div>
-        <br>
+            <br>
         <div id="pagination-div" style="display: none;">
           <ul class="pagination">
             <li class="page-item disabled">
@@ -200,18 +327,18 @@
         </div>
       </div>
     </div>
-   <div class="tableDiv">
+    <div class="tableDiv">
 
-     <table class="table  table-hover" id="table-body" width:"100vw">
-       
-    </table>
-  </div>
-    
-  </div>
+      <table class="table  table-hover" id="table-body" width:"100vw">
 
+      </table>
+    </div>
+
+  </div>
 
 
   <!---CONTACT MODEL -->
+
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -290,10 +417,23 @@
 
   <!--REadme show model end-->
 
+  <!--user details show model-->
+  <div id="modal" class="modal" onmouseout="hideModal()">
+    <div class="modal-content">
+      <span class="close" onclick="hideModal()">&times;</span>
+      <div id="user-info"></div>
+    </div>
+  </div>
+
+  <!-- hide user details model-->
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
   <script>
+
 
     function validateEmail(email) {
       // Regular expression for email validation
@@ -320,18 +460,17 @@
     }
 
     function downloadProject(readmeLink) {
-     
+
       // https://github.com/angular/angular/blob/main/README.md
       // create a zip download link
       //https://github.com/angular/angular/archive/refs/heads/main.zip
       var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
       downloadLink = downloadLink.replace("README.md", "main.zip");
-      
+
       window.open(downloadLink, "_blank");
 
     }
   </script>
-
   <!--contact form -->
   <script>
     $(document).ready(function () {
@@ -410,10 +549,14 @@
   </script>
   <!--contact form end-->
 
+
   <script>
+
     function searchRepositories(pageNumber) {
+      $("#toastContainer").hide();
       // if table is already filled with data, empty it
       // remove all the rows
+
       $("#search-response").show();
       // $("#table-body").empty();
       $("#table-body").empty();
@@ -444,6 +587,11 @@
             $("#table-body").empty();
             animateRows(response, searchKeyword);
             $("#search-response").hide();
+            setTimeout(() => {
+              $("#toastContainer").show();
+            }, 5000);
+
+
 
           } else {
             var tableDiv = document.querySelector('.tableDiv');
@@ -459,7 +607,7 @@
           // search-response-text adds the error message
           $("#spinner-icon").hide();
           var tableDiv = document.querySelector('.tableDiv');
-            tableDiv.style.display = "none";
+          tableDiv.style.display = "none";
           // $("#search-response-spin").removeClass("alert alert-dismissible alert-success");
           $("#search-response-spin").text("Error fetching data. Please try again later.");
           // show search response
@@ -475,7 +623,7 @@
       // console.log(htmlString);
       var tempContainer = document.createElement('div');
       var tableRow = document.createElement('tr');
-    
+
       // Get the rows from the temporary container
       tempContainer.innerHTML = htmlString;
       var rows = tempContainer.querySelectorAll('tr');
@@ -486,125 +634,243 @@
 
       var tableBody = document.querySelector('#table-body');
       var tableDiv = document.querySelector('.tableDiv');
-      tableDiv.style.display="flex";
+      tableDiv.style.display = "flex";
       tableRow.append(rows.innerHTML);
-      rows.forEach((row)=>{
-      
+      rows.forEach((row) => {
         var rowIndex = 0;
+
+        /**
+         * handling User name
+         * 
+         * */
+
+         var userCol = row.childNodes[1];
+         if(userCol.textContent !== 'Repository') {
+
+            var userRepo = userCol.textContent;
+            console.log("username ",userRepo);
+            var userRepoButtonDiv = document.createElement('div');
+            userRepoButtonDiv.setAttribute('class', 'btn-group');
+            userRepoButtonDiv.setAttribute('role', 'group');
+            userRepoButtonDiv.setAttribute('aria-label', 'Button group');
+            // set style max-width: 200px
+            userRepoButtonDiv.style.maxWidth = '100%';
+
+              // Create the span
+              var userRepoButton = document.createElement('span');
+              userRepoButton.setAttribute('class', 'badge bg-info');
+              userRepoButton.textContent = userRepo;
+
+              userRepoButtonDiv.appendChild(userRepoButton);
+
+              userCol.textContent = '';
+              userCol.appendChild(userRepoButtonDiv);
+
+              userRepoButton.addEventListener('click', function () {
+                var username = userRepo.split('/')[0];
+                console.log(username);
+                $.ajax({
+                    type: "POST",
+                    url: '/user-details',
+                    dataType: "json",
+                    data: { username: username },
+                    success: function (response) {
+                      function showModal() {
+                        clearTimeout(modalTimeout);
+
+                        var modal = document.getElementById("modal");
+                        modal.style.display = "block";
+
+                        showUserInfo(response);
+                      }
+
+                      showModal();
+
+                    },
+                    error: function (error) {
+
+                      console.error("Error:", error);
+                    }
+                  });
+                  
+                    });
+
+                  
+
+         }
+
+
+
+
+
+         /// end of User name handling
+       
+        // handling the url button
         var urlCol = row.childNodes[6];
         if (urlCol.textContent !== 'Url') {
-            var repo_url = row.childNodes[6].textContent;
-            // Create the button div
-            var urlButtonDiv = document.createElement('div');
-            urlButtonDiv.setAttribute('class', 'btn-group');
-            urlButtonDiv.setAttribute('role', 'group');
-            urlButtonDiv.setAttribute('aria-label', 'Button group');
+          var repo_url = urlCol.textContent;
+          // Create the button div
+          var urlButtonDiv = document.createElement('div');
+          urlButtonDiv.setAttribute('class', 'btn-group');
+          urlButtonDiv.setAttribute('role', 'group');
+          urlButtonDiv.setAttribute('aria-label', 'Button group');
 
           // Create the span
           var urlButton = document.createElement('span');
           urlButton.setAttribute('class', 'badge bg-info');
           urlButton.textContent = 'Github-Link';
 
-            // Append the button to the button div
-            urlButtonDiv.appendChild(urlButton);
+          // Append the button to the button div
+          urlButtonDiv.appendChild(urlButton);
 
-            urlCol.textContent = '';
-            urlCol.appendChild(urlButtonDiv);
-            
-            row.childNodes[6] = urlCol;
-            // ro
-            urlButton.addEventListener('click', function() {
-              window.open(repo_url, '_blank');
-            });
-            // row.childNodes[6].textContent = '';
-          }
+          urlCol.textContent = '';
+          urlCol.appendChild(urlButtonDiv);
 
-           // select last in row
-           var last = row.lastElementChild;
-          // if last is a tag create a button and add a tag to it
-          if (last.tagName == 'TD') {
-            // Print tag content
-            var readmeLink = last.textContent;
-            console.log(readmeLink);
-            // Create the div structure
-            var buttonDiv = document.createElement('div');
-            buttonDiv.setAttribute('class', 'btn-group');
-            buttonDiv.setAttribute('role', 'group');
-            buttonDiv.setAttribute('aria-label', 'Button group');
-
-            // Create the button
-            var button = document.createElement('button');
-            button.setAttribute('type', 'button');
-            button.setAttribute('class', 'btn btn-success');
-            button.textContent = 'Readme';
-
-            // Append the button to the button div
-            buttonDiv.appendChild(button);
-
-            // Replace the content of the last element with the button div
-            last.textContent = '';
-            last.appendChild(buttonDiv);
-            row.lastElementChild = last;
-
-            button.addEventListener('click', function () {
-              // Get the readme content
-              $.ajax({
-                url: '/readme',
-                type: 'POST',
-                dataType: "html",
-                data: {
-                  'url': readmeLink
-                },
-                success: function (response) {
-                  // Display the readme content in a modal
-                  $('#show-readme').modal('show');
-                  // instead of adding directly text content render it as html
-                  $('#show-readme-body').html(response);
-                  //  <button id="download-project" type="button" class="btn btn-primary" onclick="downloadProject()">Download Project</button>
-                  // get the download button and add event listener to it
-                  // on click of download button download the project as zip
-                  $("#download-project").click(function () {
-                    downloadProject(readmeLink);
-                  });
-
-
-                },
-                error: function (error) {
-                  // Display error message
-                  $('#show-readme').modal('show');
-                  $('#show-readme-body').html("<p>Error fetching readme. Please try again later.</p>");
-                  console.error("Error:", error);
-                }
-              });
-            });
-          }
-          
-          tableBody.append(row);
-
-          // tableBody.appendChild(row);
-          rowIndex++;
-
-           // Apply animation to the row
-           $(row).hide().fadeIn(500, function () {
-            // Recursive call to add the next row after animation
-            addRowWithAnimation();
+          row.childNodes[6] = urlCol;
+          // ro
+          urlButton.addEventListener('click', function () {
+            window.open(repo_url, '_blank');
           });
+          // row.childNodes[6].textContent = '';
+        }
+        // end of URL button 
+
+
+        /**
+         * handling the the last readme button
+         * 
+         **/ 
+    
+        var last = row.lastElementChild;
+        // if last is a tag create a button and add a tag to it
+        if (last.tagName == 'TD') {
+          // Print tag content
+          var readmeLink = last.textContent;
+          // console.log(readmeLink);
+          // Create the div structure
+          var buttonDiv = document.createElement('div');
+          buttonDiv.setAttribute('class', 'btn-group');
+          buttonDiv.setAttribute('role', 'group');
+          buttonDiv.setAttribute('aria-label', 'Button group');
+
+          // Create the button
+          var button = document.createElement('button');
+          button.setAttribute('type', 'button');
+          button.setAttribute('class', 'btn btn-success');
+          button.textContent = 'Readme';
+
+          // Append the button to the button div
+          buttonDiv.appendChild(button);
+
+          // Replace the content of the last element with the button div
+          last.textContent = '';
+          last.appendChild(buttonDiv);
+          row.lastElementChild = last;
+
+          button.addEventListener('click', function () {
+            // Get the readme content
+            $.ajax({
+              url: '/readme',
+              type: 'POST',
+              dataType: "html",
+              data: {
+                'url': readmeLink
+              },
+              success: function (response) {
+                // Display the readme content in a modal
+                $('#show-readme').modal('show');
+                // instead of adding directly text content render it as html
+                $('#show-readme-body').html(response);
+                //  <button id="download-project" type="button" class="btn btn-primary" onclick="downloadProject()">Download Project</button>
+                // get the download button and add event listener to it
+                // on click of download button download the project as zip
+                $("#download-project").click(function () {
+                  downloadProject(readmeLink);
+                });
+
+
+              },
+              error: function (error) {
+                // Display error message
+                $('#show-readme').modal('show');
+                $('#show-readme-body').html("<p>Error fetching readme. Please try again later.</p>");
+                console.error("Error:", error);
+              }
+            });
+          });
+        }
+
+        tableBody.append(row);
+
+        // tableBody.appendChild(row);
+        rowIndex++;
+
+
 
 
       })
     }
-      // tableBody.append(rows);
 
-      // Iterate over the rows and add them one by one with animation
+  </script>
 
-    // Call the searchRepositories function when the Search button is clicked
-    $('#search-button').click(function () {
-      // get element by id=search-response and show it
-      $("#search-response").show();
-      $("#table-body").empty();
-      searchRepositories(readmeLink);
-    });
 
+  <script>
+
+var modalTimeout;
+
+function showModal() {
+  clearTimeout(modalTimeout);
+
+  var modal = document.getElementById("modal");
+  modal.style.display = "block";
+
+  showUserInfo();
+}
+
+function hideModal() {
+  modalTimeout = setTimeout(function() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
+  }, 500);
+}
+
+function showUserInfo(response) {
+  var userInfo = {
+    'photo': response.photo,
+    'username': response.username,
+    'name': response.name,
+    'location': response.location,
+    'public_repos': response.public_repos,
+    'followers': response.followers,
+    'following': response.following,
+    'blog': response.blog,
+    'twitter': response.twitter,
+    'company': response.company
+  };
+
+  var userInfoElement = document.getElementById("user-info");
+  var infoString = "";
+
+  if (userInfo.photo) {
+    infoString += '<div class="user-info-field"><label></label><img src="' + userInfo.photo + '" alt="User Photo"></div>';
+  }
+
+  for (var key in userInfo) {
+    if (userInfo.hasOwnProperty(key) && key !== 'photo') {
+      if (userInfo[key]) {
+        var label = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize the label
+        var value = userInfo[key];
+        infoString += '<div class="user-info-field"><label>' + label + ':</label><span>' + value + '</span></div>';
+      }
+    }
+  }
+
+  if (infoString === "") {
+    infoString = "No user information available.";
+  }
+
+  userInfoElement.innerHTML = infoString;
+}
 
   </script>
 
