@@ -18,7 +18,7 @@ chatbot = Chatbot(BARD_TOKEN)
 
 def recommend_projects(data: dict):
     expertise = data['expertise']
-    skills = ' '.join(data['skills'])
+    skills = ' '.join(data['skills[]'])
     print(expertise,skills)
 
     queries = [
@@ -49,8 +49,14 @@ def recommend_projects(data: dict):
     return data['content']
 
 @router.post('/recommend')
-async def recommend(request: Recoomendation):
-    projects = recommend_projects(request.dict())
+async def recommend(request: Request):
+    data = await request.form()
+    data = dict(data)
+    print(dict(data))
+    print(data.keys())
+    # print(data["skills"])
+    projects = recommend_projects(dict(data))
+    
     if projects:
         return {
             'projects':projects

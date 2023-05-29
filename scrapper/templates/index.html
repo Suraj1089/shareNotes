@@ -12,7 +12,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
     integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <!--font awseome end-->
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 <style>
@@ -65,15 +69,16 @@
     background-color: #f2f2f2;
   }
 
-  
-  
+
+
   th,
   td {
     border: 1px solid #ddd;
     padding: 8px;
   }
+
   /** adust table width automatic based on device */
-  
+
 
   .badge.bg-info {
     cursor: pointer;
@@ -103,39 +108,39 @@
   }
 
   .user-model {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content-user {
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  background-color: #fefefe;
-  border-radius: 20px;
-}
-
-/* Adjust width for smaller devices */
-@media (max-width: 768px) {
-  .modal-content-user {
-    width: 80%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
   }
-}
 
-/* Adjust width for even smaller devices */
-@media (max-width: 480px) {
   .modal-content-user {
-    width: 90%;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    background-color: #fefefe;
+    border-radius: 20px;
   }
-}
+
+  /* Adjust width for smaller devices */
+  @media (max-width: 768px) {
+    .modal-content-user {
+      width: 80%;
+    }
+  }
+
+  /* Adjust width for even smaller devices */
+  @media (max-width: 480px) {
+    .modal-content-user {
+      width: 90%;
+    }
+  }
 
 
   .close {
@@ -190,55 +195,62 @@
     position: relative;
   }
 
-.user-info {
-  position: relative;
-  top: 0;
-  right: -200px; /* Adjust the value as per your layout */
-  width: 200px; /* Adjust the width as per your preference */
-  background-color: #f1f1f1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-      
-.user-modal {
-display: none;
-position: relative;
-z-index: 1;
-left: 0;
-top: 0;
-width: 10px;
-height: 40px;
-overflow: auto;
-background-color: rgba(0, 0, 0, 0.4);
-}
+  .user-info {
+    position: relative;
+    top: 0;
+    right: -200px;
+    /* Adjust the value as per your layout */
+    width: 200px;
+    /* Adjust the width as per your preference */
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
 
 
+  .user-modal {
+    display: none;
+    position: relative;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 40px;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
-#user-info {
-  color: black !important;
-}
 
 
-.user-info-field {
-  margin-bottom: 10px;
-}
+  #user-info {
+    color: black !important;
+  }
 
-.user-info-field label {
-  font-weight: bold;
-}
 
-.user-info-field span {
-  margin-left: 5px;
-}
+  .user-info-field {
+    margin-bottom: 10px;
+  }
 
-.user-info-field img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+  .user-info-field label {
+    font-weight: bold;
+  }
+
+  .user-info-field span {
+    margin-left: 5px;
+  }
+
+  .user-info-field img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /** style for multiple select */
+  .mt-100 {
+    margin-top: 100px
+  }
 </style>
 
 <body>
@@ -263,6 +275,7 @@ background-color: rgba(0, 0, 0, 0.4);
   </nav>
 
 
+  <!--NAVBAR END-->
   <!--other project see notification-->
   <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3">
     <div id="toast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
@@ -270,13 +283,14 @@ background-color: rgba(0, 0, 0, 0.4);
 
       <div class="toast-header">
         <strong class="me-auto">See Other Projects</strong>
-        <small id="toastTimestamp">1 min ago</small>
-        <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+        <button id="project-suggestion-button" type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+          aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
       </div>
       <div class="toast-body">
-        <button type="button" class="btn btn-success btn btn-secondary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#project-suggestion">Get Project Suggesstion</button>
+        <button type="button" class="btn btn-success btn btn-secondary btn-lg btn-block" data-bs-toggle="modal"
+          data-bs-target="#project-suggestion">Get Project Suggesstion</button>
       </div>
     </div>
   </div>
@@ -284,7 +298,6 @@ background-color: rgba(0, 0, 0, 0.4);
 
   <!--other project see notification end-->
 
-  <!--NAVBAR END-->
 
   <!-- Video Modal Start -->
   <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -463,27 +476,103 @@ background-color: rgba(0, 0, 0, 0.4);
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Project suggesstion</h5>
+          <h5 class="modal-title">Project suggestion</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
-        <div id="show-projects" class="modal-body">
-          <!-- Modal body content -->
+
+        <!-- Form to take input -->
+        <div class="row d-flex justify-content-center mt-100">
+          <div class="col-md-6"> <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
+              <option value="HTML">HTML</option>
+              <option value="Jquery">Jquery</option>
+              <option value="CSS">CSS</option>
+              <option value="Bootstrap 3">Bootstrap 3</option>
+              <option value="Bootstrap 4">Bootstrap 4</option>
+              <option value="Java">Java</option>
+              <option value="Javascript">Javascript</option>
+              <option value="Angular">Angular</option>
+              <option value="Python">Python</option>
+              <option value="Hybris">Hybris</option>
+              <option value="SQL">SQL</option>
+              <option value="NOSQL">NOSQL</option>
+              <option value="NodeJS">NodeJS</option>
+            </select> </div>
         </div>
+        <!--suggested projects-->
+        <div id="suggested-projects" class="suggested-projects"></div>
         <div class="modal-footer">
-          <button id="suggesstions" type="button" class="btn btn-primary">Suggest</button>
+          <button id="suggestion-button" type="button" class="btn btn-primary">Suggest</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
+
+
   <!--end of project suggesstion model-->
 
-
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+  <script>
+    $(document).ready(function () {
+
+      var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+        removeItemButton: true,
+        maxItemCount: 5,
+        searchResultLimit: 5,
+        renderChoiceLimit: 5
+      });
+
+      $("#suggestion-button").click(function () {
+        var tags = multipleCancelButton.getValue(true);
+        
+        const expertise = "beginner";
+        const skills = tags;
+        data = { expertise: expertise, skills: skills };
+        console.log(data);
+
+        $.ajax({
+        type: "POST",
+        url: 'http://localhost:8000/recommend',
+        dataType: "json",
+        data: { expertise: expertise, skills: ["java","python","sql"]},
+        success: function (response) {
+          // Handle the response from the backend
+          console.log("Response:", response);
+          var suggestedProjects = document.getElementById("suggested-projects");
+          // var markdownContent = "Sure, here are 6 to 9 Python projects that would challenge you and allow you to further enhance your skills:\n\n1. **Build a web application using FastAPI and SQL.** This project will allow you to use your skills in Python, FastAPI, and SQL to create a fully functional web application. You can use this project to learn how to create APIs, store data in a database, and build a user interface.\n2. **Create a data pipeline using AWS.** This project will allow you to use your skills in Python, AWS, and SQL to create a data pipeline that can be used to collect, store, and analyze data. You can use this project to learn how to use AWS services such as S3, RDS, and Redshift to store and process data.\n3. **Build a machine learning model using Python.** This project will allow you to use your skills in Python and machine learning to build a model that can be used to make predictions. You can use this project to learn how to collect data, train a model, and evaluate the performance of a model.\n4. **Create a game using Python.** This project will allow you to use your skills in Python, graphics, and game development to create a fun and engaging game. You can use this project to learn how to create graphics, handle user input, and implement game mechanics.\n5. **Build a website using Python and Django.** This project will allow you to use your skills in Python, Django, and HTML/CSS to create a fully functional website. You can use this project to learn how to create a user interface, handle user input, and store data in a database.\n6. **Create a chatbot using Python and Rasa.** This project will allow you to use your skills in Python, Rasa, and natural language processing to create a chatbot that can be used to interact with users. You can use this project to learn how to build a conversational AI agent, handle user input, and generate responses.\n7. **Build a web scraping application using Python and BeautifulSoup.** This project will allow you to use your skills in Python, BeautifulSoup, and web scraping to extract data from websites. You can use this project to learn how to find and extract data from websites, and how to store the data in a database.\n8. **Create a data visualization using Python and Matplotlib.** This project will allow you to use your skills in Python, Matplotlib, and data visualization to create a visually appealing and informative data visualization. You can use this project to learn how to plot data, add labels and annotations, and customize the appearance of a plot.\n9. **Build a natural language processing application using Python and spaCy.** This project will allow you to use your skills in Python, spaCy, and natural language processing to create an application that can be used to process and understand human language. You can use this project to learn how to tokenize text, identify named entities, and classify text.\n\nThese are just a few ideas for Python projects that you can work on to challenge yourself and further enhance your skills. There are many other possibilities, so feel free to explore and find projects that interest you.";
+          var markdownContent = response["projects"];
+          var htmlContent = marked.parse(markdownContent);
+          $("#suggested-projects").html(htmlContent);
+        },
+        error: function (error) {
+          console.error("Error:", error);
+        }
+      });
+    });
+  
+
+
+        // // textcontext// Sure, here are 8 projects that you can do to improve your Python, FastAPI, and MongoDB skills:\n\n1. **Create a simple CRUD API**. This is a great way to learn the basics of FastAPI and MongoDB. You can create an API that allows users to create, read, update, and delete records in a database.\n2. **Build a web application**. This is a more challenging project, but it will help you learn how to use FastAPI to create a full-stack application. You can use a frontend framework like React or Vue to build the frontend of your application.\n3. **Create a microservices architecture**. This is a more advanced project, but it will help you learn how to use FastAPI to create a scalable and distributed application. You can use a framework like Docker or Kubernetes to deploy your microservices.\n4. **Build a data pipeline**. This is a great way to learn how to use FastAPI to collect, transform, and load data. You can use a tool like Airflow or Prefect to manage your data pipeline.\n5. **Create a machine learning model**. This is a more challenging project, but it will help you learn how to use FastAPI to deploy a machine learning model. You can use a framework like TensorFlow or PyTorch to train your model.\n6. **Create a chatbot**. This is a great way to learn how to use FastAPI to create a conversational AI application. You can use a framework like Rasa or Hugging Face to train your chatbot.\n7. **Create a game**. This is a fun and challenging project that will help you learn how to use FastAPI to create a multiplayer game. You can use a framework like PyGame or Unity to create your game.\n8. **Contribute to an open source project**. This is a great way to learn from other developers and give back to the community. You can find a list of open source projects that use FastAPI on GitHub.\n\nThese are just a few ideas to get you started. There are many other projects that you can do to improve your Python, FastAPI, and MongoDB skills. The most important thing is to choose a project that you are interested in and that will challenge you.
+        // // get div by id suggested-projects and append the textcontext
+        
+        // var htmlContent = marked.parse(markdownContent);
+        
+        // $("#suggested-projects").html(htmlContent);
+        
+        // // Append the rendered element to the suggested-projects div
+        // suggestedProjects.appendChild(renderedElement);
+
+
+      });
+
+
+
+  </script>
 
   <script>
 
@@ -642,6 +731,9 @@ background-color: rgba(0, 0, 0, 0.4);
             $("#search-response").hide();
             setTimeout(() => {
               $("#toastContainer").show();
+              $("project-suggestion-button").click(function () {
+                $("#project-suggestion").modal("show");
+              });
             }, 5000);
 
 
@@ -902,7 +994,7 @@ background-color: rgba(0, 0, 0, 0.4);
       if (userInfo.photo) {
         infoString += '<div class="user-info-field"><label></label><img src="' + userInfo.photo + '" alt="User Photo"></div>';
       }
-      if(userInfo.blog) {
+      if (userInfo.blog) {
         // create a link
         infoString += '<div class="user-info-field"><label>Blog:</label><span><a href="' + userInfo.blog + '" target="_blank">' + userInfo.blog + '</a></span></div>';
       }
@@ -925,6 +1017,7 @@ background-color: rgba(0, 0, 0, 0.4);
     }
 
   </script>
+
 
 
   <!--serach input end-->
