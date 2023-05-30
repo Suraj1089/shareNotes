@@ -268,7 +268,9 @@
           <li class="nav-item">
           </li>
         </ul>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal"
+        data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Login</button> &nbsp;
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
           data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Contact Me</button>
       </div>
     </div>
@@ -321,7 +323,6 @@
 
   <!--search input-->
 
-  <!-- <div class="container shadow min-vh-100 py-4"> -->
   <div class="container1 py-4 min-vh-100 ">
     <div class="row">
       <div class="col-md-5 mx-auto">
@@ -510,6 +511,77 @@
     </div>
   </div>
 
+    <!--login model -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>&nbsp;&nbsp;&nbsp;
+            <div id="submitting-form-spinner" style="display: none;">Submitting form&nbsp;
+              <i class="fas fa-sync fa-spin"></i>
+            </div>
+            <div id="response-message-box" class="" style="display: none;">
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              <div id="success"></div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Signup</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <form name="loginForm" id="loginForm" novalidate="novalidate">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="loginEmail" placeholder="Your Email" required>
+                  </div>
+                  <div class="mb-3">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                  </div>
+                  <div class="mb-3">
+                    <button id="loginbutton" type="submit" class="btn btn-success" id="signInButton">Login</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </form>
+              </div>
+        
+              <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                <form name="signupForm" id="signupForm" novalidate="novalidate">
+                  <!-- <div class="mb-3">
+                    <input type="text" class="form-control" id="signupName" placeholder="Your Name" required>
+                  </div> -->
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="signupEmail" placeholder="Your Email" required>
+                  </div>
+                  <div class="mb-3">
+                    <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+                  </div>
+                  <div class="mb-3">
+                    <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                  </div>
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-success" id="signupButton">SignUp</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                  
+                </form>
+              </div>
+            </div>
+           
+          </div>
+      
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <!--login model end-->
 
   <!--end of project suggesstion model-->
 
@@ -529,53 +601,40 @@
 
       $("#suggestion-button").click(function () {
         var tags = multipleCancelButton.getValue(true);
-        
+
         const expertise = "beginner";
         const skills = tags;
         data = { expertise: expertise, skills: skills };
         console.log(data);
 
         $.ajax({
-        type: "POST",
-        url: 'http://localhost:8000/recommend',
-        dataType: "json",
-        data: { expertise: expertise, skills: ["java","python","sql"]},
-        success: function (response) {
-          // Handle the response from the backend
-          console.log("Response:", response);
-          var suggestedProjects = document.getElementById("suggested-projects");
-          // var markdownContent = "Sure, here are 6 to 9 Python projects that would challenge you and allow you to further enhance your skills:\n\n1. **Build a web application using FastAPI and SQL.** This project will allow you to use your skills in Python, FastAPI, and SQL to create a fully functional web application. You can use this project to learn how to create APIs, store data in a database, and build a user interface.\n2. **Create a data pipeline using AWS.** This project will allow you to use your skills in Python, AWS, and SQL to create a data pipeline that can be used to collect, store, and analyze data. You can use this project to learn how to use AWS services such as S3, RDS, and Redshift to store and process data.\n3. **Build a machine learning model using Python.** This project will allow you to use your skills in Python and machine learning to build a model that can be used to make predictions. You can use this project to learn how to collect data, train a model, and evaluate the performance of a model.\n4. **Create a game using Python.** This project will allow you to use your skills in Python, graphics, and game development to create a fun and engaging game. You can use this project to learn how to create graphics, handle user input, and implement game mechanics.\n5. **Build a website using Python and Django.** This project will allow you to use your skills in Python, Django, and HTML/CSS to create a fully functional website. You can use this project to learn how to create a user interface, handle user input, and store data in a database.\n6. **Create a chatbot using Python and Rasa.** This project will allow you to use your skills in Python, Rasa, and natural language processing to create a chatbot that can be used to interact with users. You can use this project to learn how to build a conversational AI agent, handle user input, and generate responses.\n7. **Build a web scraping application using Python and BeautifulSoup.** This project will allow you to use your skills in Python, BeautifulSoup, and web scraping to extract data from websites. You can use this project to learn how to find and extract data from websites, and how to store the data in a database.\n8. **Create a data visualization using Python and Matplotlib.** This project will allow you to use your skills in Python, Matplotlib, and data visualization to create a visually appealing and informative data visualization. You can use this project to learn how to plot data, add labels and annotations, and customize the appearance of a plot.\n9. **Build a natural language processing application using Python and spaCy.** This project will allow you to use your skills in Python, spaCy, and natural language processing to create an application that can be used to process and understand human language. You can use this project to learn how to tokenize text, identify named entities, and classify text.\n\nThese are just a few ideas for Python projects that you can work on to challenge yourself and further enhance your skills. There are many other possibilities, so feel free to explore and find projects that interest you.";
-          var markdownContent = response["projects"];
-          var htmlContent = marked.parse(markdownContent);
-          $("#suggested-projects").html(htmlContent);
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        }
+          type: "POST",
+          url: 'http://localhost:8000/recommend',
+          dataType: "json",
+          data: { expertise: expertise, skills: ["java", "python", "sql"] },
+          success: function (response) {
+            // Handle the response from the backend
+            console.log("Response:", response);
+            var suggestedProjects = document.getElementById("suggested-projects");
+            // var markdownContent = "Sure, here are 6 to 9 Python projects that would challenge you and allow you to further enhance your skills:\n\n1. **Build a web application using FastAPI and SQL.** This project will allow you to use your skills in Python, FastAPI, and SQL to create a fully functional web application. You can use this project to learn how to create APIs, store data in a database, and build a user interface.\n2. **Create a data pipeline using AWS.** This project will allow you to use your skills in Python, AWS, and SQL to create a data pipeline that can be used to collect, store, and analyze data. You can use this project to learn how to use AWS services such as S3, RDS, and Redshift to store and process data.\n3. **Build a machine learning model using Python.** This project will allow you to use your skills in Python and machine learning to build a model that can be used to make predictions. You can use this project to learn how to collect data, train a model, and evaluate the performance of a model.\n4. **Create a game using Python.** This project will allow you to use your skills in Python, graphics, and game development to create a fun and engaging game. You can use this project to learn how to create graphics, handle user input, and implement game mechanics.\n5. **Build a website using Python and Django.** This project will allow you to use your skills in Python, Django, and HTML/CSS to create a fully functional website. You can use this project to learn how to create a user interface, handle user input, and store data in a database.\n6. **Create a chatbot using Python and Rasa.** This project will allow you to use your skills in Python, Rasa, and natural language processing to create a chatbot that can be used to interact with users. You can use this project to learn how to build a conversational AI agent, handle user input, and generate responses.\n7. **Build a web scraping application using Python and BeautifulSoup.** This project will allow you to use your skills in Python, BeautifulSoup, and web scraping to extract data from websites. You can use this project to learn how to find and extract data from websites, and how to store the data in a database.\n8. **Create a data visualization using Python and Matplotlib.** This project will allow you to use your skills in Python, Matplotlib, and data visualization to create a visually appealing and informative data visualization. You can use this project to learn how to plot data, add labels and annotations, and customize the appearance of a plot.\n9. **Build a natural language processing application using Python and spaCy.** This project will allow you to use your skills in Python, spaCy, and natural language processing to create an application that can be used to process and understand human language. You can use this project to learn how to tokenize text, identify named entities, and classify text.\n\nThese are just a few ideas for Python projects that you can work on to challenge yourself and further enhance your skills. There are many other possibilities, so feel free to explore and find projects that interest you.";
+            var markdownContent = response["projects"];
+            var htmlContent = marked.parse(markdownContent);
+            $("#suggested-projects").html(htmlContent);
+          },
+          error: function (error) {
+            console.error("Error:", error);
+          }
+        });
       });
+
+
     });
-  
-
-
-        // // textcontext// Sure, here are 8 projects that you can do to improve your Python, FastAPI, and MongoDB skills:\n\n1. **Create a simple CRUD API**. This is a great way to learn the basics of FastAPI and MongoDB. You can create an API that allows users to create, read, update, and delete records in a database.\n2. **Build a web application**. This is a more challenging project, but it will help you learn how to use FastAPI to create a full-stack application. You can use a frontend framework like React or Vue to build the frontend of your application.\n3. **Create a microservices architecture**. This is a more advanced project, but it will help you learn how to use FastAPI to create a scalable and distributed application. You can use a framework like Docker or Kubernetes to deploy your microservices.\n4. **Build a data pipeline**. This is a great way to learn how to use FastAPI to collect, transform, and load data. You can use a tool like Airflow or Prefect to manage your data pipeline.\n5. **Create a machine learning model**. This is a more challenging project, but it will help you learn how to use FastAPI to deploy a machine learning model. You can use a framework like TensorFlow or PyTorch to train your model.\n6. **Create a chatbot**. This is a great way to learn how to use FastAPI to create a conversational AI application. You can use a framework like Rasa or Hugging Face to train your chatbot.\n7. **Create a game**. This is a fun and challenging project that will help you learn how to use FastAPI to create a multiplayer game. You can use a framework like PyGame or Unity to create your game.\n8. **Contribute to an open source project**. This is a great way to learn from other developers and give back to the community. You can find a list of open source projects that use FastAPI on GitHub.\n\nThese are just a few ideas to get you started. There are many other projects that you can do to improve your Python, FastAPI, and MongoDB skills. The most important thing is to choose a project that you are interested in and that will challenge you.
-        // // get div by id suggested-projects and append the textcontext
-        
-        // var htmlContent = marked.parse(markdownContent);
-        
-        // $("#suggested-projects").html(htmlContent);
-        
-        // // Append the rendered element to the suggested-projects div
-        // suggestedProjects.appendChild(renderedElement);
-
-
-      });
 
 
 
   </script>
 
   <script>
-
 
     function validateEmail(email) {
       // Regular expression for email validation
@@ -603,9 +662,7 @@
 
     function downloadProject(readmeLink) {
 
-      // https://github.com/angular/angular/blob/main/README.md
-      // create a zip download link
-      //https://github.com/angular/angular/archive/refs/heads/main.zip
+
       var downloadLink = readmeLink.replace("blob", "archive/refs/heads");
       downloadLink = downloadLink.replace("README.md", "main.zip");
 
