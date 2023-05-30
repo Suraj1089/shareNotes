@@ -11,6 +11,11 @@ RUN apt-get update \
 RUN pip install -r /app/requirements.txt \
     && rm -rf /root/.cache/pip
 
+
+ENV SECRET_KEY=$SECRET_KEY
+ENV ALGORITHM=$ALGORITHM
+ENV ACCESS_TOKEN_EXPIRE_MINUTES=$ACCESS_TOKEN_EXPIRE_MINUTES
+
 COPY . /app/
 
 CMD ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
