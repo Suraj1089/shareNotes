@@ -45,10 +45,11 @@ def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
 
 @auth.get('/users',status_code=status.HTTP_200_OK)
 def get_all_users(db: Session = Depends(get_db)):
-    user = db.query(models.User).all()
+    user = db.query(models.User).with_entities(models.User.id,models.User.name,models.User.email).all()
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Invalid Credentials"
         )
+    
     return user
