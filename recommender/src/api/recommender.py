@@ -52,9 +52,6 @@ def recommend_projects(data: dict):
 async def recommend(request: Request):
     data = await request.form()
     data = dict(data)
-    print(dict(data))
-    print(data.keys())
-    # print(data["skills"])
     projects = recommend_projects(dict(data))
     
     if projects:
