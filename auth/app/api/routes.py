@@ -29,7 +29,7 @@ def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
 
 
 @auth.post('/login',status_code=status.HTTP_200_OK)
-def login_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
+def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
     user = get_user(request.email,db)
     if not user:
         # raise error

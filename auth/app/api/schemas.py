@@ -16,6 +16,8 @@ class UserCreate(UserBase):
     name: str
     password: str
 
+class UserLogin(UserBase):
+    password: str
 
 class User(UserBase):
     id: str
