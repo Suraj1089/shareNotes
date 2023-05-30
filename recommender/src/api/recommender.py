@@ -63,14 +63,3 @@ async def recommend(request: Request):
         }
     raise HTTPException(status_code=404,detail="Error in loading projects")
 
-    # data = {
-    #     'expertise':form_data['expertise'],
-    #     'skills':form_data['skills'].split(',')
-    # }
-
-    # projects = recommend_projects(data)
-    # if projects:
-    #     return {
-    #         'projects':projects
-    #     }
-    # raise HTTPException(status_code=404,detail="No projects found")
