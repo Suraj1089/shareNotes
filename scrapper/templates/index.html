@@ -595,7 +595,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script>
+ // get auth url
+ const authUrl  = '{{ auth_url }}'; 
+ const recommenderUrl = '{{ recommender_url }}';
 
+</script>
   <script>
       // at time to load page check if token is present in local storage
       // if present then get User Name and set login button text to user name
@@ -626,7 +631,7 @@
     // User is logged in
     $.ajax({
       type: "GET",
-      url: "http://localhost:8002/auth/user",
+      url: auth_url + "auth/user",
       dataType: "json",
       contentType: "application/json",
       headers: {
@@ -683,7 +688,7 @@
       // Send login request
       $.ajax({
         type: "POST",
-        url: "http://localhost:8002/auth/login",
+        url: auth_url + "auth/login",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({
@@ -763,7 +768,7 @@
       // Send signup request
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8002/auth/register",
+        url: auth_url + "auth/register",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({
@@ -813,7 +818,7 @@
 
         $.ajax({
           type: "POST",
-          url: 'http://localhost:8000/recommend',
+          url: recommender_url + 'recommend',
           dataType: "json",
           data: { expertise: expertise, skills: ["java", "python", "sql"] },
           success: function (response) {
@@ -960,8 +965,6 @@
     });
   </script>
   <!--contact form end-->
-
-
   <script>
 
     function searchRepositories(pageNumber) {

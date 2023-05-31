@@ -23,7 +23,12 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request,"base_url":os.getenv('BASE_URL')})
+    return templates.TemplateResponse("index.html", {"request": request,
+                                                     "base_url":os.getenv('BASE_URL'),
+                                                      "auth_url": os.getenv('AUTH_URL'),
+                                                      "recommender_url": os.getenv('RECOMMENDER_URL'),
+
+                                                     })
 
 
 
