@@ -259,19 +259,20 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Github Project Scrapper</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-        </li>
-      </ul>
-      <button id="login-button-nav" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal"
-      data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Login</button> &nbsp;
-      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-      data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Contact Me</button> &nbsp;
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+          </li>
+        </ul>
+        <button id="login-button-nav" type="button" class="btn btn-success" data-bs-toggle="modal"
+          data-bs-target="#loginModal" data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Login</button>
+        &nbsp;
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Contact Me</button> &nbsp;
       </div>
     </div>
   </nav>
@@ -293,17 +294,17 @@
       <div class="toast-body">
         <button type="button" class="btn btn-success btn btn-secondary btn-lg btn-block" data-bs-toggle="modal"
           data-bs-target="#project-suggestion">Get Project Suggesstion</button>
-        </div>
       </div>
     </div>
-    
-    <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      <div id="search-response-spin"></div> 
-      <!-- <strong id="search-response-text"></strong> -->
-    </div>
-    </div>
-    
+  </div>
+
+  <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <div id="search-response-spin"></div>
+    <!-- <strong id="search-response-text"></strong> -->
+  </div>
+  </div>
+
 
 
   <!--other project see notification end-->
@@ -519,75 +520,78 @@
     </div>
   </div>
 
-    <!--login model -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>&nbsp;&nbsp;&nbsp;
-           
-            <div id="response-message-box" class="" style="display: none;">
-              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-              <div id="success"></div>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!--login model -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>&nbsp;&nbsp;&nbsp;
+
+          <div id="response-message-box" class="" style="display: none;">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <div id="success"></div>
           </div>
-          <div class="modal-body">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Signup</button>
-              </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-              <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                <form name="loginForm" id="loginForm" novalidate="novalidate">
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="loginEmail" placeholder="Your Email" required>
-                  </div>
-                  <div class="mb-3">
-                    <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
-                  </div>
-                  <div class="mb-3">
-                    <button id="loginbutton" type="submit" class="btn btn-success" id="signInButton">Login</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </form>
-              </div>
-        
-              <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                <form name="signupForm" id="signupForm" novalidate="novalidate">
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="signupName" placeholder="Your Name" required>
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="signupEmail" placeholder="Your Email" required>
-                  </div>
-                  <div class="mb-3">
-                    <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
-                  </div>
-                  <div class="mb-3">
-                    <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password" required>
-                  </div>
-                  <div class="mb-3">
-                    <button type="submit" class="btn btn-success" id="signupButton">SignUp</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                  
-                </form>
-              </div>
-            </div>
-           
-          </div>
-      
-          </form>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button"
+                role="tab" aria-controls="login" aria-selected="true">Login</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button"
+                role="tab" aria-controls="signup" aria-selected="false">Signup</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+              <form name="loginForm" id="loginForm" novalidate="novalidate">
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="loginEmail" placeholder="Your Email" required>
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                </div>
+                <div class="mb-3">
+                  <button id="loginbutton" type="submit" class="btn btn-success" id="signInButton">Login</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+              <form name="signupForm" id="signupForm" novalidate="novalidate">
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="signupName" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="signupEmail" placeholder="Your Email" required>
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password"
+                    required>
+                </div>
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-success" id="signupButton">SignUp</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        </form>
       </div>
     </div>
-  
-    <!--login model end-->
+  </div>
+
+  <!--login model end-->
 
   <!--end of project suggesstion model-->
 
@@ -595,19 +599,20 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script>
- // get auth url
- const authUrl  = '{{ auth_url }}'; 
- const recommenderUrl = '{{ recommender_url }}';
-
-</script>
   <script>
-      // at time to load page check if token is present in local storage
-      // if present then get User Name and set login button text to user name
-      // else set login button text to login
-      function updateModalContent(response) {
-    $("#exampleModalLabel").text("Welcome, " + email);
-    $(".modal-body").html(`
+    // get auth url
+    const authUrl = '{{ auth_url }}';
+    const recommenderUrl = '{{ recommender_url }}';
+
+
+  </script>
+  <script>
+    // at time to load page check if token is present in local storage
+    // if present then get User Name and set login button text to user name
+    // else set login button text to login
+    function updateModalContent(response) {
+      $("#exampleModalLabel").text("Welcome, " + email);
+      $(".modal-body").html(`
       <div class="user-info-field">
         <label>Name:</label>
         <span>${response.name}</span>
@@ -621,182 +626,182 @@
       </div>
      
     `);
-  }
+    }
 
-  function updateDom(token) {
+    function updateDom(token) {
 
-    $(document).ready(function() {
-  
-  if (token) {
-    // User is logged in
-    $.ajax({
-      type: "GET",
-      url: auth_url + "auth/user",
-      dataType: "json",
-      contentType: "application/json",
-      headers: {
-        Authorization: "Bearer " + token
-      },
-      success: function(response) {
-        // Handle successful login
-        $("#login-button-nav").text(response.email);
-        updateModalContent(response);
-      },
-      error: function(error) {
-        // Handle login error
-        console.log("auth error ",error);
-      }
-    });
-  }
+      $(document).ready(function () {
+
+        if (token) {
+          // User is logged in
+          $.ajax({
+            type: "GET",
+            url: "https://auth-githubprojectscrapper.onrender.com/auth/user",
+            dataType: "json",
+            contentType: "application/json",
+            headers: {
+              Authorization: "Bearer " + token
+            },
+            success: function (response) {
+              // Handle successful login
+              $("#login-button-nav").text(response.email);
+              updateModalContent(response);
+            },
+            error: function (error) {
+              // Handle login error
+              console.log("auth error ", error);
+            }
+          });
+        }
 
 
-  // Handle logout button click
-  $(document).on("click", "#logoutButton", function() {
-    // Perform logout logic
-    // Clear token and redirect to login page
-    localStorage.removeItem("token");
-    // reload the page
-    // reload page 
-    location.reload();
+        // Handle logout button click
+        $(document).on("click", "#logoutButton", function () {
+          // Perform logout logic
+          // Clear token and redirect to login page
+          localStorage.removeItem("token");
+          // reload the page
+          // reload page 
+          location.reload();
 
-  });
-});
-  }
-  const token = localStorage.getItem("token");
-  updateDom(token);
+        });
+      });
+    }
+    const token = localStorage.getItem("token");
+    updateDom(token);
   </script>
 
-<!--LOGIN AND SINGUP-->
-<script>
-  $(document).ready(function() {
-    // Login form submission
-    $("#loginForm").submit(function(event) {
-      event.preventDefault(); // Prevent form submission
+  <!--LOGIN AND SINGUP-->
+  <script>
+    $(document).ready(function () {
+      // Login form submission
+      $("#loginForm").submit(function (event) {
+        event.preventDefault(); // Prevent form submission
 
-      const email = $("#loginEmail").val();
-      const password = $("#loginPassword").val();
-      // check empty fields
-      if (email === "" || password === "") {
-        console.log("Empty fields!");
-        $("search-response").show();
-        $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-        $("#search-response").text("All fields are required!");
-        $("search-response").hide();
-        return;
-      }
-
-      // Send login request
-      $.ajax({
-        type: "POST",
-        url: auth_url + "auth/login",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify({
-          email: email,
-          password: password
-        }),
-        success: function(response) {
-          // Handle successful login
-          // save the token in local storage
-          console.log(response);
-          localStorage.setItem("token", response.access_token);
-
-          $("search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
-          $("#search-response").text("Successfully logged in! as " + email);
-          // close the modal
-          $("#loginModal").modal("hide");
-          // login-button-nav bet button and set text to logout
-          $("#login-button-nav").text(email);
-          $("search-response").hide();
-          const token = localStorage.getItem("token");
-          updateDom(token);
-        },
-        error: function(error) {
-          // Handle login error
-          console.log(error);
+        const email = $("#loginEmail").val();
+        const password = $("#loginPassword").val();
+        // check empty fields
+        if (email === "" || password === "") {
+          console.log("Empty fields!");
           $("search-response").show();
           $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-          $("#search-response").text(error.responseJSON.detail);
+          $("#search-response").text("All fields are required!");
           $("search-response").hide();
-
-
-
+          return;
         }
+        console.log('auth url in login ', auth_url + 'auth/login');
+        // Send login request
+        $.ajax({
+          type: "POST",
+          url: "https://auth-githubprojectscrapper.onrender.com/auth/login",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify({
+            email: email,
+            password: password
+          }),
+          success: function (response) {
+            // Handle successful login
+            // save the token in local storage
+            console.log(response);
+            localStorage.setItem("token", response.access_token);
+
+            $("search-response").show();
+            $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
+            $("#search-response").text("Successfully logged in! as " + email);
+            // close the modal
+            $("#loginModal").modal("hide");
+            // login-button-nav bet button and set text to logout
+            $("#login-button-nav").text(email);
+            $("search-response").hide();
+            const token = localStorage.getItem("token");
+            updateDom(token);
+          },
+          error: function (error) {
+            // Handle login error
+            console.log(error);
+            $("search-response").show();
+            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
+            $("#search-response").text(error.responseJSON.detail);
+            $("search-response").hide();
+
+
+
+          }
+        });
       });
-    });
 
-    // Signup form submission
-    $("#signupForm").submit(function(event) {
-      event.preventDefault(); // Prevent form submission
+      // Signup form submission
+      $("#signupForm").submit(function (event) {
+        event.preventDefault(); // Prevent form submission
 
-      const name = $("#signupName").val();
-      const email = $("#signupEmail").val();
-      const password = $("#signupPassword").val();
-      const confirmPassword = $("#signupConfirmPassword").val();
-      if (password !== confirmPassword) {
-        console.log("Passwords do not match!");
-        $("search-response").show();
-        $("#search-response").removeClass("alert-success").addClass("alert-danger").show();
-        $("#search-response").text("Password Not matched!");
-        $("search-response").hide();
-
-        return;
-      }
-      // check empty fields
-      if (name === "" || email === "" || password === "" || confirmPassword === "") {
-        console.log("Empty fields!");
-        $("search-response").show();
-        $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-dagner").show();
-        $("#search-response").text("All fields are required!");
-        $("search-response").hide();
-        return;
-      }
-
-      // check valid email
-      // validateEmail()
-      if (!validateEmail(email)) {
-        console.log("Invalid email!");
-        $("search-response").show();
-        $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-        $("#search-response").text("Invalid email!");
-        $("search-response").hide();
-        return;
-      }
-
-
-      // Send signup request
-      $.ajax({
-        type: "POST",
-        url: auth_url + "auth/register",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify({
-          name: name,
-          email: email,
-          password: password,
-        }),
-        success: function(response) {
-          // Handle successful signup
-          console.log(response);
+        const name = $("#signupName").val();
+        const email = $("#signupEmail").val();
+        const password = $("#signupPassword").val();
+        const confirmPassword = $("#signupConfirmPassword").val();
+        if (password !== confirmPassword) {
+          console.log("Passwords do not match!");
           $("search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
-          $("#search-response").text("Signed up successfully!");
-          $("#loginModal").modal("hide");
+          $("#search-response").removeClass("alert-success").addClass("alert-danger").show();
+          $("#search-response").text("Password Not matched!");
           $("search-response").hide();
-        },
-        error: function(error) {
-          // Handle signup error
-          console.log(error);
+
+          return;
+        }
+        // check empty fields
+        if (name === "" || email === "" || password === "" || confirmPassword === "") {
+          console.log("Empty fields!");
+          $("search-response").show();
+          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-dagner").show();
+          $("#search-response").text("All fields are required!");
+          $("search-response").hide();
+          return;
+        }
+
+        // check valid email
+        // validateEmail()
+        if (!validateEmail(email)) {
+          console.log("Invalid email!");
           $("search-response").show();
           $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-          $("#search-response").text(error.responseJSON.detail);
+          $("#search-response").text("Invalid email!");
           $("search-response").hide();
+          return;
         }
+
+
+        // Send signup request
+        $.ajax({
+          type: "POST",
+          url: "https://auth-githubprojectscrapper.onrender.com/auth/register",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+          }),
+          success: function (response) {
+            // Handle successful signup
+            console.log(response);
+            $("search-response").show();
+            $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
+            $("#search-response").text("Signed up successfully!");
+            $("#loginModal").modal("hide");
+            $("search-response").hide();
+          },
+          error: function (error) {
+            // Handle signup error
+            console.log(error);
+            $("search-response").show();
+            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
+            $("#search-response").text(error.responseJSON.detail);
+            $("search-response").hide();
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
 
   <script>
     $(document).ready(function () {
@@ -818,7 +823,7 @@
 
         $.ajax({
           type: "POST",
-          url: recommender_url + 'recommend',
+          url: 'https://recommender-githubprojectscrapper.onrender.com/recommend',
           dataType: "json",
           data: { expertise: expertise, skills: ["java", "python", "sql"] },
           success: function (response) {
@@ -1293,7 +1298,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
-    
+
 </body>
 
 </html>
