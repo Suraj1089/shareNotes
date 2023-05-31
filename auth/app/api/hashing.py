@@ -10,6 +10,6 @@ class Hash():
     def verify(hashed_password,plain_password):
         return pwd_cxt.verify(plain_password,hashed_password)
     
-    def get_random_id():
-        return str(uuid.uuid4())
+    # def get_random_id():
+    #     return str(uuid.uuid4())
 
