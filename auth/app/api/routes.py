@@ -1,9 +1,9 @@
-from fastapi import Depends,HTTPException,status
+from fastapi import Depends,HTTPException,status,Request
 from app.api import schemas,models,hashing
 from app.api.database import get_db
 from sqlalchemy.orm import Session
 from fastapi import APIRouter
-from .token import get_user,create_access_token
+from .token import get_user,create_access_token,get_current_user
 
 
 auth = APIRouter(
@@ -30,12 +30,18 @@ def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
 
 @auth.post('/login',status_code=status.HTTP_200_OK)
 def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
-    user = get_user(request.email,db)
+    user = get_user(email=request.email,db=db)
+    print(user.email)
     if not user:
         # raise error
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Invalid Credentials"
+        )
+    if not hashing.Hash.verify(user.hashed_password,request.password):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Incorrect password"
         )
     access_token = create_access_token(
         data={"sub": user.email}
@@ -43,13 +49,11 @@ def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@auth.get('/users',status_code=status.HTTP_200_OK)
-def get_all_users(db: Session = Depends(get_db)):
-    user = db.query(models.User).with_entities(models.User.id,models.User.name,models.User.email).all()
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Invalid Credentials"
-        )
-    
+@auth.get('/user',status_code=status.HTTP_200_OK)
+def get_current_logged_user(request: Request,db: Session = Depends(get_db)):
+    # get token from header
+    print(request.headers)
+    token = request.headers.get("authorization")
+    # get user from token
+    user = get_current_user(token,db)
     return user

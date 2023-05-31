@@ -2,13 +2,11 @@ from os import environ
 from Bard import Chatbot
 from fastapi import APIRouter,Request,HTTPException
 import random
-from .schemas import Recoomendation
 
 
 router = APIRouter(
     tags=['Recommendation']
 )
-
 
 BARD_TOKEN = environ.get("BARD_TOKEN")
 

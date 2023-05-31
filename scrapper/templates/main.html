@@ -597,70 +597,66 @@
 
 
   <script>
-      // at time to load page check if token is present in local storage
-      // if present then get User Name and set login button text to user name
-      // else set login button text to login
-      function updateModalContent(response) {
-    $("#exampleModalLabel").text("Welcome, " + email);
-    $(".modal-body").html(`
-      <div class="user-info-field">
-        <label>Name:</label>
-        <span>${response.name}</span>
-      </div>
-      <div class="user-info-field">
-        <label>Email:</label>
-        <span>${response.email}</span>
-      </div>
-      <div class="user-info-field">
-        <button type="button" class="btn btn-danger" id="logoutButton">Logout</button>
-      </div>
-     
-    `);
-  }
-
-  function updateDom(token) {
-
-    $(document).ready(function() {
+    // Function to update modal content
+    function updateModalContent(response) {
+      $("#exampleModalLabel").text("Welcome, " + response.email);
+      $(".modal-body").html(`
+        <div class="user-info-field">
+          <label>Name:</label>
+          <span>${response.name}</span>
+        </div>
+        <div class="user-info-field">
+          <label>Email:</label>
+          <span>${response.email}</span>
+        </div>
+        <div class="user-info-field">
+          <button type="button" class="btn btn-danger" id="logoutButton">Logout</button>
+        </div>
+      `);
+      $(".modal-footer").html("");
+    }
   
-  if (token) {
-    // User is logged in
-    $.ajax({
-      type: "GET",
-      url: "http://localhost:8002/auth/user",
-      dataType: "json",
-      contentType: "application/json",
-      headers: {
-        Authorization: "Bearer " + token
-      },
-      success: function(response) {
-        // Handle successful login
-        $("#login-button-nav").text(response.email);
-        updateModalContent(response);
-      },
-      error: function(error) {
-        // Handle login error
-        console.log("auth error ",error);
+    // Function to update DOM based on token presence
+    function updateDom(token) {
+      console.log(token);
+      if (token) {
+        // User is logged in
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:8002/auth/user",
+          dataType: "json",
+          contentType: "application/json",
+          headers: {
+            Authorization: "Bearer " + token
+          },
+          success: function(response) {
+            // Handle successful login
+            $("#login-button-nav").text(response.email);
+            updateModalContent(response);
+          },
+          error: function(error) {
+            // Handle login error
+            $("#login-button-nav").text("Login");
+            console.log("auth error ", error);
+          }
+        });
       }
+    }
+  
+    $(document).ready(function() {
+      // Check if token is present in local storage
+      const token = localStorage.getItem("token");
+      updateDom(token);
     });
-  }
-
-
-  // Handle logout button click
-  $(document).on("click", "#logoutButton", function() {
-    // Perform logout logic
-    // Clear token and redirect to login page
-    localStorage.removeItem("token");
-    // reload the page
-    // reload page 
-    location.reload();
-
-  });
-});
-  }
-  const token = localStorage.getItem("token");
-  updateDom(token);
+  
+    $(document).on("click", "#logoutButton", function() {
+      localStorage.removeItem("token");
+      // Refresh the page
+      location.reload();
+      // location.href = "login.html"; // Replace with your desired redirect URL
+    });
   </script>
-
+  
 <!--LOGIN AND SINGUP-->
 <script>
   $(document).ready(function() {
@@ -703,9 +699,10 @@
           $("#loginModal").modal("hide");
           // login-button-nav bet button and set text to logout
           $("#login-button-nav").text(email);
+
           $("search-response").hide();
-          const token = localStorage.getItem("token");
-          updateDom(token);
+          // update modal content
+          updateDom(response);
         },
         error: function(error) {
           // Handle login error
