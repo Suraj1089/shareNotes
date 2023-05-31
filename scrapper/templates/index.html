@@ -600,9 +600,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <script>
-    // get auth url
-    const authUrl = '{{ auth_url }}';
-    const recommenderUrl = '{{ recommender_url }}';
+
 
 
   </script>
@@ -689,7 +687,7 @@
           $("search-response").hide();
           return;
         }
-        console.log('auth url in login ', auth_url + 'auth/login');
+        // console.log('auth url in login ', auth_url + 'auth/login');
         // Send login request
         $.ajax({
           type: "POST",
