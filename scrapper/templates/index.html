@@ -94,9 +94,6 @@
     margin-bottom: 0;
   }
 
-  #submitting-form-spinner {
-    display: none;
-  }
 
   #response-message-box {
     display: none;
@@ -269,8 +266,9 @@
           </li>
         </ul>
         <button id="project-recommend" type="button" class="btn btn-info" data-bs-toggle="modal"
-        data-bs-target="#project-suggestion" data-bs-whatever="@getbootstrap" style="display: none;"> Recommend Projects</button> &nbsp;
-          
+          data-bs-target="#project-suggestion" data-bs-whatever="@getbootstrap" style="display: none;"> Recommend
+          Projects</button> &nbsp;
+
         <button id="login-button-nav" type="button" class="btn btn-success" data-bs-toggle="modal"
           data-bs-target="#loginModal" data-bs-whatever="@getbootstrap">Login</button>
         &nbsp;
@@ -305,15 +303,8 @@
     <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <div id="search-response-spin"></div>
-    <!-- <strong id="search-response-text"></strong> -->
   </div>
-  </div>
-
-
-
   <!--other project see notification end-->
-
-
   <!-- Video Modal Start -->
   <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -333,9 +324,7 @@
     </div>
   </div>
   <!-- Video Modal End -->
-
   <!--search input-->
-
   <div class="container1 py-4 min-vh-100 ">
     <div class="row">
       <div class="col-md-5 mx-auto">
@@ -394,11 +383,7 @@
     </div>
 
   </div>
-
-
   <!---CONTACT MODEL -->
-
-
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -454,7 +439,6 @@
     </div>
   </div>
   <!--CONTACT MODEL END-->
-
   <!--REadme show model-->
   <div id="show-readme" class="modal">
     <div class="modal-dialog modal-lg" role="document">
@@ -475,9 +459,7 @@
       </div>
     </div>
   </div>
-
   <!--REadme show model end-->
-
   <!--user details show model-->
   <div id="user-modal" class="modal user-model">
     <div class="modal-content-user">
@@ -485,9 +467,7 @@
       <div id="user-info"></div>
     </div>
   </div>
-
   <!-- hide user details model-->
-
   <!--get project suggesstion model-->
   <div id="project-suggestion" class="modal">
     <div class="modal-dialog modal-lg" role="document">
@@ -500,55 +480,60 @@
         </div>
 
         <!-- Form to take input -->
-<div class="row d-flex justify-content-center mt-100">
-  <div class="col-md-6">
-    <select id="choices-multiple-remove-button" placeholder="Select up to 5 tags" multiple>
-      <option value="HTML">HTML</option>
-      <option value="Jquery">Jquery</option>
-      <option value="CSS">CSS</option>
-      <option value="Bootstrap 4">Bootstrap 4</option>
-      <option value="Java">Java</option>
-      <option value="Javascript">Javascript</option>
-      <option value="Angular">Angular</option>
-      <option value="Python">Python</option>
-      <option value="Hybris">Hybris</option>
-      <option value="SQL">SQL</option>
-      <option value="NOSQL">NOSQL</option>
-      <option value="NodeJS">NodeJS</option>
-      <option value="React">React</option>
-      <option value="Vue.js">Vue.js</option>
-      <option value="PHP">PHP</option>
-      <option value="Ruby">Ruby</option>
-      <option value="C#">C#</option>
-      <option value="ASP.NET">ASP.NET</option>
-      <option value="MongoDB">MongoDB</option>
-      <option value="Redis">Redis</option>
-      <option value="Docker">Docker</option>
-      <option value="Git">Git</option>
-      <option value="Swift">Swift</option>
-      <option value="Kotlin">Kotlin</option>
-      <option value="C++">C++</option>
-      <option value="R">R</option>
-      <option value="Scala">Scala</option>
-      <option value="TensorFlow">TensorFlow</option>
-      <option value="PyTorch">PyTorch</option>
-      <option value="AWS">AWS</option>
-      <option value="Azure">Azure</option>
-      <option value="Google Cloud">Google Cloud</option>
-      <option value="Firebase">Firebase</option>
-      <option value="GraphQL">GraphQL</option>
-    </select>
-    <!-- <div class="col-md-6"> -->
-      <select id="experience-select">
-        <option value="1">1 Year</option>
-        <option value="2">2 Years</option>
-        <option value="3">3 Years</option>
-        <option value="4">4 Years</option>
-        <option value="5+">More than 4 Years</option>
-      </select>
-    <!-- </div> -->
-  </div>
-</div>
+        <div class="row d-flex justify-content-center mt-100">
+          <div class="col-md-6">
+            <select id="choices-multiple-remove-button" placeholder="Select up to 5 tags" multiple>
+              <option value="HTML">HTML</option>
+              <option value="Jquery">Jquery</option>
+              <option value="CSS">CSS</option>
+              <option value="Bootstrap 4">Bootstrap 4</option>
+              <option value="Java">Java</option>
+              <option value="Javascript">Javascript</option>
+              <option value="Angular">Angular</option>
+              <option value="Python">Python</option>
+              <option value="Hybris">Hybris</option>
+              <option value="SQL">SQL</option>
+              <option value="NOSQL">NOSQL</option>
+              <option value="NodeJS">NodeJS</option>
+              <option value="React">React</option>
+              <option value="Vue.js">Vue.js</option>
+              <option value="PHP">PHP</option>
+              <option value="Ruby">Ruby</option>
+              <option value="C#">C#</option>
+              <option value="ASP.NET">ASP.NET</option>
+              <option value="MongoDB">MongoDB</option>
+              <option value="Redis">Redis</option>
+              <option value="Docker">Docker</option>
+              <option value="Git">Git</option>
+              <option value="Swift">Swift</option>
+              <option value="Kotlin">Kotlin</option>
+              <option value="C++">C++</option>
+              <option value="R">R</option>
+              <option value="Scala">Scala</option>
+              <option value="TensorFlow">TensorFlow</option>
+              <option value="PyTorch">PyTorch</option>
+              <option value="AWS">AWS</option>
+              <option value="Azure">Azure</option>
+              <option value="Google Cloud">Google Cloud</option>
+              <option value="Firebase">Firebase</option>
+              <option value="GraphQL">GraphQL</option>
+              <option value="Kubernates">Kubernates</option>
+              <option value="FastAPI">FastAPI</option>
+              <option value="Django">Django</option>
+              <option value="Django">Django</option>
+
+            </select>
+            <!-- <div class="col-md-6"> -->
+            <select id="experience-select">
+              <option value="1">1 Year</option>
+              <option value="2">2 Years</option>
+              <option value="3">3 Years</option>
+              <option value="4">4 Years</option>
+              <option value="5+">More than 4 Years</option>
+            </select>
+            <!-- </div> -->
+          </div>
+        </div>
 
         <!--suggested projects-->
         <div id="suggested-projects" class="suggested-projects"></div>
@@ -559,7 +544,6 @@
       </div>
     </div>
   </div>
-
   <!--login model -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -567,7 +551,7 @@
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="loginModalTitle">Login</h1>&nbsp;&nbsp;&nbsp;
 
-          <div id="response-message-box" class="" style="display: none;">
+          <div id="response-message-box" class="alert alert-dismissible alert-success" style="display: none;">
             <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <div id="success"></div>
@@ -631,20 +615,14 @@
       </div>
     </div>
   </div>
-
   <!--login model end-->
-
   <!--end of project suggesstion model-->
-
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <script>
-
-
-
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
   <script>
     // at time to load page check if token is present in local storage
     // if present then get User Name and set login button text to user name
@@ -652,7 +630,7 @@
     function updateModalContent(response) {
       $("#exampleModalLabel").text("Welcome, " + response.email);
       // loginModalTitle
-      $("#loginModalTitle").text("Welcome, "+ response.email);
+      $("#loginModalTitle").text("Welcome, " + response.email);
       $("#modal-body-login").html(`
       <div class="user-info-field">
         <label>Name:</label>
@@ -665,10 +643,8 @@
       <div class="user-info-field">
         <button type="button" class="btn btn-danger" id="logoutButton">Logout</button>
       </div>
-     
     `);
     }
-
     function updateDom(token) {
 
       $(document).ready(function () {
@@ -677,8 +653,8 @@
           // User is logged in
           $.ajax({
             type: "GET",
-            // https://auth-githubprojectscrapper.onrender.com
-            url: "http://localhost:8000/auth/user",
+            url: "https://auth-githubprojectscrapper.onrender.com/auth/user",
+            // url: "http://localhost:8000/auth/user",
             dataType: "json",
             contentType: "application/json",
             headers: {
@@ -691,7 +667,7 @@
               updateModalContent(response);
               // project-recommend
               // get button and update style set display = block 
-              $("#project-recommend").css("display","block");
+              $("#project-recommend").css("display", "block");
             },
             error: function (error) {
               // Handle login error
@@ -715,8 +691,43 @@
     }
     const token = localStorage.getItem("token");
     updateDom(token);
-  </script>
 
+    function showSearchResponseNotification(intialClass, finalClass, message, isHide) {
+      $("#search-response").removeClass(intialClass).addClass(finalClass).show();
+      $("#search-response").text(message);
+      if (isHide) {
+        $("#search-response").hide();
+      } else {
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+          $("#success-alert").slideUp(500);
+        });
+      }
+    }
+
+    function showSuccessNotification(initialClass, finalClass, message, isHide) {
+      $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
+      $("#response-message-box").text(message);
+      if (isHide) {
+        $("#response-message-box").hide();
+      } else {
+        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
+          $("#response-message-box").slideUp(500);
+        });
+      }
+    }
+
+    function responseMessageNotification(initialClass, finalClass, message, isHide) {
+      $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
+      $("#response-message-box").text(message);
+      if (isHide) {
+        $("#response-message-box").hide();
+      } else {
+        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
+          $("#response-message-box").slideUp(500);
+        });
+      }
+    }
+  </script>
   <!--LOGIN AND SINGUP-->
   <script>
     $(document).ready(function () {
@@ -729,18 +740,15 @@
         // check empty fields
         if (email === "" || password === "") {
           console.log("Empty fields!");
-          $("search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-          $("#search-response").text("All fields are required!");
-          $("#search-response").hide();
+          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required!", false);
           return;
         }
         // console.log('auth url in login ', auth_url + 'auth/login');
         // Send login request
         $.ajax({
           type: "POST",
-          // https://auth-githubprojectscrapper.onrender.com
-          url: "http://localhost:8000/auth/login",
+          url: "https://auth-githubprojectscrapper.onrender.com/auth/login",
+          // url: "http://localhost:8000/auth/login",
           dataType: "json",
           contentType: "application/json",
           data: JSON.stringify({
@@ -753,28 +761,24 @@
             console.log(response);
             localStorage.setItem("token", response.access_token);
 
-            $("#search-response").show();
-            $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
-            $("#search-response").text("Successfully logged in! as " + email);
+            showSearchResponseNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Successfully logged in! as " + email, false);
             // close the modal
             $("#loginModal").modal("hide");
             // login-button-nav bet button and set text to logout
             $("#login-button-nav").text(email);
             const token = localStorage.getItem("token");
             updateDom(token);
-            $("#project-recommend").css("display","block");
+            $("#project-recommend").css("display", "block");
           },
           error: function (error) {
             // Handle login error
             console.log(error);
-            $("#search-response").show();
-            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-            $("#search-response").text(error.responseJSON.detail);
-            // $("#search-response").hide();
+
+            showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Invalid credentials", false);
 
           }
         });
-      });
+      })
 
       // Signup form submission
       $("#signupForm").submit(function (event) {
@@ -786,17 +790,15 @@
         const confirmPassword = $("#signupConfirmPassword").val();
         if (password !== confirmPassword) {
           console.log("Passwords do not match!");
-          $("search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-          $("#search-response").text("Password Not matched!");
+
+          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Password Not matched!", false);
           return;
         }
         // check empty fields
         if (name === "" || email === "" || password === "" || confirmPassword === "") {
           console.log("Empty fields!");
-          $("#search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-dagner").show();
-          $("#search-response").text("All fields are required!");
+
+          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required!", false);
           return;
         }
 
@@ -804,9 +806,8 @@
         // validateEmail()
         if (!validateEmail(email)) {
           console.log("Invalid email!");
-          $("#search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-          $("#search-response").text("Invalid email!");
+
+          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Invalid email!", false);
           return;
         }
 
@@ -814,8 +815,8 @@
         // Send signup request
         $.ajax({
           type: "POST",
-          // https://auth-githubprojectscrapper.onrender.com
-          url: "http://localhost:8000/auth/register",
+          url: "https://auth-githubprojectscrapper.onrender.com/auth/register",
+          // url: "http://localhost:8000/auth/register",
           dataType: "json",
           contentType: "application/json",
           data: JSON.stringify({
@@ -826,26 +827,22 @@
           success: function (response) {
             // Handle successful signup
             console.log(response);
-            $("#search-response").show();
-            $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
-            $("#search-response").text("Signed up successfully!");
+
+            showSearchResponseNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Signed up successfully!", false);
             $("#loginModal").modal("hide");
           },
           error: function (error) {
             // Handle signup error
             console.log(error);
-            $("#search-response").show();
-            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-            $("#search-response").text(error.responseJSON.detail || "error at auth/register");
+
+            showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Error in registering", false);
           }
         });
       });
     });
   </script>
-
   <script>
     $(document).ready(function () {
-
       var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
         removeItemButton: true,
         maxItemCount: 5,
@@ -854,6 +851,7 @@
       });
 
       $("#suggestion-button").click(function () {
+        showSearchResponseNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Searching.....!", true);
         var tags = multipleCancelButton.getValue(true);
 
         const expertise = $("#experience-select").val();
@@ -867,24 +865,19 @@
           dataType: "json",
           data: data,
           success: function (response) {
-            // Handle the response from the backend
-            // get div by id=search-response and set text to searching...
-            $("#search-response").show();
-            $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
-            $("#search-response").text("Searching.....");
+
+            showSearchResponseNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Found some result!", true);
+
             console.log("Response:", response);
             var suggestedProjects = document.getElementById("suggested-projects");
             // var markdownContent = "Sure, here are 6 to 9 Python projects that would challenge you and allow you to further enhance your skills:\n\n1. **Build a web application using FastAPI and SQL.** This project will allow you to use your skills in Python, FastAPI, and SQL to create a fully functional web application. You can use this project to learn how to create APIs, store data in a database, and build a user interface.\n2. **Create a data pipeline using AWS.** This project will allow you to use your skills in Python, AWS, and SQL to create a data pipeline that can be used to collect, store, and analyze data. You can use this project to learn how to use AWS services such as S3, RDS, and Redshift to store and process data.\n3. **Build a machine learning model using Python.** This project will allow you to use your skills in Python and machine learning to build a model that can be used to make predictions. You can use this project to learn how to collect data, train a model, and evaluate the performance of a model.\n4. **Create a game using Python.** This project will allow you to use your skills in Python, graphics, and game development to create a fun and engaging game. You can use this project to learn how to create graphics, handle user input, and implement game mechanics.\n5. **Build a website using Python and Django.** This project will allow you to use your skills in Python, Django, and HTML/CSS to create a fully functional website. You can use this project to learn how to create a user interface, handle user input, and store data in a database.\n6. **Create a chatbot using Python and Rasa.** This project will allow you to use your skills in Python, Rasa, and natural language processing to create a chatbot that can be used to interact with users. You can use this project to learn how to build a conversational AI agent, handle user input, and generate responses.\n7. **Build a web scraping application using Python and BeautifulSoup.** This project will allow you to use your skills in Python, BeautifulSoup, and web scraping to extract data from websites. You can use this project to learn how to find and extract data from websites, and how to store the data in a database.\n8. **Create a data visualization using Python and Matplotlib.** This project will allow you to use your skills in Python, Matplotlib, and data visualization to create a visually appealing and informative data visualization. You can use this project to learn how to plot data, add labels and annotations, and customize the appearance of a plot.\n9. **Build a natural language processing application using Python and spaCy.** This project will allow you to use your skills in Python, spaCy, and natural language processing to create an application that can be used to process and understand human language. You can use this project to learn how to tokenize text, identify named entities, and classify text.\n\nThese are just a few ideas for Python projects that you can work on to challenge yourself and further enhance your skills. There are many other possibilities, so feel free to explore and find projects that interest you.";
             var markdownContent = response["projects"];
             var htmlContent = marked.parse(markdownContent);
             $("#suggested-projects").html(htmlContent);
-            $("#search-response").hide();
           },
           error: function (error) {
-            $("#search-response").show();
-            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-            $("#search-response").text(error.responseJSON.detail || "error at recommender");
-            $("#search-response").hide();
+
+            showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Error in suggesting", false);
             console.error("Error:", error);
           }
         });
@@ -892,19 +885,14 @@
 
 
     });
-
-
-
   </script>
 
   <script>
-
     function validateEmail(email) {
       // Regular expression for email validation
       var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
     }
-
     function handleSearch(event) {
       if (event.key === "Enter") {
         // Prevent the default form submission behavior
@@ -930,7 +918,6 @@
       downloadLink = downloadLink.replace("README.md", "main.zip");
 
       window.open(downloadLink, "_blank");
-
     }
   </script>
   <!--contact form -->
@@ -939,38 +926,24 @@
       $('#contactForm').submit(function (event) {
         event.preventDefault();
 
-        $("#submitting-form-spinner").show();
 
         var name = $('#name').val();
         var email = $('#email').val();
         var subject = $('#subject').val();
         var message = $('#message').val();
         var role = $('#role').val();
-
-
         // Perform field validation
         if (name === '' || email === '' || subject === '' || message === '' || role === '') {
-          // Display error message if any field is empty
-          $("#submitting-form-spinner").hide();
-          $("#response-message-box").show();
-          $("#response-message-box").addClass("alert alert-dismissible alert-danger");
 
-          $('#success').text('All fields are required.');
-          $('#success').removeClass('success-message');
-          $('#success').addClass('error-message'); // Apply error class to the success message element
+          responseMessageNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required.", false);
+
+          showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required.", false);
           return;
         }
         if (!validateEmail(email)) {
-          $("#submitting-form-spinner").hide();
-          $("#response-message-box").show();
-          $("#response-message-box").addClass("alert alert-dismissible alert-danger");
-
-          $('#success').text('Enter a valid email address!');
-          $('#success').removeClass('success-message');
-          $('#success').addClass('error-message'); // Apply error class to the success message element
+          showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Enter a valid email address!", false);
           return;
         }
-
         // Make an AJAX POST request to the backend endpoint
         $.ajax({
           type: 'POST',
@@ -984,26 +957,11 @@
           },
           dataType: "json",
           success: function (response) {
-            // Display success message
-            $("#submitting-form-spinner").hide();
-            $("#response-message-box").show();
-            $("#response-message-box").removeClass("alert alert-dismissible alert-danger");
 
-            $("#response-message-box").addClass("alert alert-dismissible alert-success");
-
-            $('#success').text('Message sent!');
-            $('#success').removeClass('error-message');
-            $('#success').addClass('success-message'); // Apply success class to the success message element
+            showSuccessNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Message sent!", false);
           },
           error: function (error) {
-            // Display error message
-            $("#submitting-form-spinner").hide();
-            $("#response-message-box").show();
-            $("#response-message-box").addClass("alert alert-dismissible alert-danger");
-
-            $('#success').text('Error sending message.Retry! Or Send Your message at:surajpisal113@gmail.com');
-            $('#success').removeClass('success-message');
-            $('#success').addClass('error-message'); // Apply error class to the success message element
+            showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Error sending message.Retry! Or Send Your message at: surajpisal113@gmail.com");
           }
         });
       });
@@ -1016,11 +974,9 @@
       $("#toastContainer").hide();
       // if table is already filled with data, empty it
       // remove all the rows
-
       $("#search-response").show();
       // $("#table-body").empty();
       $("#table-body").empty();
-
 
       // Get the input value
       const searchKeyword = $("#example-search-input").val();
@@ -1054,30 +1010,17 @@
               });
             }, 5000);
 
-
-
           } else {
             var tableDiv = document.querySelector('.tableDiv');
             tableDiv.style.display = "none";
             $("#pagination-div").hide();
-            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger");
-            $("#search-response").text("No records found for query.");
-            $("#search-response").hide();
+            showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "No records found for query.", false);
           }
         },
         error: function (error) {
-          // search-response-spin hides the spinner
-          // Display error message
-          // search-response-text adds the error message
-          $("#search-response").hide();
-          $("#search-response").show();
-          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger");
-          $("#search-response").text("Error fetching data. Please try again later.");
+          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Error fetching data. Please try again later.", false);
           var tableDiv = document.querySelector('.tableDiv');
           tableDiv.style.display = "none";
-          // $("#search-response-spin").removeClass("alert alert-dismissible alert-success");
-          // show search response
-          $("#search-response").hide();
           console.error("Error:", error);
         }
       });
@@ -1089,7 +1032,6 @@
       // console.log(htmlString);
       var tempContainer = document.createElement('div');
       var tableRow = document.createElement('tr');
-
       // Get the rows from the temporary container
       tempContainer.innerHTML = htmlString;
       var rows = tempContainer.querySelectorAll('tr');
@@ -1115,7 +1057,6 @@
           userRepoButtonDiv.setAttribute('aria-label', 'Button group');
           // set style max-width: 200px
           userRepoButtonDiv.style.maxWidth = '100%';
-
           // Create the span
           var userRepoButton = document.createElement('span');
           userRepoButton.setAttribute('class', 'badge bg-info');
@@ -1148,21 +1089,13 @@
 
               },
               error: function (error) {
-                $("#search-response-spin").show();
-                $("#search-response-spin").text("Error fetching data. Please try again later.");
-                $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger");
+                showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Error fetching data. Please try again later.", false);
                 console.error("Error:", error);
               }
             });
 
           });
-
-
-
         }
-
-
-
 
         // handling the url button
         var urlCol = row.childNodes[6];
@@ -1192,14 +1125,11 @@
           });
           // row.childNodes[6].textContent = '';
         }
-        // end of URL button 
-
 
         /**
          * handling the the last readme button
          * 
-         **/
-
+        **/
         var last = row.lastElementChild;
         // if last is a tag create a button and add a tag to it
         if (last.tagName == 'TD') {
@@ -1237,8 +1167,7 @@
               },
               success: function (response) {
                 // Display the readme content in a modal
-                $("#search-response-spin").show();
-                $("#search-response-spin").text("Reading Readme.");
+                showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Searching.....!", true);
                 $('#show-readme').modal('show');
                 // instead of adding directly text content render it as html
                 $('#show-readme-body').html(response);
@@ -1246,8 +1175,6 @@
                 $("#download-project").click(function () {
                   downloadProject(readmeLink);
                 });
-
-
               },
               error: function (error) {
                 // Display error message
@@ -1263,18 +1190,11 @@
 
         // tableBody.appendChild(row);
         rowIndex++;
-
-
-
-
       })
     }
 
   </script>
-
-
   <script>
-
     var modalTimeout;
 
     function showModal() {
@@ -1336,11 +1256,6 @@
     }
 
   </script>
-
-  <!--serach input end-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
 
 </body>
 
