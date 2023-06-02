@@ -248,6 +248,27 @@
   .mt-100 {
     margin-top: 100px
   }
+
+  .alert-fullscreen {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: auto;
+      z-index: 9999;
+      width: 300px; /* Adjust this value as per your needs */
+      height: 70px;
+      margin-top: 70px;
+      padding: 20px;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+  
+    .alert-fullscreen .btn-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
 </style>
 
 <body>
@@ -297,31 +318,9 @@
       </div>
     </div>
   </div>
-  <style>
-    .alert-fullscreen {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: auto;
-      z-index: 9999;
-      width: 300px; /* Adjust this value as per your needs */
-      height: 70px;
-      margin-top: 70px;
-      padding: 20px;
-      box-sizing: border-box;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-  
-    .alert-fullscreen .btn-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-  </style>
+
   
   <div id="search-response" class="alert alert-dismissible alert-danger alert-fullscreen">
-    <!-- <strong id="search-response">Error</strong>  -->
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   </div>
   
@@ -784,7 +783,7 @@
             console.log(response);
             localStorage.setItem("token", response.access_token);
 
-            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Successfully logged in! as " + email, false);
+            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Successfully logged in! as " + email, false);
             // close the modal
             $("#loginModal").modal("hide");
             // login-button-nav bet button and set text to logout
@@ -1003,7 +1002,8 @@
 
       // Get the input value
       const searchKeyword = $("#example-search-input").val();
-      $("#search-response").text("Generating result for " + searchKeyword);
+      // $("#search-response").text("Generating result for " + searchKeyword);
+      showSuccessNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "generating result for " + searchKeyword, false);
       if (pageNumber == null) {
         pageNumber = 1;
       }
@@ -1017,7 +1017,6 @@
         success: function (response) {
          
           // search-response-spin hides the spinner
-          $("#search-response").hide();
           if (1 == !animateRows(response, searchKeyword)) {
             $("#pagination-div").show();
             $("#table-body").empty();
@@ -1186,7 +1185,7 @@
               },
               success: function (response) {
                 // Display the readme content in a modal
-                showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Searching.....!", true);
+                showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Getting Readme.....!", true);
                 $('#show-readme').modal('show');
                 // instead of adding directly text content render it as html
                 $('#show-readme-body').html(response);
