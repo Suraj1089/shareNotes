@@ -78,3 +78,4 @@ async def get_user_info(request: Request):
         status_code=status.HTTP_404_NOT_FOUND,
         detail='Error in fetching data! Try Again!'
     )
+

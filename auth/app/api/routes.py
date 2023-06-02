@@ -57,3 +57,5 @@ def get_current_logged_user(request: Request,db: Session = Depends(get_db)):
     # get user from token
     user = get_current_user(token,db)
     return user
+
+

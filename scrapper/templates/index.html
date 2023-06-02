@@ -500,23 +500,56 @@
         </div>
 
         <!-- Form to take input -->
-        <div class="row d-flex justify-content-center mt-100">
-          <div class="col-md-6"> <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
-              <option value="HTML">HTML</option>
-              <option value="Jquery">Jquery</option>
-              <option value="CSS">CSS</option>
-              <option value="Bootstrap 3">Bootstrap 3</option>
-              <option value="Bootstrap 4">Bootstrap 4</option>
-              <option value="Java">Java</option>
-              <option value="Javascript">Javascript</option>
-              <option value="Angular">Angular</option>
-              <option value="Python">Python</option>
-              <option value="Hybris">Hybris</option>
-              <option value="SQL">SQL</option>
-              <option value="NOSQL">NOSQL</option>
-              <option value="NodeJS">NodeJS</option>
-            </select> </div>
-        </div>
+<div class="row d-flex justify-content-center mt-100">
+  <div class="col-md-6">
+    <select id="choices-multiple-remove-button" placeholder="Select up to 5 tags" multiple>
+      <option value="HTML">HTML</option>
+      <option value="Jquery">Jquery</option>
+      <option value="CSS">CSS</option>
+      <option value="Bootstrap 4">Bootstrap 4</option>
+      <option value="Java">Java</option>
+      <option value="Javascript">Javascript</option>
+      <option value="Angular">Angular</option>
+      <option value="Python">Python</option>
+      <option value="Hybris">Hybris</option>
+      <option value="SQL">SQL</option>
+      <option value="NOSQL">NOSQL</option>
+      <option value="NodeJS">NodeJS</option>
+      <option value="React">React</option>
+      <option value="Vue.js">Vue.js</option>
+      <option value="PHP">PHP</option>
+      <option value="Ruby">Ruby</option>
+      <option value="C#">C#</option>
+      <option value="ASP.NET">ASP.NET</option>
+      <option value="MongoDB">MongoDB</option>
+      <option value="Redis">Redis</option>
+      <option value="Docker">Docker</option>
+      <option value="Git">Git</option>
+      <option value="Swift">Swift</option>
+      <option value="Kotlin">Kotlin</option>
+      <option value="C++">C++</option>
+      <option value="R">R</option>
+      <option value="Scala">Scala</option>
+      <option value="TensorFlow">TensorFlow</option>
+      <option value="PyTorch">PyTorch</option>
+      <option value="AWS">AWS</option>
+      <option value="Azure">Azure</option>
+      <option value="Google Cloud">Google Cloud</option>
+      <option value="Firebase">Firebase</option>
+      <option value="GraphQL">GraphQL</option>
+    </select>
+    <!-- <div class="col-md-6"> -->
+      <select id="experience-select">
+        <option value="1">1 Year</option>
+        <option value="2">2 Years</option>
+        <option value="3">3 Years</option>
+        <option value="4">4 Years</option>
+        <option value="5+">More than 4 Years</option>
+      </select>
+    <!-- </div> -->
+  </div>
+</div>
+
         <!--suggested projects-->
         <div id="suggested-projects" class="suggested-projects"></div>
         <div class="modal-footer">
@@ -823,16 +856,16 @@
       $("#suggestion-button").click(function () {
         var tags = multipleCancelButton.getValue(true);
 
-        const expertise = "beginner";
-        const skills = tags;
+        const expertise = $("#experience-select").val();
+        const skills = tags.join(',');
         data = { expertise: expertise, skills: skills };
-        console.log(data);
 
         $.ajax({
           type: "POST",
           url: 'https://recommender-githubprojectscrapper.onrender.com/recommend',
+          // url: 'http://localhost:8001/recommend',
           dataType: "json",
-          data: { expertise: expertise, skills: ["java", "python", "sql"] },
+          data: data,
           success: function (response) {
             // Handle the response from the backend
             // get div by id=search-response and set text to searching...
