@@ -18,6 +18,7 @@ def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
         user: schemas.UserCreate = pydantic model for user
     """
     user_in_db = db.query(models.User).filter(models.User.email == user.email)
+    print(user_in_db.first())
     if user_in_db.first():
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=f"User with {user.email} already exist")
     hashed_password = hashing.Hash.bcrypt(user.password)
@@ -31,7 +32,6 @@ def create_user(user: schemas.UserCreate,db: Session = Depends(get_db)):
 @auth.post('/login',status_code=status.HTTP_200_OK)
 def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
     user = get_user(email=request.email,db=db)
-    print(user.email)
     if not user:
         # raise error
         raise HTTPException(

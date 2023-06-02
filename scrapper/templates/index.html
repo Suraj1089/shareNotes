@@ -268,8 +268,11 @@
           <li class="nav-item">
           </li>
         </ul>
+        <button id="project-recommend" type="button" class="btn btn-info" data-bs-toggle="modal"
+        data-bs-target="#project-suggestion" data-bs-whatever="@getbootstrap" style="display: none;"> Recommend Projects</button> &nbsp;
+          
         <button id="login-button-nav" type="button" class="btn btn-success" data-bs-toggle="modal"
-          data-bs-target="#loginModal" data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Login</button>
+          data-bs-target="#loginModal" data-bs-whatever="@getbootstrap">Login</button>
         &nbsp;
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
           data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Contact Me</button> &nbsp;
@@ -298,8 +301,9 @@
     </div>
   </div>
 
-  <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;" role="alert">
+    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <div id="search-response-spin"></div>
     <!-- <strong id="search-response-text"></strong> -->
   </div>
@@ -336,7 +340,8 @@
     <div class="row">
       <div class="col-md-5 mx-auto">
         <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           <div id="search-response-spin"></div> <i id="spinner-icon" class="fas fa-sync fa-spin"></i>
           <!-- <strong id="search-response-text"></strong> -->
         </div>
@@ -403,10 +408,12 @@
             <i class="fas fa-sync fa-spin"></i>
           </div>
           <div id="response-message-box" class="" style="display: none;">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <div id="success"></div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
         </div>
         <div class="modal-body">
           <form name="sendMessage" id="contactForm" novalidate="novalidate">
@@ -525,15 +532,16 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>&nbsp;&nbsp;&nbsp;
+          <h1 class="modal-title fs-5" id="loginModalTitle">Login</h1>&nbsp;&nbsp;&nbsp;
 
           <div id="response-message-box" class="" style="display: none;">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <div id="success"></div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div id="modal-body-login" class="modal-body">
           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button"
@@ -609,8 +617,10 @@
     // if present then get User Name and set login button text to user name
     // else set login button text to login
     function updateModalContent(response) {
-      $("#exampleModalLabel").text("Welcome, " + email);
-      $(".modal-body").html(`
+      $("#exampleModalLabel").text("Welcome, " + response.email);
+      // loginModalTitle
+      $("#loginModalTitle").text("Welcome, "+ response.email);
+      $("#modal-body-login").html(`
       <div class="user-info-field">
         <label>Name:</label>
         <span>${response.name}</span>
@@ -634,7 +644,8 @@
           // User is logged in
           $.ajax({
             type: "GET",
-            url: "https://auth-githubprojectscrapper.onrender.com/auth/user",
+            // https://auth-githubprojectscrapper.onrender.com
+            url: "http://localhost:8000/auth/user",
             dataType: "json",
             contentType: "application/json",
             headers: {
@@ -642,8 +653,12 @@
             },
             success: function (response) {
               // Handle successful login
+              console.log("auth success ", response);
               $("#login-button-nav").text(response.email);
               updateModalContent(response);
+              // project-recommend
+              // get button and update style set display = block 
+              $("#project-recommend").css("display","block");
             },
             error: function (error) {
               // Handle login error
@@ -684,14 +699,15 @@
           $("search-response").show();
           $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
           $("#search-response").text("All fields are required!");
-          $("search-response").hide();
+          $("#search-response").hide();
           return;
         }
         // console.log('auth url in login ', auth_url + 'auth/login');
         // Send login request
         $.ajax({
           type: "POST",
-          url: "https://auth-githubprojectscrapper.onrender.com/auth/login",
+          // https://auth-githubprojectscrapper.onrender.com
+          url: "http://localhost:8000/auth/login",
           dataType: "json",
           contentType: "application/json",
           data: JSON.stringify({
@@ -704,26 +720,24 @@
             console.log(response);
             localStorage.setItem("token", response.access_token);
 
-            $("search-response").show();
+            $("#search-response").show();
             $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
             $("#search-response").text("Successfully logged in! as " + email);
             // close the modal
             $("#loginModal").modal("hide");
             // login-button-nav bet button and set text to logout
             $("#login-button-nav").text(email);
-            $("search-response").hide();
             const token = localStorage.getItem("token");
             updateDom(token);
+            $("#project-recommend").css("display","block");
           },
           error: function (error) {
             // Handle login error
             console.log(error);
-            $("search-response").show();
+            $("#search-response").show();
             $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
             $("#search-response").text(error.responseJSON.detail);
-            $("search-response").hide();
-
-
+            // $("#search-response").hide();
 
           }
         });
@@ -740,19 +754,16 @@
         if (password !== confirmPassword) {
           console.log("Passwords do not match!");
           $("search-response").show();
-          $("#search-response").removeClass("alert-success").addClass("alert-danger").show();
+          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
           $("#search-response").text("Password Not matched!");
-          $("search-response").hide();
-
           return;
         }
         // check empty fields
         if (name === "" || email === "" || password === "" || confirmPassword === "") {
           console.log("Empty fields!");
-          $("search-response").show();
+          $("#search-response").show();
           $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-dagner").show();
           $("#search-response").text("All fields are required!");
-          $("search-response").hide();
           return;
         }
 
@@ -760,10 +771,9 @@
         // validateEmail()
         if (!validateEmail(email)) {
           console.log("Invalid email!");
-          $("search-response").show();
+          $("#search-response").show();
           $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
           $("#search-response").text("Invalid email!");
-          $("search-response").hide();
           return;
         }
 
@@ -771,7 +781,8 @@
         // Send signup request
         $.ajax({
           type: "POST",
-          url: "https://auth-githubprojectscrapper.onrender.com/auth/register",
+          // https://auth-githubprojectscrapper.onrender.com
+          url: "http://localhost:8000/auth/register",
           dataType: "json",
           contentType: "application/json",
           data: JSON.stringify({
@@ -782,19 +793,17 @@
           success: function (response) {
             // Handle successful signup
             console.log(response);
-            $("search-response").show();
+            $("#search-response").show();
             $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
             $("#search-response").text("Signed up successfully!");
             $("#loginModal").modal("hide");
-            $("search-response").hide();
           },
           error: function (error) {
             // Handle signup error
             console.log(error);
-            $("search-response").show();
+            $("#search-response").show();
             $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-            $("#search-response").text(error.responseJSON.detail);
-            $("search-response").hide();
+            $("#search-response").text(error.responseJSON.detail || "error at auth/register");
           }
         });
       });
@@ -829,7 +838,7 @@
             // get div by id=search-response and set text to searching...
             $("#search-response").show();
             $("#search-response").removeClass("alert alert-dismissible alert-danger").addClass("alert alert-dismissible alert-success").show();
-            $("#search-response-spin").text("Searching.....");
+            $("#search-response").text("Searching.....");
             console.log("Response:", response);
             var suggestedProjects = document.getElementById("suggested-projects");
             // var markdownContent = "Sure, here are 6 to 9 Python projects that would challenge you and allow you to further enhance your skills:\n\n1. **Build a web application using FastAPI and SQL.** This project will allow you to use your skills in Python, FastAPI, and SQL to create a fully functional web application. You can use this project to learn how to create APIs, store data in a database, and build a user interface.\n2. **Create a data pipeline using AWS.** This project will allow you to use your skills in Python, AWS, and SQL to create a data pipeline that can be used to collect, store, and analyze data. You can use this project to learn how to use AWS services such as S3, RDS, and Redshift to store and process data.\n3. **Build a machine learning model using Python.** This project will allow you to use your skills in Python and machine learning to build a model that can be used to make predictions. You can use this project to learn how to collect data, train a model, and evaluate the performance of a model.\n4. **Create a game using Python.** This project will allow you to use your skills in Python, graphics, and game development to create a fun and engaging game. You can use this project to learn how to create graphics, handle user input, and implement game mechanics.\n5. **Build a website using Python and Django.** This project will allow you to use your skills in Python, Django, and HTML/CSS to create a fully functional website. You can use this project to learn how to create a user interface, handle user input, and store data in a database.\n6. **Create a chatbot using Python and Rasa.** This project will allow you to use your skills in Python, Rasa, and natural language processing to create a chatbot that can be used to interact with users. You can use this project to learn how to build a conversational AI agent, handle user input, and generate responses.\n7. **Build a web scraping application using Python and BeautifulSoup.** This project will allow you to use your skills in Python, BeautifulSoup, and web scraping to extract data from websites. You can use this project to learn how to find and extract data from websites, and how to store the data in a database.\n8. **Create a data visualization using Python and Matplotlib.** This project will allow you to use your skills in Python, Matplotlib, and data visualization to create a visually appealing and informative data visualization. You can use this project to learn how to plot data, add labels and annotations, and customize the appearance of a plot.\n9. **Build a natural language processing application using Python and spaCy.** This project will allow you to use your skills in Python, spaCy, and natural language processing to create an application that can be used to process and understand human language. You can use this project to learn how to tokenize text, identify named entities, and classify text.\n\nThese are just a few ideas for Python projects that you can work on to challenge yourself and further enhance your skills. There are many other possibilities, so feel free to explore and find projects that interest you.";
@@ -841,8 +850,8 @@
           error: function (error) {
             $("#search-response").show();
             $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger").show();
-            $("#search-response").text("Error in fetching data");
-            $("search-response").hide();
+            $("#search-response").text(error.responseJSON.detail || "error at recommender");
+            $("#search-response").hide();
             console.error("Error:", error);
           }
         });
@@ -982,7 +991,7 @@
 
       // Get the input value
       const searchKeyword = $("#example-search-input").val();
-      $("#search-response-spin").text("Generating result for " + searchKeyword);
+      $("#search-response").text("Generating result for " + searchKeyword);
       if (pageNumber == null) {
         pageNumber = 1;
       }
@@ -1000,11 +1009,11 @@
           // pagination-div is hidden by default in the HTML show it
 
           // search-response-spin hides the spinner
+          $("#search-response").hide();
           if (1 == !animateRows(response, searchKeyword)) {
             $("#pagination-div").show();
             $("#table-body").empty();
             animateRows(response, searchKeyword);
-            $("#search-response").hide();
             setTimeout(() => {
               $("#toastContainer").show();
               $("project-suggestion-button").click(function () {
@@ -1018,6 +1027,7 @@
             var tableDiv = document.querySelector('.tableDiv');
             tableDiv.style.display = "none";
             $("#pagination-div").hide();
+            $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger");
             $("#search-response").text("No records found for query.");
             $("#search-response").hide();
           }
@@ -1026,12 +1036,15 @@
           // search-response-spin hides the spinner
           // Display error message
           // search-response-text adds the error message
+          $("#search-response").hide();
+          $("#search-response").show();
+          $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger");
+          $("#search-response").text("Error fetching data. Please try again later.");
           var tableDiv = document.querySelector('.tableDiv');
           tableDiv.style.display = "none";
           // $("#search-response-spin").removeClass("alert alert-dismissible alert-success");
-          $("#search-response").text("Error fetching data. Please try again later.");
           // show search response
-
+          $("#search-response").hide();
           console.error("Error:", error);
         }
       });
@@ -1104,6 +1117,7 @@
               error: function (error) {
                 $("#search-response-spin").show();
                 $("#search-response-spin").text("Error fetching data. Please try again later.");
+                $("#search-response").removeClass("alert alert-dismissible alert-success").addClass("alert alert-dismissible alert-danger");
                 console.error("Error:", error);
               }
             });
@@ -1289,8 +1303,6 @@
     }
 
   </script>
-
-
 
   <!--serach input end-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

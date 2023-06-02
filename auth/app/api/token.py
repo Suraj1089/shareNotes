@@ -2,6 +2,7 @@ from app.api import models,config,schemas
 from sqlalchemy.orm import Session
 from datetime import timedelta,datetime
 from jose import jwt,JWTError
+from fastapi import HTTPException,status
 
 
 
@@ -26,7 +27,11 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 
 
 def get_current_user(token: str,db: Session):
-    credentials_exception = Exception("Could not validate credentials")
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"}
+    )
     # Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdXJhanBpc2FsMTEzQGdtYWlsLmNvbSIsImV4cCI6MTY4NTUzMDkwN30.cUIlyteNmxAOPWsCVP27xcMcT9BDKZrXzacc9WVYAq4
     token = token.split(" ")[1]
     try:
@@ -46,6 +51,6 @@ def get_current_user(token: str,db: Session):
             "name": user[1]
         }
         return data
-    except Exception as e:
-        print(e)
-        # raise credentials_exception
+    except JWTError:
+        # print(e)
+        raise credentials_exception
