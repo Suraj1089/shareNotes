@@ -250,25 +250,26 @@
   }
 
   .alert-fullscreen {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: auto;
-      z-index: 9999;
-      width: 300px; /* Adjust this value as per your needs */
-      height: 70px;
-      margin-top: 70px;
-      padding: 20px;
-      box-sizing: border-box;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-  
-    .alert-fullscreen .btn-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    z-index: 9999;
+    width: 300px;
+    /* Adjust this value as per your needs */
+    height: 70px;
+    margin-top: 70px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .alert-fullscreen .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 </style>
 
 <body>
@@ -319,12 +320,12 @@
     </div>
   </div>
 
-  
+
   <div id="search-response" class="alert alert-dismissible alert-danger alert-fullscreen">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   </div>
-  
- 
+
+
   <!--other project see notification end-->
   <!-- Video Modal Start -->
   <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -352,8 +353,7 @@
         <div id="search-response" class="alert alert-dismissible alert-success" style="display: none;">
           <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          <div id="search-response-spin"></div> <i id="spinner-icon" class="fas fa-sync fa-spin"></i>
-          <!-- <strong id="search-response-text"></strong> -->
+          <!-- <div id="search-response-spin"></div> <i id="spinner-icon" class="fas fa-sync fa-spin"></i> -->
         </div>
         <div class="input-group">
           <input class="form-control border-end-0 border rounded-pill" type="search" value="" id="example-search-input"
@@ -645,6 +645,38 @@
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
   <script>
+    function showSearchResponseNotification(intialClass, finalClass, message, isHide, animationTime = 500) {
+      $("#search-response").removeClass(intialClass).addClass(finalClass).show();
+      $("#search-response").text(message);
+      $("#search-response").fadeTo(animationTime, 500).slideUp(500, function () {
+        $("#search-response").slideUp(500);
+      });
+    }
+
+    function showSuccessNotification(initialClass, finalClass, message, isHide) {
+      $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
+      $("#response-message-box").text(message);
+      if (isHide) {
+        $("#response-message-box").hide();
+      } else {
+        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
+          $("#response-message-box").slideUp(500);
+        });
+      }
+    }
+
+    function responseMessageNotification(initialClass, finalClass, message, isHide) {
+      $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
+      $("#response-message-box").text(message);
+      if (isHide) {
+        $("#response-message-box").hide();
+      } else {
+        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
+          $("#response-message-box").slideUp(500);
+        });
+      }
+    }
+ 
     // at time to load page check if token is present in local storage
     // if present then get User Name and set login button text to user name
     // else set login button text to login
@@ -688,6 +720,7 @@
               updateModalContent(response);
               // project-recommend
               $("#project-recommend").css("display", "block");
+              showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Logged in as " + response.email, false);
             },
             error: function (error) {
               // Handle login error
@@ -715,44 +748,17 @@
       });
     }
     const token = localStorage.getItem("token");
-    console.log('token form storage ',token);
+    console.log('token form storage ', token);
     updateDom(token);
 
-    function showSearchResponseNotification(intialClass, finalClass, message, isHide) {
-      $("#search-response").removeClass(intialClass).addClass(finalClass).show();
-      $("#search-response").text(message);
-        $("#search-response").fadeTo(2000, 500).slideUp(500, function () {
-          $("#search-response").slideUp(500);
-        });
-    }
-
-    function showSuccessNotification(initialClass, finalClass, message, isHide) {
-      $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
-      $("#response-message-box").text(message);
-      if (isHide) {
-        $("#response-message-box").hide();
-      } else {
-        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
-          $("#response-message-box").slideUp(500);
-        });
-      }
-    }
-
-    function responseMessageNotification(initialClass, finalClass, message, isHide) {
-      $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
-      $("#response-message-box").text(message);
-      if (isHide) {
-        $("#response-message-box").hide();
-      } else {
-        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
-          $("#response-message-box").slideUp(500);
-        });
-      }
-    }
-  </script>
+ </script>
   <!--LOGIN AND SINGUP-->
   <script>
     $(document).ready(function () {
+      if (!navigator.onLine) {
+        showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "No Internet connection!", false, 500);
+      return false;
+      }
       // Login form submission
       $("#loginForm").submit(function (event) {
         event.preventDefault(); // Prevent form submission
@@ -762,7 +768,7 @@
         // check empty fields
         if (email === "" || password === "") {
           console.log("Empty fields!");
-          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "All fields are required!", false);
+          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "All fields are required!", false, 500);
           return;
         }
         // console.log('auth url in login ', auth_url + 'auth/login');
@@ -783,7 +789,7 @@
             console.log(response);
             localStorage.setItem("token", response.access_token);
 
-            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Successfully logged in! as " + email, false);
+            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Successfully logged in! as " + email, false, 500);
             // close the modal
             $("#loginModal").modal("hide");
             // login-button-nav bet button and set text to logout
@@ -796,7 +802,7 @@
             // Handle login error
             console.log(error);
 
-            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Invalid credentials", false);
+            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Invalid credentials", false, 500);
 
           }
         });
@@ -813,14 +819,14 @@
         if (password !== confirmPassword) {
           console.log("Passwords do not match!");
 
-          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Password Not matched!", false);
+          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Password Not matched!", false, 500);
           return;
         }
         // check empty fields
         if (name === "" || email === "" || password === "" || confirmPassword === "") {
           console.log("Empty fields!");
 
-          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required!", false);
+          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "All fields are required!", false, 500);
           return;
         }
 
@@ -829,7 +835,7 @@
         if (!validateEmail(email)) {
           console.log("Invalid email!");
 
-          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Invalid email!", false);
+          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Invalid email!", false, 500);
           return;
         }
 
@@ -850,14 +856,14 @@
             // Handle successful signup
             console.log(response);
 
-            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Signed up successfully!", false);
+            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Signed up successfully!", false, 500);
             $("#loginModal").modal("hide");
           },
           error: function (error) {
             // Handle signup error
             console.log(error);
 
-            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", error.responseJSON.details?error.responseJSON.detail: "Error in registering",false);
+            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", error.responseJSON && error.responseJSON.details ? error.responseJSON.detail : "Error in registering", false, 500);
           }
         });
       });
@@ -873,7 +879,7 @@
       });
 
       $("#suggestion-button").click(function () {
-        showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Searching.....!", true);
+        showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Searching.....!", true, 10000);
         var tags = multipleCancelButton.getValue(true);
 
         const expertise = $("#experience-select").val();
@@ -888,7 +894,7 @@
           data: data,
           success: function (response) {
 
-            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Found some result!", true);
+            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Found some result!", true, 500);
 
             console.log("Response:", response);
             var suggestedProjects = document.getElementById("suggested-projects");
@@ -899,7 +905,7 @@
           },
           error: function (error) {
 
-            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", error.responseJSON.details?error.responseJSON.detail:"Error in suggesting", false);
+            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", error.responseJSON && error.responseJSON.details ? error.responseJSON.detail : "Error in suggesting", false, 500);
             console.error("Error:", error);
           }
         });
@@ -979,11 +985,12 @@
           },
           dataType: "json",
           success: function (response) {
-
+            console.log('message sent');
             showSuccessNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Message sent!", false);
           },
           error: function (error) {
-            showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", error.responseJSON.details?error.responseJSON.detail:"Error sending message.Retry! Or Send Your message at: surajpisal113@gmail.com");
+            console.log('erro in sending message ', error);
+            showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", error.responseJSON && error.responseJSON.detail ? error.responseJSON.detail : "Error sending message.Retry! Or Send Your message at: surajpisal113@gmail.com");
           }
         });
       });
@@ -996,8 +1003,6 @@
       $("#toastContainer").hide();
       // if table is already filled with data, empty it
       // remove all the rows
-      $("#search-response").show();
-      // $("#table-body").empty();
       $("#table-body").empty();
 
       // Get the input value
@@ -1015,7 +1020,7 @@
         dataType: "html",
         data: { keyword: searchKeyword, pageNumber: pageNumber },
         success: function (response) {
-         
+
           // search-response-spin hides the spinner
           if (1 == !animateRows(response, searchKeyword)) {
             $("#pagination-div").show();
@@ -1027,16 +1032,17 @@
                 $("#project-suggestion").modal("show");
               });
             }, 5000);
+            showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "found some records", false, 500);
 
           } else {
             var tableDiv = document.querySelector('.tableDiv');
             tableDiv.style.display = "none";
             $("#pagination-div").hide();
-            showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "No records found for query.", false);
+            showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "No records found for query.", false, 500);
           }
         },
         error: function (error) {
-          showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", error.responseJSON.details?error.responseJSON.detail:"Error fetching data. Please try again later.", false);
+          showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", error.responseJSON && error.responseJSON.details ? error.responseJSON.detail : "Error fetching data. Please try again later.", false, 500);
           var tableDiv = document.querySelector('.tableDiv');
           tableDiv.style.display = "none";
           console.error("Error:", error);
@@ -1102,12 +1108,13 @@
 
                   showUserInfo(response);
                 }
+                showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "fetching user details", false, 500);
 
                 showModal();
 
               },
               error: function (error) {
-                showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", error.responseJSON.details?error.responseJSON.detail:"Error fetching data. Please try again later.", false);
+                showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", error.responseJSON && error.responseJSON.details ? error.responseJSON.detail : "Error fetching data. Please try again later.", false, 500);
                 console.error("Error:", error);
               }
             });
@@ -1185,7 +1192,7 @@
               },
               success: function (response) {
                 // Display the readme content in a modal
-                showSearchResponseNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Getting Readme.....!", true);
+                showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Getting Readme.....!", true, 500);
                 $('#show-readme').modal('show');
                 // instead of adding directly text content render it as html
                 $('#show-readme-body').html(response);
