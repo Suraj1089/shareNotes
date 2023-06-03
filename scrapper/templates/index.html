@@ -291,11 +291,10 @@
           data-bs-target="#project-suggestion" data-bs-whatever="@getbootstrap" style="display: none;"> Recommend
           Projects</button> &nbsp;
 
-        <button id="login-button-nav" type="button" class="btn btn-success" data-bs-toggle="modal"
-          data-bs-target="#loginModal" data-bs-whatever="@getbootstrap">Login</button>
-        &nbsp;
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-          data-bs-whatever="@getbootstrap"><i class="fas fa-phone"></i> Contact Me</button> &nbsp;
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#videoModal"
+          data-bs-whatever="@getbootstrap" data-bs-src="{{ url_for('static',path='/img/video.mp4') }}"> How It works</button> &nbsp;
+          <button id="login-button-nav" type="button" class="btn btn-success" data-bs-toggle="modal"
+            data-bs-target="#loginModal" data-bs-whatever="@getbootstrap">Login</button>
       </div>
     </div>
   </nav>
@@ -329,22 +328,22 @@
   <!--other project see notification end-->
   <!-- Video Modal Start -->
   <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <!-- 16:9 aspect ratio -->
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always"
-              allow="autoplay"></iframe>
+          <div class="modal-body">
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <!-- 16:9 aspect ratio -->
+              <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="{{ url_for('static', path='/img/video.mp4') }}" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+
+              </div>
           </div>
-        </div>
       </div>
-    </div>
   </div>
+</div>
   <!-- Video Modal End -->
   <!--search input-->
   <div class="container1 py-4 min-vh-100 ">
@@ -592,7 +591,7 @@
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
   <script>
-    function showSearchResponseNotification(intialClass, finalClass, message, isHide, animationTime = 500) {
+    function showSearchResponseNotification(intialClass, finalClass, message, isHide, animationTime = 4000) {
       $("#search-response").removeClass(intialClass).addClass(finalClass).show();
       $("#search-response").text(message);
       $("#search-response").fadeTo(animationTime, 500).slideUp(500, function () {
@@ -600,25 +599,25 @@
       });
     }
 
-    function showSuccessNotification(initialClass, finalClass, message, isHide) {
+    function showSuccessNotification(initialClass, finalClass, message, isHide,animationTime = 4000) {
       $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
       $("#response-message-box").text(message);
       if (isHide) {
         $("#response-message-box").hide();
       } else {
-        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
+        $("#response-message-box").fadeTo(animationTime, 500).slideUp(500, function () {
           $("#response-message-box").slideUp(500);
         });
       }
     }
 
-    function responseMessageNotification(initialClass, finalClass, message, isHide) {
+    function responseMessageNotification(initialClass, finalClass, message, isHide, animationTime = 4000) {
       $("#response-message-box").removeClass(initialClass).addClass(finalClass).show();
       $("#response-message-box").text(message);
       if (isHide) {
         $("#response-message-box").hide();
       } else {
-        $("#response-message-box").fadeTo(2000, 500).slideUp(500, function () {
+        $("#response-message-box").fadeTo(animationTime, 500).slideUp(500, function () {
           $("#response-message-box").slideUp(500);
         });
       }
@@ -648,6 +647,7 @@
     function updateDom(token) {
 
       $(document).ready(function () {
+        showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Welcome to githubprojectscrapper get project suggestion easily!", false,10000);
 
         if (token) {
           // User is logged in
@@ -668,12 +668,14 @@
               // project-recommend
               $("#project-recommend").css("display", "block");
               showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Logged in as " + response.email, false);
+              showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "Welcome to githubprojectscrapper get project suggestion easily!", false,10000);
             },
             error: function (error) {
               // Handle login error
               console.log("auth error ", error);
               // alert alert-dismissible alert-danger alert-fullscreen
               showSearchResponseNotification("alert alert-dismissible alert-success alert-fullscreen", "alert alert-dismissible alert-danger alert-fullscreen", "Signature is expired.Login to get more features", false);
+              
             }
           });
         } else {
