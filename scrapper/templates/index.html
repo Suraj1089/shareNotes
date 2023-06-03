@@ -908,7 +908,7 @@
       // Get the input value
       const searchKeyword = $("#example-search-input").val();
       // $("#search-response").text("Generating result for " + searchKeyword);
-      showSuccessNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "generating result for " + searchKeyword, false);
+      showSearchResponseNotification("alert alert-dismissible alert-danger alert-fullscreen", "alert alert-dismissible alert-success alert-fullscreen", "generating result for " + searchKeyword, false, 4000);
       if (pageNumber == null) {
         pageNumber = 1;
       }
