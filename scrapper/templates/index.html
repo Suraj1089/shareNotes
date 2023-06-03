@@ -405,60 +405,7 @@
 
   </div>
   <!---CONTACT MODEL -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Contact </h1> &nbsp;&nbsp;&nbsp;
-          <div id="submitting-form-spinner" style="display: none;">Submitting form &nbsp;
-            <i class="fas fa-sync fa-spin"></i>
-          </div>
-          <div id="response-message-box" class="" style="display: none;">
-            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <div id="success"></div>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-        </div>
-        <div class="modal-body">
-          <form name="sendMessage" id="contactForm" novalidate="novalidate">
-            <div class="mb-3">
-              <input type="text" class="form-control" id="name" placeholder="Your Name" required>
-            </div>
-            <div class="mb-3">
-              <input type="text" class="form-control" id="email" placeholder="Your Email" required>
-            </div>
-            <div class="mb-3">
-              <input type="text" class="form-control" id="subject" placeholder="Subject" required>
-            </div>
-            <div class="mb-3">
-              <textarea class="form-control" rows="5" id="message" placeholder="Message" required="required"
-                data-validation-required-message="Please enter your message"></textarea>
-            </div>
-            <div class="control-group">
-              <select class="form-control form-control-sm" id="role" required="required"
-                data-validation-required-message="Please select your role">
-                <option value="" disabled selected>Your Role</option>
-                <option value="Developer">Developer</option>
-                <option value="HR">HR</option>
-                <option value="Student">Student</option>
-                <option value="Manager">Manager</option>
-                <option value="Manager">Client</option>
-                <option value="Others">Others</option>
-              </select>
-              <p class="help-block text-danger"></p>
-            </div>
-        </div>
-        <div class="modal-footer">
-
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
+ 
   <!--CONTACT MODEL END-->
   <!--REadme show model-->
   <div id="show-readme" class="modal">
@@ -948,55 +895,6 @@
       window.open(downloadLink, "_blank");
     }
   </script>
-  <!--contact form -->
-  <script>
-    $(document).ready(function () {
-      $('#contactForm').submit(function (event) {
-        event.preventDefault();
-
-
-        var name = $('#name').val();
-        var email = $('#email').val();
-        var subject = $('#subject').val();
-        var message = $('#message').val();
-        var role = $('#role').val();
-        // Perform field validation
-        if (name === '' || email === '' || subject === '' || message === '' || role === '') {
-
-          responseMessageNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required.", false);
-
-          showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "All fields are required.", false);
-          return;
-        }
-        if (!validateEmail(email)) {
-          showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", "Enter a valid email address!", false);
-          return;
-        }
-        // Make an AJAX POST request to the backend endpoint
-        $.ajax({
-          type: 'POST',
-          url: '/message',
-          data: {
-            name: name,
-            email: email,
-            subject: subject,
-            role: role,
-            message_body: message
-          },
-          dataType: "json",
-          success: function (response) {
-            console.log('message sent');
-            showSuccessNotification("alert alert-dismissible alert-danger", "alert alert-dismissible alert-success", "Message sent!", false);
-          },
-          error: function (error) {
-            console.log('erro in sending message ', error);
-            showSuccessNotification("alert alert-dismissible alert-success", "alert alert-dismissible alert-danger", error.responseJSON && error.responseJSON.detail ? error.responseJSON.detail : "Error sending message.Retry! Or Send Your message at: surajpisal113@gmail.com");
-          }
-        });
-      });
-    });
-  </script>
-  <!--contact form end-->
   <script>
 
     function searchRepositories(pageNumber) {
