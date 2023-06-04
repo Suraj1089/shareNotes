@@ -32,7 +32,6 @@ def get_current_user(token: str,db: Session):
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"}
     )
-    # Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdXJhanBpc2FsMTEzQGdtYWlsLmNvbSIsImV4cCI6MTY4NTUzMDkwN30.cUIlyteNmxAOPWsCVP27xcMcT9BDKZrXzacc9WVYAq4
     token = token.split(" ")[1]
     try:
         payload = jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM])
