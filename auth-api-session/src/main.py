@@ -1,11 +1,12 @@
 from fastapi import Depends, FastAPI
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
-from .api.auth import auth
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from .api import auth,database,models,schemas
 
 
+models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
 app.include_router(auth)

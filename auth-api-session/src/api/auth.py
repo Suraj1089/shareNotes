@@ -1,9 +1,16 @@
 
 from fastapi import APIRouter
+from fastapi import Depends, HTTPException, status
+from .schemas import Token, User, UserInDB
+from typing import Annotated
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from datetime import timedelta
+from .oauth import authenticate_user, create_access_token, get_current_active_user
+
 
 auth = APIRouter()
 
-@app.post("/token", response_model=Token)
+@auth.post("/token", response_model=Token)
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
 ):
@@ -21,14 +28,14 @@ async def login_for_access_token(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@app.get("/users/me/", response_model=User)
+@auth.get("/users/me/", response_model=User)
 async def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)]
 ):
     return current_user
 
 
-@app.get("/users/me/items/")
+@auth.get("/users/me/items/")
 async def read_own_items(
     current_user: Annotated[User, Depends(get_current_active_user)]
 ):
