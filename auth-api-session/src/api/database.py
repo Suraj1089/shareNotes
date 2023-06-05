@@ -1,33 +1,28 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from databases import Database
+import sqlalchemy
+import uuid
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 
-engine = create_engine(
+
+SQLALCHEMY_DATABASE_URL = "sqlite:///./auth.db"
+
+database = Database(SQLALCHEMY_DATABASE_URL)
+
+
+metadata = sqlalchemy.MetaData()
+
+# Define your table(s)
+users = sqlalchemy.Table(
+    "users",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True,default=uuid.uuid4()), # using simple id
+    sqlalchemy.Column("username", sqlalchemy.String(length=100)),
+    sqlalchemy.Column("email", sqlalchemy.String),
+    sqlalchemy.Column("expiry_date",sqlalchemy.DateTime),
+    sqlalchemy.Column("api_key",sqlalchemy.String)
+)
+
+engine = sqlalchemy.create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-
-fake_users_db = {
-    "johndoe": {
-        "username": "johndoe",
-        "full_name": "John Doe",
-        "email": "johndoe@example.com",
-        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",
-        "disabled": False,
-    }
-}
+metadata.create_all(engine)
