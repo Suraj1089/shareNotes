@@ -15,7 +15,7 @@ metadata = sqlalchemy.MetaData()
 users = sqlalchemy.Table(
     "users",
     metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True,default=uuid.uuid4()), # using simple id
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True), # using simple id
     sqlalchemy.Column("username", sqlalchemy.String(length=100)),
     sqlalchemy.Column("email", sqlalchemy.String),
     sqlalchemy.Column("expiry_date",sqlalchemy.DateTime),
