@@ -1,14 +1,20 @@
-from fastapi import FastAPI, HTTPException, status,Depends
+from fastapi import FastAPI, HTTPException, status,Depends,Response
 from datetime import datetime, timedelta
 
 from fastapi.param_functions import Form
-from .api.schemas import User
+from .api.schemas import User,Token
 from .api.database import database, users  # Update with the correct import statements
 import secrets
 from .api import hashing
 from typing import Annotated, Dict, Optional
 from fastapi.security import OAuth2PasswordRequestForm,OAuth2PasswordBearer
 app = FastAPI()
+from jose import JWTError, jwt
+
+# openssl rand -hex 32
+SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 # Home page
@@ -27,14 +33,6 @@ async def shutdown():
     await database.disconnect()
 
 
-class CustomOAuth2PasswordRequestForm(OAuth2PasswordRequestForm):
-    def __init__(self, api_key: str | None = None):
-        super().__init__(grant_type="password",  username=api_key, password="")
-
-class customOAuth2PasswordBearer(OAuth2PasswordBearer):
-    def __init__(self, tokenUrl: str):
-        super().__init__(tokenUrl)
-
 async def get_user(email: str):
     query = users.select().where(users.c.email == email) # check user already exist with email
     return await database.fetch_one(query)
@@ -44,19 +42,34 @@ async def get_all_users():
     return await database.fetch_all(query)
 
 async def create_user(user: dict):
+    user_copy = user.copy()
     api_key = secrets.token_hex(10)     # generate 10 digit token
+    user_copy.update({'api_key': api_key})
+    hashed_key = hashing.get_password_hash(api_key)
     query = users.insert().values(
         username=user['username'],
         email=user['email'],
         expiry_date=datetime.now() + timedelta(days=365),
-        api_key=api_key
+        api_key=hashed_key
     )
     user_ = await database.execute(query)
-    return api_key
+    user_copy.update({'id': user_})
+    return user_copy
 
-async def authenticate(api_key: str):
-    query = users.select().where(users.c.api_key == api_key)
-    return await database.fetch_one(query)
+def create_access_token(data: dict, expires_delta: timedelta | None = None):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+async def authenticate(username: str, password: str):
+    user = await get_user(username)
+    if not user:
+        return False
+    if not hashing.verify_password(password, user['api_key']):
+        return False
+    return user
 
 
 @app.post('/register', status_code=status.HTTP_201_CREATED)
@@ -72,7 +85,7 @@ async def register(user: User):
     return await create_user(user.dict())
 
 
-oauth2_scheme = customOAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
@@ -85,19 +98,23 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
 
 
 
-@app.post("/token")
-async def login(form_data: Annotated[CustomOAuth2PasswordRequestForm, Depends()]):
-    print(form_data.username)
-    user = await authenticate("f44a025c991a2d0df905")
-    users = await get_all_users()
-    print("user in login",user)
-    return {
-        "user":users
-    }
+@app.post("/token",response_model=Token,status_code=status.HTTP_200_OK)
+async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],response:Response):
+    user = await authenticate(form_data.username,form_data.password)
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    token = create_access_token(data={"sub": user.username},expires_delta=ACCESS_TOKEN_EXPIRE_MINUTES)
+    return {"access_token": token, "token_type": "bearer"}
 
 
 
-@app.get("getUserData", response_model=User)
+
+@app.get("/getUserData", response_model=User)
 async def read_users_me(
     current_user: Annotated[User, Depends(get_current_user)]
 ):
