@@ -1,24 +1,20 @@
-from fastapi import FastAPI, HTTPException, status,Depends,Response
-from datetime import datetime, timedelta
+from fastapi import FastAPI
+from .api.database import database
+from .api.auth import auth
+from starlette.middleware.cors import CORSMiddleware
 
-from fastapi.param_functions import Form
-from .api.schemas import User,Token
-from .api.database import database, users  # Update with the correct import statements
-import secrets
-from .api import hashing
-from typing import Annotated, Dict, Optional
-from fastapi.security import OAuth2PasswordRequestForm,OAuth2PasswordBearer
+
 app = FastAPI()
-from jose import JWTError, jwt
-
-# openssl rand -hex 32
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.include_router(auth)
 # Home page
-@app.get('/home')
+@app.get('/home',tags=['Home'])
 def home():
     return {"data": "home page"}
 

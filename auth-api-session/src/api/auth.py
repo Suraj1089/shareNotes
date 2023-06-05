@@ -9,11 +9,13 @@ from .oauth import get_user,get_current_user,create_user,authenticate,create_acc
 from .config import ACCESS_TOKEN_EXPIRE_MINUTES,SECRET_KEY
 
 
-auth = APIRouter()
+auth = APIRouter(
+    prefix="/auth",
+    tags=["auth"],
+)
 
 
-
-@app.post('/register', status_code=status.HTTP_201_CREATED)
+@auth.post('/register', status_code=status.HTTP_201_CREATED)
 async def register(user: User):
     user_ = await get_user(user.email)
     print('users are', user_)
@@ -26,7 +28,7 @@ async def register(user: User):
     return await create_user(user.dict())
 
 
-@app.post("/token",response_model=Token,status_code=status.HTTP_200_OK)
+@auth.post("/token",response_model=Token,status_code=status.HTTP_200_OK)
 async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],response:Response):
     user = await authenticate(form_data.username,form_data.password)
     
@@ -43,8 +45,6 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],respo
 
 
 
-@app.get("/getUserData", response_model=User)
-async def read_users_me(
-    current_user: Annotated[User, Depends(get_current_user)]
-):
+@auth.get("/getUserData", response_model=User)
+async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
     return current_user

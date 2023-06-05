@@ -7,6 +7,9 @@ from .config import ALGORITHM, SECRET_KEY
 from .import hashing
 from .database import database, users
 import secrets
+from .schemas import TokenData
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 
 
 
@@ -49,18 +52,24 @@ async def authenticate(username: str, password: str):
     return user
 
 
-
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    print('user')
-    return credentials_exception
-
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+        token_data = TokenData(username=username)
+    except JWTError:
+        raise credentials_exception
+    user = get_user(email=token_data.username)
+    if user is None:
+        raise credentials_exception
+    print("user in current user ", user)
+    return user
 
 
