@@ -1,5 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String
-from . import hashing
+from sqlalchemy import Boolean, Column, String
 from .database import Base
 import secrets
 

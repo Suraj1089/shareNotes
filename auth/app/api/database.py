@@ -4,9 +4,6 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URI_AUTH')
-# if SQLALCHEMY_DATABASE_URL is None:
-# SQLALCHEMY_DATABASE_URL = 'sqlite:///./test.db'
-
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL

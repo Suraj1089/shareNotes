@@ -6,8 +6,14 @@ from sqlalchemy.orm import Session
 from datetime import timedelta,datetime
 from jose import JWTError,jwt
 from app.api import routes
+
+# bind engine
 models.Base.metadata.create_all(bind=engine)
+
+
 app = FastAPI()
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # TODO: change this to specific origins in production
