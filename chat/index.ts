@@ -1,24 +1,27 @@
 import express from "express";
-import dotenv from "dotenv";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import { PORT,HOST,DATABASE_URI } from "./apis/config";
 
-// load dotenv
-dotenv.config();
-
-// constants
-const PORT = process.env.PORT || 8000
-const DATABASE_URL = process.env.DATABASE_URL || null
-const HOST = process.env.HOST || "localhost"
-
+// initialize express app
 const app: express.Application = express();
 
+// create http server
+const server = createServer(app);
 
-app.get('/',async (req:express.Request, res:express.Response) => {
-    res.send({
-        name: 'suraj',
-        rollNo: 12
-    })
-})
+// create socket io server
+const io = new Server(server);
 
-app.listen(PORT, () => {
-    console.log(`application running at http://${HOST}:${PORT}`);
+app.get('/', (req, res) => {
+  res.send({
+    data:" hello "
+  })
 })
+io.on('connection', (socket) => {
+    console.log('a user connected');
+  });
+  
+  server.listen(PORT, () => {
+    console.log('listening on *:3000');
+  });
+
