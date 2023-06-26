@@ -21,8 +21,8 @@ const chatSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     }
-
 })
 
 
-const user = mongoose.model('user', userSchema);
+const UserModel = mongoose.model('User', userSchema);
+const ChatModel = mongoose.model('Chat',chatSchema);
