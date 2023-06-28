@@ -11,11 +11,15 @@ const app: express.Application = express();
 const server = createServer(app);
 
 // create socket io server
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: ['*']
+  }
+});
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
-    socketIo(socket);
+    console.log(`user conneted with id ${socket.id}`);
+    socketIo(socket,io);
   });
   
 
