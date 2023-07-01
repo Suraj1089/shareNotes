@@ -2,6 +2,19 @@
 
 This project consists of three microservices developed using FastAPI: auth, recommender, and scrapper. The microservices provide functionality for user authentication, project recommendation based on skills and experience, and scraping GitHub data, respectively.
 
+
+### Tech Stack Used At Frontend
+- ![javascript](https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+- ![CSS5](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+
+### Tech Stack Used At Backend (Microservices)
+- ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)  [](https://www.python.org/)
+- ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)  [](https://fastapi.tiangolo.com/)
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)  [](https://www.docker.com/)
+- ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)  [](https://nodejs.org/)
+
+
 Installation
 Clone the project repository from GitHub.
 
@@ -55,3 +68,7 @@ Users can make requests to the recommender microservice to get project recommend
 The scrapper microservice is responsible for scraping GitHub data. Users can request information about specific repositories, contributors, or other GitHub-related details. The scrapper microservice retrieves the required data from the GitHub API and returns it to the user.
 
 By combining these microservices, users can authenticate, get project recommendations, and retrieve GitHub data seamlessly.
+
+
+
+
