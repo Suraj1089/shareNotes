@@ -17,13 +17,7 @@ Setup
 Auth Microservice
 Configure the authentication settings in the auth/config.py file, such as the database connection details and secret key.
 
-Run the migration to set up the database schema:
 
-shell
-Copy code
-```
-alembic upgrade head
-```
 Recommender Microservice
 Configure the recommender settings in the recommender/config.py file, such as the database connection details and recommendation algorithms.
 
@@ -61,25 +55,3 @@ Users can make requests to the recommender microservice to get project recommend
 The scrapper microservice is responsible for scraping GitHub data. Users can request information about specific repositories, contributors, or other GitHub-related details. The scrapper microservice retrieves the required data from the GitHub API and returns it to the user.
 
 By combining these microservices, users can authenticate, get project recommendations, and retrieve GitHub data seamlessly.
-
-Contributing
-If you would like to contribute to this project, please follow these steps:
-
-Fork the repository on GitHub.
-
-Create a new branch for your feature or bug fix.
-
-Commit your changes to the new branch.
-
-Push the branch to your forked repository.
-
-Submit a pull request with a description of your changes.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for more information.
-
-Contact
-If you have any questions or inquiries about this project, please contact project@example.com.
-
-FastAPI
-GitHub
