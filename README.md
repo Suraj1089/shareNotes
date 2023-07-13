@@ -1,4 +1,5 @@
-# Microservices in FastAPI, with docker
+# GithubProjectScrapper
+### Microservices in FastAPI, with docker
 
 This project consists of three microservices developed using FastAPI: auth, recommender, and scrapper. The microservices provide functionality for user authentication, project recommendation based on skills and experience, and scraping GitHub data, respectively.
 

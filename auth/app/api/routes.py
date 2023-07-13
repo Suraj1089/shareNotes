@@ -54,10 +54,10 @@ def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
 @auth.get('/user',status_code=status.HTTP_200_OK)
 def get_current_logged_user(request: Request,db: Session = Depends(get_db)):
     # get token from header
-    print(request.headers)
     token = request.headers.get("authorization")
     # get user from token
     user = get_current_user(token,db)
     return user
+
 
 
