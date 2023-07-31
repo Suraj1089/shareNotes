@@ -8,7 +8,8 @@ router = APIRouter(
     tags=['Recommendation']
 )
 
-BARD_TOKEN = environ.get("BARD_TOKEN")
+# BARD_TOKEN = environ.get("BARD_TOKEN")
+BARD_TOKEN = "Ywj99rI93hh-vmucwHfo9pWFA98Pm5lim-yRxrkjf9Q8VBARD__Secure_1PSIDkAF4k6XzmM3QMYMUVXJh2m2qg."
 
 chatbot = Chatbot(BARD_TOKEN)
 
