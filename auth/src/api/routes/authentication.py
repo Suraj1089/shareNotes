@@ -11,7 +11,7 @@ from ..utils.token import (get_user,create_access_token,get_current_user,
                     get_all_users,
                     get_user_by_email,)
 
-from ..settings.config import SALT
+# from ..settings.config import SALT
 
 
 auth = APIRouter(
