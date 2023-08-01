@@ -36,6 +36,7 @@ async def scrap_search_query(request: Request,page: int = 1):
     keyword = data['keyword']
     page = data['pageNumber']
     url = generate_query_url(keyword,page)
+    print(url)
     soup = get_page_data(url)
     if soup is None:
         raise HTTPException(
@@ -47,7 +48,7 @@ async def scrap_search_query(request: Request,page: int = 1):
     df = pd.DataFrame(projects)
     # df.to_csv('projects.csv')
 
-    
+    print(df)
     return df.to_html()
 
 

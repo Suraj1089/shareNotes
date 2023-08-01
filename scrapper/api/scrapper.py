@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
     "Accept-Language": "en-US,en;q=0.9",
-    "Authority": "github.com"
+    "Authority": "https://github.com/"
 }
 
 # function to get github projects links from query
@@ -19,7 +19,7 @@ def generate_query_url(keyword:str,page: int = 1):
 def get_page_data(url: str):
     try:
         response = requests.get(url,headers=headers)
-    except requests.exceptions.ConnectionError:
+    except requests.exceptions.ConnectionError as e:
         return None
     if response.status_code == 200:
         soup = BeautifulSoup(response.content,"html.parser")
@@ -50,11 +50,14 @@ def scrap_projects(soup):
               'Last Updated':[],'Url':[],
               'Programing Language':[],"Readme":[]
               }
-    repo_list = soup.find_all("li", {"class": "repo-list-item"})
+    # class="Box-sc-g0xbh4-0 bItZsX"
+    repo_list = soup.find_all("div", {"class": "results-list"})
+    print('list ', repo_list)
     for repo in repo_list:
         # repo_owner = repo.find("span", {"class": "mr-2"}).text.strip()
         try:
-            repo_name = repo.find("a", {"class": "v-align-middle"}).text.strip()
+            # class="Text-sc-17v1xeu-0 qaOIC search-match"
+            repo_name = repo.find("a", {"class": "Text-sc-17v1xeu-0 qaOIC search-match"}).text.strip()
 
             repo_about = repo.find("p", {"class": "mb-1"}).text.strip()
 
@@ -71,15 +74,14 @@ def scrap_projects(soup):
 
 
             result['Repository'].append(repo_name)
-            result['About'].append(repo_about)
-            result['Keywords'].append(repo_keywords)
-            result['Stars'].append(repo_stars)
-            result['Last Updated'].append(repo_last_updated)
-            result['Url'].append(repo_url)
-            result['Programing Language'].append(repo_language)
-            result['Readme'].append(button)
+            # result['About'].append(repo_about)
+            # result['Keywords'].append(repo_keywords)
+            # result['Stars'].append(repo_stars)
+            # result['Last Updated'].append(repo_last_updated)
+            # result['Url'].append(repo_url)
+            # result['Programing Language'].append(repo_language)
+            # result['Readme'].append(button)
 
-            # print('repo_project_language ',repo_project_language)
 
         except AttributeError:
             pass
