@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
-from blog import models, schemas
+from ..db import schemas
 from fastapi import HTTPException, status
+
+from ..db import models
 
 
 def get_all(db: Session):
