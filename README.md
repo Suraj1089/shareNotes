@@ -1,85 +1,148 @@
-# Microservices in FastAPI, with docker
+# Microservices using FastAPI
 
-This project consists of three microservices developed using FastAPI: auth, recommender, and scrapper. The microservices provide functionality for user authentication, project recommendation based on skills and experience, and scraping GitHub data, respectively.
+![FastAPI Logo](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)
 
-Installation
-Clone the project repository from GitHub.
+## About
 
-```
-git clone https://github.com/Suraj1089/shareNotes.git
-```
+This project demonstrates the implementation of a microservices architecture using FastAPI, a modern, fast web framework for building APIs with Python. The project is structured into separate microservices, each responsible for a specific functionality. It leverages the power of FastAPI to create efficient and scalable microservices.
 
-Install the required dependencies for each microservice by navigating to their respective directories (auth, recommender, scrapper) and running the following command:
-```
-pip install -r requirements.txt
-```
-Setup
-Auth Microservice
-Configure the authentication settings in the auth/config.py file, such as the database connection details and secret key.
+## Technologies Used
 
-Run the migration to set up the database schema:
+- Python
+- FastAPI
+- Docker
+- Nginx (for reverse proxy and load balancing - optional)
 
-shell
-Copy code
-```
-alembic upgrade head
-```
-Recommender Microservice
-Configure the recommender settings in the recommender/config.py file, such as the database connection details and recommendation algorithms.
+## Usage
 
-If necessary, train the recommendation models using the provided data or your own dataset.
+To use and test the microservices, follow these steps:
 
-Scrapper Microservice
-Configure the scrapper settings in the scrapper/config.py file, such as the GitHub API credentials and scraping options.
-Usage
-Start the microservices individually by running the following commands in separate terminal windows:
+1. Clone the repository: `git clone https://github.com/your-username/microservices-fastapi.git`
+2. Enter the project directory: `cd microservices-fastapi`
+3. Build and run the Docker containers: `docker-compose up -d`
+4. The microservices will be accessible on the following ports:
+   - Auth Service: `http://localhost:8000`
+   - Blog Service: `http://localhost:8001`
+   - Chat Service: `http://localhost:8002`
+   - Converter Service: `http://localhost:8003`
+
+## Contribution
+
+Contributions are welcome! If you want to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature`
+3. Make your changes and commit them: `git commit -m "Add your message here"`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Open a pull request.
+
+## Flow Diagram
+
+├── Auth
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── db
+│   │   │   ├── __init__.py
+│   │   │   ├── database.py
+│   │   │   ├── models.py
+│   │   │   └── schemas.py
+│   │   ├── routes
+│   │   │   ├── __init__.py
+│   │   │   ├── authentication.py
+│   │   │   └── profile.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── config.py
+│   │       ├── hashing.py
+│   │       └── token.py
+│   ├── main.py
+│   └── requirements.txt
+│
+├── Blog
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── db
+│   │   │   ├── __init__.py
+│   │   │   ├── database.py
+│   │   │   ├── models.py
+│   │   │   └── schemas.py
+│   │   ├── routes
+│   │   │   ├── __init__.py
+│   │   │   ├── blog.py
+│   │   │   └── comments.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── authentication.py
+│   │       ├── authorization.py
+│   │       └── pagination.py
+│   ├── main.py
+│   └── requirements.txt
+│
+├── Chat
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── db
+│   │   │   ├── __init__.py
+│   │   │   ├── database.py
+│   │   │   ├── models.py
+│   │   │   └── schemas.py
+│   │   ├── routes
+│   │   │   ├── __init__.py
+│   │   │   ├── chat.py
+│   │   │   └── users.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── authentication.py
+│   │       ├── authorization.py
+│   │       └── websocket.py
+│   ├── main.py
+│   └── requirements.txt
+│
+├── Converter
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── routes
+│   │   │   ├── __init__.py
+│   │   │   ├── convert.py
+│   │   │   └── history.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── authentication.py
+│   │       └── validation.py
+│   ├── main.py
+│   └── requirements.txt
+│
+├── README.md
+├── .gitignore
+├── nginx
+│   └── nginx.conf
+└── docker-compose.yml
 
 
-```
-uvicorn auth.main:app --reload
-uvicorn recommender.main:app --reload
-uvicorn scrapper.main:app --reload
-```
-Make sure to run them in the respective directories (auth, recommender, scrapper).
+## Working
 
-Access the microservices using the provided endpoints and interact with them using HTTP requests.
+1. **Auth Microservice**: Handles user authentication and profile management. It uses FastAPI's powerful routing capabilities for defining API endpoints.
 
-About
-The microservices in this project are designed to work together to provide a comprehensive system for user authentication, project recommendation, and GitHub data scraping. Each microservice can be deployed independently and scaled as needed.
+2. **Blog Microservice**: Provides functionalities related to blog posts and comments. FastAPI's validation features are utilized to ensure data integrity.
 
-The auth microservice handles user authentication and authorization. It provides endpoints for user registration, login, and token management.
+3. **Chat Microservice**: Manages real-time chat functionality with WebSocket support. FastAPI WebSocket features are employed for bidirectional communication.
 
-The recommender microservice leverages recommendation algorithms to provide project recommendations based on user skills and experience. It utilizes machine learning models trained on relevant data.
+4. **Converter Microservice**: Converts data between different formats (e.g., JSON to XML). FastAPI's request and response models streamline data conversion.
 
-The scrapper microservice scrapes GitHub data to gather information about repositories, contributors, and other relevant details. It provides endpoints to retrieve data related to GitHub projects.
+Each microservice is containerized using Docker for easy deployment and scalability. Nginx can be optionally used as a reverse proxy and load balancer to distribute incoming requests among the microservices.
 
-How It Works
-The auth microservice handles user registration and authentication. Users can register with their credentials and receive authentication tokens upon successful login. These tokens can be used to access the protected endpoints of other microservices.
+Feel free to explore each microservice's code and extend their functionalities according to your requirements.
 
-Users can make requests to the recommender microservice to get project recommendations based on their skills and experience. The recommender microservice processes the user's data, applies recommendation algorithms, and returns a list of recommended projects.
+Happy coding! 🚀
 
-The scrapper microservice is responsible for scraping GitHub data. Users can request information about specific repositories, contributors, or other GitHub-related details. The scrapper microservice retrieves the required data from the GitHub API and returns it to the user.
+---
 
-By combining these microservices, users can authenticate, get project recommendations, and retrieve GitHub data seamlessly.
-
-Contributing
-If you would like to contribute to this project, please follow these steps:
-
-Fork the repository on GitHub.
-
-Create a new branch for your feature or bug fix.
-
-Commit your changes to the new branch.
-
-Push the branch to your forked repository.
-
-Submit a pull request with a description of your changes.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for more information.
-
-Contact
-If you have any questions or inquiries about this project, please contact project@example.com.
-
-FastAPI
-GitHub
+Please note that the actual content of the "Flow Diagram" section should include a diagram that visually represents the interaction between the microservices and any other relevant components (e.g., databases). Similarly, the usage instructions and technology details should be tailored to the specific implementation of your microservices project.
