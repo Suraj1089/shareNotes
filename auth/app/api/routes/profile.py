@@ -15,18 +15,18 @@ profile = APIRouter(
 )
 
 
-@profile.post('/profile',status_code=status.HTTP_201_CREATED)
+@profile.post('/user',status_code=status.HTTP_201_CREATED)
 def create_profile(profile: schemas.ProfileCreate,db: Session = Depends(get_db)):
     return create_profile(db,profile)
 
-@profile.get('/profile/{email}',status_code=status.HTTP_200_OK)
+@profile.get('/user/{email}',status_code=status.HTTP_200_OK)
 def get_profile_by_email(email: str,db: Session = Depends(get_db)):
     return get_profile(db,email)
 
-@profile.put('/profile/{email}',status_code=status.HTTP_202_ACCEPTED)
+@profile.put('/user/{email}',status_code=status.HTTP_202_ACCEPTED)
 def update_profile_by_email(email: str,profile: schemas.ProfileUpdate,db: Session = Depends(get_db)):
     return update_profile(db,email,profile)
 
-@profile.delete('/profile/{email}',status_code=status.HTTP_202_ACCEPTED)
+@profile.delete('/user/{email}',status_code=status.HTTP_202_ACCEPTED)
 def delete_profile_by_email(email: str,db: Session = Depends(get_db)):
     return delete_profile(email,db)
