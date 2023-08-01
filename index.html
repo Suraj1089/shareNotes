@@ -85,7 +85,7 @@
               </a>
               <a
                  href="#"
-                 class="list-group-item list-group-item-action py-2 ripple active"
+                 class="list-group-item list-group-item-action py-2 ripple"
                  >
                 <i class="fas fa-chart-area fa-fw me-3"></i
                   ><span id="https://auth-sharenoteservices.onrender.com">Auth Service</span>
@@ -104,7 +104,7 @@
            aria-current="true"
            >
           <i class="fas fa-tachometer-alt fa-fw me-3"></i
-            ><span id="">https://blog-sharenoteservices.onrender.com</span>
+            ><span id="https://blog-sharenoteservices.onrender.com">Blog Service</span>
         </a>
         <a
         href="#"
@@ -112,7 +112,7 @@
         aria-current="true"
         >
        <i class="fas fa-tachometer-alt fa-fw me-3"></i
-         ><span id="https://converter-sharenoteservices.onrender.com/converter/api/v1/docs/">Converter Service</span>
+         ><span id="https://converter-sharenoteservices.onrender.com">Converter Service</span>
      </a>
             
             </div>
@@ -229,10 +229,9 @@
         <!-- Add iframe container -->
         <div class="iframe-container" id="mainContent">
             <!-- Replace 'your_iframe_src' with your actual iframe source -->
-            <iframe src="https://getbootstrap.com/docs/5.3/getting-started/introduction/" width="100%" height="100%" frameborder="0"></iframe>
+            <iframe src="./microservice-archttecture.jpg" width="100%" height="100%" frameborder="0"></iframe>
         </div>
       </main>
-      <!-- Add this script just before the closing </body> tag -->
 <script>
     // Function to handle click event on service links
     function handleServiceLinkClick(url) {
@@ -260,6 +259,11 @@
     document.querySelectorAll(".list-group-item").forEach((link) => {
       link.addEventListener("click", function (event) {
         // Prevent the default link behavior
+        // add active class to clicked link
+        document.querySelectorAll(".list-group-item").forEach((link) => {
+          link.classList.remove("active");
+        });
+        this.classList.add("active");
         event.preventDefault();
         // Get the URL from the span's id attribute and call the handler function
         handleServiceLinkClick(link.querySelector("span").id);
