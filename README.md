@@ -37,6 +37,7 @@ Contributions are welcome! If you want to contribute to this project, please fol
 5. Open a pull request.
 
 ## Flow Diagram
+```
 ├── Auth
 │   ├── Dockerfile
 │   ├── __init__.py
@@ -125,7 +126,7 @@ Contributions are welcome! If you want to contribute to this project, please fol
 │   └── nginx.conf
 └── docker-compose.yml
 
-
+```
 
 ## Working
 
