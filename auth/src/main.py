@@ -27,5 +27,6 @@ app.add_middleware(
 def redirect_to_docs():
     return RedirectResponse(url='/api/v1/docs')
 
+
 app.include_router(router=authentication.auth)
 app.include_router(router=profile.profile)

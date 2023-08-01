@@ -1,22 +1,18 @@
 from fastapi import FastAPI, UploadFile, File
 import io
-import PyPDF2
-
-app = FastAPI()
-
-def extract_text_from_pdf(pdf_file):
-    text = ""
-    pdf_reader = PyPDF2.PdfReader(pdf_file)
-    for page_num in range(len(pdf_reader.pages)):
-        page = pdf_reader.pages[page_num]
-        text += page.extract_text()
-    return text.strip()
-
-# reader = PdfReader("example.pdf")
-# number_of_pages = len(reader.pages)
-# page = reader.pages[0]
-# text = page.extract_text()
 import pypdf
+from fastapi.responses import RedirectResponse
+
+app = FastAPI(
+    title="PDF Converter",
+    description="Convert PDF to text",
+    version="1.0.0",
+    openapi_url="/converter/api/v1/auth/openapi.json",
+    docs_url="/converter/api/v1/docs/",
+    redoc_url="/converter/api/v1/redoc/"
+)
+
+
 def convert(path):
     text = ""
     reader = pypdf.PdfReader(path)
@@ -25,6 +21,7 @@ def convert(path):
         page = reader.pages[line]
         text += page.extract_text()
     return text
+
 
 @app.post("/extract/")
 async def extract_text(file: UploadFile = File(...)):
@@ -37,6 +34,11 @@ async def extract_text(file: UploadFile = File(...)):
         "text_length": text_length
     }
 
+
+@app.get('/',include_in_schema=False)
+def redirect_to_docs():
+    return RedirectResponse(url='/converter/api/v1/docs')
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run('main:app', host="0.0.0.0", port=8000,reload=True)
+    uvicorn.run('src.main:app', host="0.0.0.0", port=8000,reload=True)
