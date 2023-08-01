@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from api import routes
@@ -23,7 +23,10 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request,
+    if os.getenv('MODE') == 'Maintainance':
+        return RedirectResponse('https://sharenoteservices.netlify.app/')
+    else:
+        return templates.TemplateResponse("index.html", {"request": request,
                                                      "base_url":os.getenv('BASE_URL'),
                                                       "auth_url": os.getenv('AUTH_URL'),
                                                       "recommender_url": os.getenv('RECOMMENDER_URL')
