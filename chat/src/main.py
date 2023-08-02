@@ -1,7 +1,6 @@
 # main.py
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-import socketio
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -14,8 +13,6 @@ app = FastAPI(
     docs_url="/chat/api/v1/docs/",
     redoc_url="/chat/api/v1/redoc/"
 )
-sio = socketio.AsyncServer()
-socket_app = socketio.ASGIApp(sio, app)
 
 
 # setup middlewares
