@@ -5,7 +5,7 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI(
     title="PDF Converter",
-    description="Convert PDF to text",
+    description="Convert PDF to text base URL = https://converter-sharenoteservices.onrender.com",
     version="1.0.0",
     openapi_url="/converter/api/v1/auth/openapi.json",
     docs_url="/converter/api/v1/docs/",

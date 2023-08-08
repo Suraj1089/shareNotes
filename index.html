@@ -2,259 +2,206 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
 </head>
-    <style>
-        body {
-  background-color: #fbfbfb;
-}
-@media (min-width: 991.98px) {
-  main {
-    padding-left: 240px;
+<style>
+  body {
+    background-color: #fbfbfb;
   }
-}
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  padding: 58px 0 0; /* Height of navbar */
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-  width: 250px;
-  z-index: 600;
-}
+  @media (min-width: 991.98px) {
+    main {
+      padding-left: 240px;
+    }
+  }
 
-@media (max-width: 991.98px) {
+  /* Sidebar */
   .sidebar {
-    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 58px 0 0;
+    /* Height of navbar */
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+    width: 250px;
+    z-index: 600;
   }
-}
-.sidebar .active {
-  border-radius: 5px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-}
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: 0.5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-.iframe-container {
-        width: calc(100% - 240px);
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 240px;
+  @media (max-width: 991.98px) {
+    .sidebar {
+      width: 100%;
     }
-    @media (max-width: 991.98px) {
-        .iframe-container {
-            width: 100%;
-            left: 0;
-        }
+  }
+
+  .sidebar .active {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  }
+
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+  }
+
+  .iframe-container {
+    width: calc(100% - 240px);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 240px;
+  }
+
+  @media (max-width: 991.98px) {
+    .iframe-container {
+      width: 100%;
+      left: 0;
     }
-    </style>
+  }
+</style>
+
 <body>
-    <header>
-        <!-- Sidebar -->
-        <nav
-             id="sidebarMenu"
-             class="collapse d-lg-block sidebar collapse bg-white"
-             >
-          <div class="position-sticky">
-            <div class="list-group list-group-flush mx-3 mt-4">
-              <a
-                 href="#"
-                 class="list-group-item list-group-item-action py-2 ripple"
-                 aria-current="true"
-                 >
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i
-                  ><span id="https://auth-sharenoteservices.onrender.com">Home</span>
-              </a>
-              <a
-                 href="#"
-                 class="list-group-item list-group-item-action py-2 ripple"
-                 >
-                <i class="fas fa-chart-area fa-fw me-3"></i
-                  ><span id="https://auth-sharenoteservices.onrender.com">Auth Service</span>
-              </a>
-              <a
-              href="#"
-              class="list-group-item list-group-item-action py-2 ripple"
-              aria-current="true"
-              >
-             <i class="fas fa-tachometer-alt fa-fw me-3"></i
-               ><span id="https://chat-sharenoteservices.onrender.com">Chat Service</span>
-           </a>
-           <a
-           href="#"
-           class="list-group-item list-group-item-action py-2 ripple"
-           aria-current="true"
-           >
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i
-            ><span id="https://blog-sharenoteservices.onrender.com">Blog Service</span>
-        </a>
-        <a
-        href="#"
-        class="list-group-item list-group-item-action py-2 ripple"
-        aria-current="true"
-        >
-       <i class="fas fa-tachometer-alt fa-fw me-3"></i
-         ><span id="https://converter-sharenoteservices.onrender.com">Converter Service</span>
-     </a>
-            
-            </div>
-          </div>
-        </nav>
-        <!-- Sidebar -->
-      
-        <!-- Navbar -->
-        <nav
-             id="main-navbar"
-             class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
-             >
-          <!-- Container wrapper -->
-          <div class="container-fluid">
-            <!-- Toggle button -->
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-mdb-toggle="collapse"
-                    data-mdb-target="#sidebarMenu"
-                    aria-controls="sidebarMenu"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                    >
-              <i class="fas fa-bars"></i>
-            </button>
-      
-            
-            <!-- Search form -->
-            <form class="d-none d-md-flex input-group w-auto my-auto">
-              <input
-                     autocomplete="off"
-                     type="search"
-                     class="form-control rounded"
-                     placeholder='Search (ctrl + "/" to focus)'
-                     style="min-width: 225px"
-                     />
-              <span class="input-group-text border-0"
-                    ><i class="fas fa-search"></i
-                ></span>
-            </form>
-      
-            <!-- Right links -->
-            <ul class="navbar-nav ms-auto d-flex flex-row">
-              <!-- Notification dropdown -->
-              <li class="nav-item dropdown">
-                <a
-                   class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
-                   href="#"
-                   id="navbarDropdownMenuLink"
-                   role="button"
-                   data-mdb-toggle="dropdown"
-                   aria-expanded="false"
-                   >
-                  <i class="fas fa-bell"></i>
-                  <span class="badge rounded-pill badge-notification bg-danger"
-                        >1</span
-                    >
-                </a>
-              
-              </li>
-      
-            
-              <!-- Icon -->
-              <li class="nav-item me-3 me-lg-0">
-                <a class="nav-link" href="https://github.com/Suraj1089/shareNotes" target="_blank">
-                  <i class="fab fa-github"></i>
-                </a>
-              </li>
-      
-              <!-- Icon dropdown -->
-              <li class="nav-item dropdown">
-                <a
-                   class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
-                   href="#"
-                   id="navbarDropdown"
-                   role="button"
-                   data-mdb-toggle="dropdown"
-                   aria-expanded="false"
-                   >
-                  <i class="united kingdom flag m-0"></i>
-                </a>
-              
-              </li>
-      
-              <!-- Avatar -->
-              <li class="nav-item dropdown">
-                <a
-                   class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
-                   href="#"
-                   id="navbarDropdownMenuLink"
-                   role="button"
-                   data-mdb-toggle="dropdown"
-                   aria-expanded="false"
-                   >
-                  <img
-                       src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                       class="rounded-circle"
-                       height="22"
-                       alt=""
-                       loading="lazy"
-                       />
-                </a>
-               
-          </div>
-          <!-- Container wrapper -->
-        </nav>
-        <!-- Navbar -->
-      </header>
-      <!--Main Navigation-->
-      
-      <!--Main layout-->
-      <main style="margin-top: 58px">
-        <!-- Add iframe container -->
-        <div class="iframe-container" id="mainContent">
-            <!-- Replace 'your_iframe_src' with your actual iframe source -->
-            <iframe src="./microservice-archttecture.jpg" width="100%" height="100%" frameborder="0"></iframe>
+  <header>
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span
+              id="https://auth-sharenoteservices.onrender.com">Home</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fas fa-chart-area fa-fw me-3"></i><span id="https://auth-sharenoteservices.onrender.com">Auth
+              Service</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span id="https://chat-sharenoteservices.onrender.com">Chat
+              Service</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span id="https://blog-sharenoteservices.onrender.com">Blog
+              Service</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span
+              id="https://converter-sharenoteservices.onrender.com">Converter Service</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span id="https://analyser-u04c.onrender.com/">Converter
+              UI</span>
+          </a>
+
         </div>
-      </main>
-<script>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+          aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+
+        <!-- Search form -->
+        <form class="d-none d-md-flex input-group w-auto my-auto">
+          <input autocomplete="off" type="search" class="form-control rounded"
+            placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px" />
+          <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+        </form>
+
+        <!-- Right links -->
+        <ul class="navbar-nav ms-auto d-flex flex-row">
+          <!-- Notification dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+              role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-bell"></i>
+              <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            </a>
+
+          </li>
+
+
+          <!-- Icon -->
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="https://github.com/Suraj1089/shareNotes" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+
+          <!-- Icon dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdown" role="button"
+              data-mdb-toggle="dropdown" aria-expanded="false">
+              <i class="united kingdom flag m-0"></i>
+            </a>
+
+          </li>
+
+          <!-- Avatar -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+              id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22"
+                alt="" loading="lazy" />
+            </a>
+
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main style="margin-top: 58px">
+    <!-- Add iframe container -->
+    <div class="iframe-container" id="mainContent">
+      <!-- Replace 'your_iframe_src' with your actual iframe source -->
+      <iframe src="./microservice-archttecture.jpg" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+  </main>
+  <script>
     // Function to handle click event on service links
     function handleServiceLinkClick(url) {
       // Get the current screen width
       const screenWidth = window.innerWidth;
-  
+
       // Check if the sidebar is visible and the screen width is below the medium breakpoint (992 pixels)
       const sidebarMenu = document.getElementById("sidebarMenu");
       const sidebarIsVisible = window.getComputedStyle(sidebarMenu).display !== "none";
       const isMobileMode = screenWidth < 992;
-  
+
       // If the sidebar is visible in mobile mode, hide it
       if (sidebarIsVisible && isMobileMode) {
         const togglerButton = document.querySelector("button.navbar-toggler");
         togglerButton.click();
       }
-  
+
       // Get the iframe element
       const iframe = document.querySelector("iframe");
       // Update the iframe's source URL with the clicked service URL
       iframe.src = url;
     }
-  
+
     // Add click event listeners to each service link
     document.querySelectorAll(".list-group-item").forEach((link) => {
       link.addEventListener("click", function (event) {
@@ -270,8 +217,8 @@
       });
     });
   </script>
-  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
 
 </body>
 
