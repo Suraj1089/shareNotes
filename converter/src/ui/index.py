@@ -23,7 +23,7 @@ class File:
 
     def showUploadedFile(self):
         ui.notify(f'Uploaded {self.name}')
-        ui.button('Analyze', on_click=lambda e: self.analyse()
+        ui.button('Convert', on_click=lambda e: self.analyse()
                   ).classes('w-full mt-6')
         with ui.expansion('show/hide uploded file').classes('w-full text-black'):
             base64_pdf = base64.b64encode(self.content).decode('utf-8')
@@ -32,10 +32,15 @@ class File:
 
     def analyse(self):
         ui.notify(f'Analyzing {self.name}')
-        res = requests.post('http://localhost:8000/extract',
+        res = requests.post('http://localhost:8000/extract/',
                             files={'file': self.content})
+        
+        
+
         ui.notify(f'Analysis Complete {res.json()}')
 
+    def process(self,path):
+        pass
     def __repr__(self):
         return f'<File {self.name}>'
 
@@ -57,7 +62,7 @@ with ui.header().classes('bg-white'), ui.column().classes('w-full max-w-3xl mx-a
     file = ui.upload(
         label='Upload The Result Pdf File',
         on_upload=lambda e: File(e).showUploadedFile(),
-        on_rejected=lambda e: ui.notify(f'Rejected {e.name}'),
+        on_rejected=lambda e: ui.notify(f'Rejected {e}'),
         auto_upload=True,
         max_file_size=1_000_000
     ).props('accept=.pdf').classes('max-w-full w-full')

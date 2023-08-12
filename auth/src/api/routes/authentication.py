@@ -10,6 +10,7 @@ from ..utils.token import (get_user,create_access_token,get_current_user,
                     delete_user,
                     get_all_users,
                     get_user_by_email,)
+from datetime import timedelta,datetime
 
 # from ..settings.config import SALT
 
@@ -53,7 +54,8 @@ def login_user(request: schemas.UserLogin, db: Session = Depends(get_db)):
             detail=f"Incorrect password"
         )
     access_token = create_access_token(
-        data={"sub": user.email}
+        data={"sub": user.email},
+        expires_delta=timedelta(minutes=30)
     )
     return {"access_token": access_token, "token_type": "bearer"}
 

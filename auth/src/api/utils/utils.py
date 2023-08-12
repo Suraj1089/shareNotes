@@ -8,7 +8,7 @@ def create_profile(db: Session,profile: schemas.ProfileCreate):
     profile_in_db = db.query(models.Profile).filter(models.Profile.email == profile.email)
     if profile_in_db.first():
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail=f"Profile with {profile.email} already exist")
-    new_profile = models.Profile(**profile.dict())
+    new_profile = models.Profile(**profile)
     db.add(new_profile)
     db.commit()
     db.refresh(new_profile)
