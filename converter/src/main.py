@@ -21,6 +21,5 @@ def redirect_to_docs():
     return RedirectResponse(url='/converter/api/v1/docs')
 
 if __name__ == "__main__":
-
     import uvicorn
     uvicorn.run('src.main:app', host="0.0.0.0", port=8000,reload=True)

@@ -45,10 +45,6 @@ async def save_file(file: UploadFile = File(...)):
     content = await file.read()
     pdf_file = io.BytesIO(content)
 
-    # save pdf files
-    # with open(f'{UPLOAD_DIR}/pdf/{file.filename}','wb') as f:
-    #     f.write(pdf_file.read())
-    
     extracted_text = converter.convert(pdf_file)
 
     # save txt file
