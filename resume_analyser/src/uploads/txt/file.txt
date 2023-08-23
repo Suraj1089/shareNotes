@@ -1,0 +1,40 @@
+SURAJ PISAL
++919370296739 surajpisal113@gmail.com surajpisal /gtbSuraj1089 ὑ7Portfolio Pune
+SUMMARY
+As a backend developer with 2 months of experience, and proficiency in Python, FastAPI, and Docker, I am well-
+equipped to create innovative projects and tackle complex problem-solving tasks. I believe my drive, skills, and
+enthusiasm make me a valuable asset to any team in need of a dedicated Software developer.
+EDUCATION
+BE - INFORMATION TECHNOLOGY
+•D Y Patil College of Engineering Pune .GPA - 8.6 2020 - 2024
+Co-curricular- CS fundamentals,Data structures and algorithms , OS,Computer Networks etc.
+HSC
+•Enzo-chem Junior College Yevla .PERCENTAGE - 74.92 2018 - 2020
+Co-curricular - Math, Statistics, Probability, Science etc.
+EXPERIENCE
+Insponse (System Engineer Intern ) Jan 2023 - April 2023
+•Worked with a range of cutting-edge technologies including Python, FastAPI , Socket Io, Nodejs, MongoDB,
+Docker, and AWS.
+•Collaborated with interns and engineers to develop efficient solutions for complex projects.
+•Contributed to the development of the company’s application, increasing its functionality from 20% to 80%
+through the implementation of efficient and robust micro-services.
+SKILLS
+Programming Python , C/C++, SQL .
+Tools and Frameworks FastAPI ,Docker , Django, Git and GitHub, Linux.
+Databases MySQL .
+Others Pandas, Streamlit.
+PROJECTS
+SPPU Result Converter Liveˆ
+•SPPU Result Converter is a web-based application that allows users to quickly and easily convert result PDF
+files into Excel format .
+•Thiseliminates the need for manual conversion , which can take up to 3 days. It allows users to complete
+the task in just 5 minutes . Currently, all faculty members at DYPCOE use the application to convert student
+results into Excel files, making their work 10 times faster . live-link.
+share-notes(micro-services using FastAPI and Docker) Liveˆ
+•This project consists of three micro-services developed using FastAPI: auth, re-commender, and scrap-
+per.
+EXTRA-CURRICULAR ACTIVITIES
+•Participated in hackthon organized by Tally Codebrewers created typing-practice website. July - 2023
+•Winner of techathon hackathon conducted by D Y Patil Pimpari. Created a Write-mate web app which
+helps to convert digital document to handwritten. January - 2023
+•Achieved the 5Th rank in a Microsoft Azure-organized event held on our college campus. August - 2022
