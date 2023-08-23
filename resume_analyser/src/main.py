@@ -7,18 +7,10 @@ from .db.config import BASE_DIR
 
 app = FastAPI(
     title="PDF Converter",
-    description="Convert PDF to Excel base URL = https://converter-sharenoteservices.onrender.com",
-    version="1.0.0",
-    openapi_url="/converter/api/v1/auth/openapi.json",
-    docs_url="/converter/api/v1/docs/",
-    redoc_url="/converter/api/v1/redoc/"
 )
 
 app.include_router(converter.router)
 
-@app.get('/',include_in_schema=False)
-def redirect_to_docs():
-    return RedirectResponse(url='/converter/api/v1/docs')
 
 if __name__ == "__main__":
     import uvicorn
