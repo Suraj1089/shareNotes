@@ -32,13 +32,13 @@ with ui.column().classes("bg-gray-10 mx-auto my-auto"):
     with ui.row().classes("mx-auto my-auto"):
         ui.label('Resume Analyser').classes("font-bold text-2xl text-center")
 
-        def set_background():
+        def set_background(e):
             if dark_mode.value:
                 ui.query('body').style('background', 'black')
             else:
                 ui.query('body').style('background', 'white')
 
-        dark_mode = ui.dark_mode(value=True, on_change=lambda e: set_background())
+        dark_mode = ui.dark_mode(value=True, on_change=lambda e: set_background(e))
 
         with ui.element().classes('max-[360px]:hidden'):
             ui.button(icon='dark_mode', on_click=lambda: dark_mode.set_value(None)) \
