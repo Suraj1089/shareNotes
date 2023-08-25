@@ -2,3 +2,6 @@ fastapi==0.95.1
 pypdf==3.14.0
 uvicorn==0.22.0
 python-multipart==0.0.6
+spacy==3.6.1
+nlp==0.4.0
+nltk==3.8.1
