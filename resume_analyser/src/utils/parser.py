@@ -4,8 +4,11 @@ import re
 from nltk.corpus import stopwords
 
 
+import en_core_web_sm
+
+nlp = en_core_web_sm.load()
 # load pre-trained model
-nlp = spacy.load('en_core_web_sm')
+# nlp = spacy.load('en_core_web_sm')
 
 # initialize matcher with a vocab
 matcher = Matcher(nlp.vocab)
