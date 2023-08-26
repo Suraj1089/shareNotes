@@ -7,7 +7,8 @@ from annotated_text import annotated_text
 import requests
 import os
 
-BASE_URL = os.getenv('BASE_URL')
+BASE_URL = st.secrets['BASE_URL']
+
 
 def displayPDF(pdf_file):
     base64_pdf = base64.b64encode(pdf_file.read()).decode('utf-8')
@@ -76,7 +77,7 @@ def App():
 
                 
 if __name__ == "__main__":
-
+    
     # set page title and icon
     try:
         st.set_page_config(

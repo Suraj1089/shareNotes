@@ -62,7 +62,10 @@ def analyse_resume(path: str):
     
     with open(path,'rb') as file:
         resume,links = converter.convert(file)
-        os.rmdir(path)
+    
+    # remove file after reading
+    if os.path.exists(path):
+        os.remove(path=path)
     
     
     social_links = defaultdict(list)
