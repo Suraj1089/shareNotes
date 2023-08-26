@@ -62,9 +62,8 @@ def analyse_resume(path: str):
     
     with open(path,'rb') as file:
         resume,links = converter.convert(file)
+        os.rmdir(path)
     
-    with open('sample.txt','w') as txt:
-        txt.write(resume)
     
     social_links = defaultdict(list)
 
@@ -80,7 +79,7 @@ def analyse_resume(path: str):
 
       
     # find name
-    name = parser.extract_name(resume)
+    name = 'Name not found'
 
     # find email
     email = parser.extract_email(resume)
