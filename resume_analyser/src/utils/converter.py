@@ -9,6 +9,7 @@ from typing import Tuple
 
 def convert(path: str) -> Tuple:
     """Converts pdf to text"""
+    print('path in convert ', path)
     text = ""
     links = []
     reader = pypdf.PdfReader(path)
@@ -24,6 +25,16 @@ def convert(path: str) -> Tuple:
                     links.append(annot.get_object()['/A']['/URI'])
         text += page.extract_text()
     return (text,links)
+
+def convert2(path):
+    """Converts pdf to text"""
+    text = ""
+    reader = pypdf.PdfReader(path)
+    noOfPages = len(reader.pages)
+    for line in range(0,noOfPages):
+        page = reader.pages[line]
+        text += page.extract_text()
+    return (text,[])
 
 
 class Links:
@@ -76,4 +87,3 @@ class Links:
                 return matches[0]
         return None
  
-    

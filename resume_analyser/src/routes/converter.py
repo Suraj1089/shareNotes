@@ -32,8 +32,11 @@ def upload(file: UploadFile = File(...)):
         if not os.path.exists(path=path):
             os.makedirs(path)
         
-        with open(f'{path}/{file.filename}', 'wb') as f:
-            shutil.copyfileobj(file.file, f)
+        # with open(f'{path}/{file.filename}', 'wb') as f:
+        #     shutil.copyfileobj(file.file, f)
+
+        with open(f'{path}/{file.filename}', 'wb') as buffer:
+            buffer.write(file.file.read())
     
     except Exception as e:
         return JSONResponse(
@@ -50,9 +53,6 @@ def upload(file: UploadFile = File(...)):
 
 @router.post('/analyse')
 def analyse_resume(path: str):
-    print("***************************"
-          )
-    print(path)
     # check if file exists
     if not os.path.exists(path):
         return JSONResponse(

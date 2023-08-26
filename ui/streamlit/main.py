@@ -5,6 +5,9 @@ import re
 import base64
 from annotated_text import annotated_text
 import requests
+import os
+
+BASE_URL = os.getenv('BASE_URL')
 
 def displayPDF(pdf_file):
     base64_pdf = base64.b64encode(pdf_file.read()).decode('utf-8')
@@ -36,24 +39,25 @@ def App():
                             
     pdf_file = st.file_uploader(label="Upload Pdf File", type="pdf")
     if pdf_file:
-        # display document
-        with st.expander(label="Show Uploaded File"):
-            displayPDF(pdf_file)
-        import time
-        time.sleep(0.1)
-        r = requests.post(
-            url='http://localhost:8000/upload',
-            files={'file': pdf_file},
-        )
+        with st.spinner("Uploading and processing..."):
+            response = requests.post(
+                url=f'{BASE_URL}/upload',
+                files={'file': pdf_file},
+            )
 
-        if r.status_code == 201:
+        # Display the API response once it's available
+        st.write("API Response:")
+        st.json(response.json()) 
+
+        if response.status_code == 201:
             st.success("File Uploaded Successfully")
             Analyse = st.button("Analyse")
             import time
             if Analyse:
-                path = r.json()['path']
+                path = response.json()['path']
+                st.info(path)
                 data = requests.post(
-                    url=f'http://localhost:8000/analyse?path={path}',
+                    url=f'{BASE_URL}/analyse?path={path}',
                 )
 
                 # data = requests.post()
