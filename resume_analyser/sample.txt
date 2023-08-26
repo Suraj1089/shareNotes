@@ -1,0 +1,53 @@
+Suraj Pisal Github: github.com/Suraj1089 
+Mobile: +91-9370296739 Portfolio: surajpisal.netlify.com 
+Email: surajpisal113@gmail.com LinkedIn: linkedin.com/in/surajpisal 
+Education
+•D Y Patil College of Engineering Pune. Pune,India
+Bachelor of Engineering - Information Technology ;GPA: 8.64 Jan 2021 - July 2024
+Courses: Operating Systems, Data Structures, Databases and Computer Networks.
+•Enzo chem Junior College Yevla. Nashik,India
+HSC - Science ;Percentage: 74.92 July 2018 - May 2020
+Courses: Math, Physics, Problem Solving.
+Skills
+•Programing :Python , Willing to learn(PHP).
+•Frameworks :FastAPI ,Django .
+•Tools : Version control software such as Git and Github.
+•Databases :SQL with proficiency in MySQL .
+Experience
+•Insponse Remote
+Backend Developer Intern (Full-time) Jan 2023 - Apr 2023
+◦Technologies :Utilized cutting-edge technologies such as Python, FastAPI to create scalalable
+microservices for social media app.
+◦Role :Collaborated seamlessly with fellow interns and engineers to formulate streamlined
+solutions for intricate projects, leading to the creation of microservices.
+◦Impact :Played an integral role in enhancing the company’s application, elevating its
+functionality from 20% to 80% by meticulously implementing highly efficient and resilient
+microservices.
+Projects
+•SPPU Result Converter : Github Live Sep 2022 - Apr 2023
+(Python, Pandas, Streamlit, Data Preprocessing, Data Visualization, Regex. )
+◦The web-based SPPU Result Converter facilitates seamless result conversion, offering a user
+friendly solution for efficient data transformation .
+◦Thiseliminates the need for manual conversion , which can take up to 3 days.It allows
+faculties to complete the task in just 5 minutes . Currently, all faculty members at DYPCOE
+use the application to convert student results into Excel files, making their work 10 times
+faster . live-link .
+•Sharenotes(Microservices) : Github Live Apr 2023 - Aug 2023
+(Python, FastAPI, Docker, JavaScript, REST APIS. )
+◦Achieved greater flexibility in deploying and scaling individual services. Impact: Enhanced
+system resilience, reduced downtime, and ensured efficient resource allocation, contributing to a
+more robust and user-friendly application.
+•OpenSource Contribution :
+(Python, Streamlit. )
+◦Contributing to GPTInterviewerˆ . GPTInterviewer is a cutting-edge application powered by
+generative AI designed to conduct mock interviews. With the ability to analyze your uploaded
+resume and job descriptions, AI Interviewer generates tailored questions to enhance your
+interview preparation. You even have the flexibility to customize your own interviewing
+experience.
+◦Contributing to nicegui which is an easy-to-use, Python-based UI framework, which shows
+up in your web browser.
+Achievements
+•Tally Codebrewers hackthon pre finalist. created typing-practice web app. July, 2023
+•Winner of techathon hackathon conducted by D Y Patil Pimpari. Created a write-mate 
+application which helps to convert digital document to handwritten. Jan, 2023
+•Achieved 5Th rank in a Microsoft Azure organized hackthon held on our college campus. 2022

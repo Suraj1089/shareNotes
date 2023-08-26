@@ -21,12 +21,19 @@ class File:
         self.uploaded_at = datetime.now()
 
     def showUploadedFile(self):
-        ui.notify(f'Uploaded {self.name}')
         with ui.expansion('show/hide uploded file').classes('w-full text-black'):
             base64_pdf = base64.b64encode(self.content).decode('utf-8')
             pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="100%"></iframe>'
             ui.html(pdf_display).classes('w-full h-screen')
 
+        path = requests.post('http://localhost:8000/upload', files={'file': (self.name, self.content)})
+        print(path.json()['path'])
+
+        # create a button to analyse the file
+        ui.button('Analyse', on_click=lambda: self.analyse(path.json()['path'])).classes('w-full')
+
+    def analyse(self,path):
+        print(path)
 
 with ui.column().classes("bg-gray-10 mx-auto my-auto"):
     with ui.row().classes("mx-auto my-auto"):
@@ -76,7 +83,7 @@ with ui.row().classes("mx-auto my-auto"):
         max_file_size=1_000_000
     ).props('accept=.pdf')
     
-
+    ui.spinner().bind_visibility_from(file, 'uploading', value=True)
 with ui.row().classes("mx-auto w-100").style('width: 50vw;'):
     # align links in a row   
     with ui.stepper().props('vertical').classes('w-full') as stepper:

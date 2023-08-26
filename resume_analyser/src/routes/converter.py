@@ -50,6 +50,16 @@ def upload(file: UploadFile = File(...)):
 
 @router.post('/analyse')
 def analyse_resume(path: str):
+    print("***************************"
+          )
+    print(path)
+    # check if file exists
+    if not os.path.exists(path):
+        return JSONResponse(
+            content=f'File {path} not found',
+            status_code=status.HTTP_404_NOT_FOUND
+        )
+    
     with open(path,'rb') as file:
         resume,links = converter.convert(file)
     
@@ -73,11 +83,7 @@ def analyse_resume(path: str):
     name = parser.extract_name(resume)
 
     # find email
-    email = None
-    for line in resume.split('\n'):
-        if '@' in line:
-            email = line
-            break
+    email = parser.extract_email(resume)
 
     # find phone number
     phone = parser.get_phone_number(resume)
@@ -89,16 +95,10 @@ def analyse_resume(path: str):
             skills.append(line)
 
     # find education
-    education = []
-    for line in resume.split('\n'):
-        if 'education' in line.lower():
-            education.append(line)
+    education = parser.extract_education(resume)
 
     # find experience
-    experience = []
-    for line in resume.split('\n'):
-        if 'experience' in line.lower():
-            experience.append(line)
+    experience = parser.extract_experience(resume)
 
     # find projects
     projects = []
