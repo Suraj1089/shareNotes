@@ -95,10 +95,10 @@ def analyse_resume(path: str):
             skills.append(line)
 
     # find education
-    education = parser.extract_education(resume)
+    education = 'Education not found'
 
     # find experience
-    experience = parser.extract_experience(resume)
+    experience = 'Experience not found'
 
     # find projects
     projects = []
