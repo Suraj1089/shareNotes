@@ -82,31 +82,25 @@ def analyse_resume(path: str):
 
       
     # find name
-    name = 'Name not found'
+    name = parser.get_user_name(resume)
 
     # find email
-    email = parser.extract_email(resume)
+    email = parser.get_email(resume)
 
     # find phone number
     phone = parser.get_phone_number(resume)
 
     # find skills
-    skills = []
-    for line in resume.split('\n'):
-        if line.strip().isupper():
-            skills.append(line)
+    skills = parser.get_skills(resume)
 
     # find education
-    education = 'Education not found'
+    education = parser.extract_education(resume)
 
     # find experience
-    experience = 'Experience not found'
+    experience = parser.get_experience(resume)
 
     # find projects
-    projects = []
-    for line in resume.split('\n'):
-        if 'projects' in line.lower():
-            projects.append(line)
+    projects = parser.get_projects(resume)
 
     # find achievements
     achievements = []

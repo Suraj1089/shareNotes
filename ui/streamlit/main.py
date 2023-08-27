@@ -1,15 +1,12 @@
 import streamlit as st
-import pandas as pd
-import time
-import re
 import base64
 from annotated_text import annotated_text
 import requests
 import os
 
-BASE_URL = st.secrets['BASE_URL']
+# BASE_URL = st.secrets['BASE_URL']
 
-
+BASE_URL = 'http://localhost:8000'
 def displayPDF(pdf_file):
     base64_pdf = base64.b64encode(pdf_file.read()).decode('utf-8')
     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
@@ -40,23 +37,19 @@ def App():
                             
     pdf_file = st.file_uploader(label="Upload Pdf File", type="pdf")
     if pdf_file:
-        with st.spinner("Uploading and processing..."):
+        with st.spinner("Uploading ..."):
             response = requests.post(
                 url=f'{BASE_URL}/upload',
                 files={'file': pdf_file},
             )
 
-        # Display the API response once it's available
-        st.write("API Response:")
-        st.json(response.json()) 
-
+        
         if response.status_code == 201:
             st.success("File Uploaded Successfully")
             Analyse = st.button("Analyse")
             import time
             if Analyse:
                 path = response.json()['path']
-                st.info(path)
                 data = requests.post(
                     url=f'{BASE_URL}/analyse?path={path}',
                 )
@@ -64,7 +57,7 @@ def App():
                 # data = requests.post()
                 my_bar = st.progress(0, text='Analyzing...')
 
-                for percent_complete in range(0,100,5):
+                for percent_complete in range(0,100):
                     time.sleep(0.1)
                     my_bar.progress(percent_complete + 1, text='Analyzing...')
                 my_bar.empty()
@@ -72,6 +65,7 @@ def App():
 
                 if data.status_code == 200:
                     st.write(data.json())
+    
         else:
             st.error("Error in uploading file")
 
