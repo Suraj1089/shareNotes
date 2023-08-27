@@ -4,9 +4,9 @@ from annotated_text import annotated_text
 import requests
 import os
 
-# BASE_URL = st.secrets['BASE_URL']
+BASE_URL = st.secrets['BASE_URL']
 
-BASE_URL = 'http://localhost:8000'
+# BASE_URL = 'http://localhost:8000'
 def displayPDF(pdf_file):
     base64_pdf = base64.b64encode(pdf_file.read()).decode('utf-8')
     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
